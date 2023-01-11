@@ -62,6 +62,7 @@ theme:
     # - toc.integrate
 
 plugins:
+  - autorefs
   - search
   - mkdocstrings:
       handlers:
