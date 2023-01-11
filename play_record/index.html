@@ -60,7 +60,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue">
   
     
     
@@ -116,7 +116,7 @@
           
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -126,7 +126,7 @@
           
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -1201,53 +1201,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-190">190</a></span>
-<span class="normal"><a href="#__codelineno-0-191">191</a></span>
-<span class="normal"><a href="#__codelineno-0-192">192</a></span>
-<span class="normal"><a href="#__codelineno-0-193">193</a></span>
-<span class="normal"><a href="#__codelineno-0-194">194</a></span>
-<span class="normal"><a href="#__codelineno-0-195">195</a></span>
-<span class="normal"><a href="#__codelineno-0-196">196</a></span>
-<span class="normal"><a href="#__codelineno-0-197">197</a></span>
-<span class="normal"><a href="#__codelineno-0-198">198</a></span>
-<span class="normal"><a href="#__codelineno-0-199">199</a></span>
-<span class="normal"><a href="#__codelineno-0-200">200</a></span>
-<span class="normal"><a href="#__codelineno-0-201">201</a></span>
-<span class="normal"><a href="#__codelineno-0-202">202</a></span>
-<span class="normal"><a href="#__codelineno-0-203">203</a></span>
-<span class="normal"><a href="#__codelineno-0-204">204</a></span>
-<span class="normal"><a href="#__codelineno-0-205">205</a></span>
-<span class="normal"><a href="#__codelineno-0-206">206</a></span>
-<span class="normal"><a href="#__codelineno-0-207">207</a></span>
-<span class="normal"><a href="#__codelineno-0-208">208</a></span>
-<span class="normal"><a href="#__codelineno-0-209">209</a></span>
-<span class="normal"><a href="#__codelineno-0-210">210</a></span>
-<span class="normal"><a href="#__codelineno-0-211">211</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-190" name="__codelineno-0-190"></a><span class="k">def</span> <span class="nf">get_played</span><span class="p">(</span><span class="n">simulation</span><span class="p">:</span> <span class="s2">&quot;Simulation&quot;</span><span class="p">,</span> <span class="n">var_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-192" name="__codelineno-0-192"></a><span class="sd">    Retrieves a played time series from a simulation</span>
-<a id="__codelineno-0-193" name="__codelineno-0-193"></a>
-<a id="__codelineno-0-194" name="__codelineno-0-194"></a><span class="sd">    Retrieves a played time series from a simulation.</span>
-<a id="__codelineno-0-195" name="__codelineno-0-195"></a>
-<a id="__codelineno-0-196" name="__codelineno-0-196"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-197" name="__codelineno-0-197"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="sd">        var_ids (Any): name of the output variable played to a time series. &#39;Catchment|StreamflowRate&#39;. If missing, a multivariate time series of all played states is returned; this may be a large amount of data.</span>
-<a id="__codelineno-0-199" name="__codelineno-0-199"></a><span class="sd">        start_time (Any): An optional parameter, the start of a period to subset the time series</span>
-<a id="__codelineno-0-200" name="__codelineno-0-200"></a><span class="sd">        end_time (Any): An optional parameter, the end of a period to subset the time series</span>
-<a id="__codelineno-0-201" name="__codelineno-0-201"></a>
-<a id="__codelineno-0-202" name="__codelineno-0-202"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-203" name="__codelineno-0-203"></a><span class="sd">        an xts time series, possibly multivariate.</span>
-<a id="__codelineno-0-204" name="__codelineno-0-204"></a>
-<a id="__codelineno-0-205" name="__codelineno-0-205"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-206" name="__codelineno-0-206"></a>
-<a id="__codelineno-0-207" name="__codelineno-0-207"></a>    <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
-<a id="__codelineno-0-208" name="__codelineno-0-208"></a>    <span class="k">if</span> <span class="n">var_ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-209" name="__codelineno-0-209"></a>        <span class="n">var_ids</span> <span class="o">=</span> <span class="n">get_played_varnames</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
-<a id="__codelineno-0-210" name="__codelineno-0-210"></a>    <span class="n">series</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">internal_get_played_tts</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">)</span>
-<a id="__codelineno-0-211" name="__codelineno-0-211"></a>    <span class="k">return</span> <span class="n">si</span><span class="o">.</span><span class="n">get_ts_window</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1308,37 +1261,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-214">214</a></span>
-<span class="normal"><a href="#__codelineno-0-215">215</a></span>
-<span class="normal"><a href="#__codelineno-0-216">216</a></span>
-<span class="normal"><a href="#__codelineno-0-217">217</a></span>
-<span class="normal"><a href="#__codelineno-0-218">218</a></span>
-<span class="normal"><a href="#__codelineno-0-219">219</a></span>
-<span class="normal"><a href="#__codelineno-0-220">220</a></span>
-<span class="normal"><a href="#__codelineno-0-221">221</a></span>
-<span class="normal"><a href="#__codelineno-0-222">222</a></span>
-<span class="normal"><a href="#__codelineno-0-223">223</a></span>
-<span class="normal"><a href="#__codelineno-0-224">224</a></span>
-<span class="normal"><a href="#__codelineno-0-225">225</a></span>
-<span class="normal"><a href="#__codelineno-0-226">226</a></span>
-<span class="normal"><a href="#__codelineno-0-227">227</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-214" name="__codelineno-0-214"></a><span class="k">def</span> <span class="nf">get_played_varnames</span><span class="p">(</span><span class="n">simulation</span><span class="p">):</span>
-<a id="__codelineno-0-215" name="__codelineno-0-215"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-216" name="__codelineno-0-216"></a><span class="sd">    Gets all the names of states fed an input time series</span>
-<a id="__codelineno-0-217" name="__codelineno-0-217"></a>
-<a id="__codelineno-0-218" name="__codelineno-0-218"></a><span class="sd">    Gets all the names of states fed an input time series</span>
-<a id="__codelineno-0-219" name="__codelineno-0-219"></a>
-<a id="__codelineno-0-220" name="__codelineno-0-220"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-221" name="__codelineno-0-221"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-222" name="__codelineno-0-222"></a>
-<a id="__codelineno-0-223" name="__codelineno-0-223"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-224" name="__codelineno-0-224"></a><span class="sd">        The names of the state variables fed over the simulation with values from a time series</span>
-<a id="__codelineno-0-225" name="__codelineno-0-225"></a>
-<a id="__codelineno-0-226" name="__codelineno-0-226"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-227" name="__codelineno-0-227"></a>    <span class="k">return</span> <span class="n">swg</span><span class="o">.</span><span class="n">GetPlayedVariableNames_py</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1429,61 +1351,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-230">230</a></span>
-<span class="normal"><a href="#__codelineno-0-231">231</a></span>
-<span class="normal"><a href="#__codelineno-0-232">232</a></span>
-<span class="normal"><a href="#__codelineno-0-233">233</a></span>
-<span class="normal"><a href="#__codelineno-0-234">234</a></span>
-<span class="normal"><a href="#__codelineno-0-235">235</a></span>
-<span class="normal"><a href="#__codelineno-0-236">236</a></span>
-<span class="normal"><a href="#__codelineno-0-237">237</a></span>
-<span class="normal"><a href="#__codelineno-0-238">238</a></span>
-<span class="normal"><a href="#__codelineno-0-239">239</a></span>
-<span class="normal"><a href="#__codelineno-0-240">240</a></span>
-<span class="normal"><a href="#__codelineno-0-241">241</a></span>
-<span class="normal"><a href="#__codelineno-0-242">242</a></span>
-<span class="normal"><a href="#__codelineno-0-243">243</a></span>
-<span class="normal"><a href="#__codelineno-0-244">244</a></span>
-<span class="normal"><a href="#__codelineno-0-245">245</a></span>
-<span class="normal"><a href="#__codelineno-0-246">246</a></span>
-<span class="normal"><a href="#__codelineno-0-247">247</a></span>
-<span class="normal"><a href="#__codelineno-0-248">248</a></span>
-<span class="normal"><a href="#__codelineno-0-249">249</a></span>
-<span class="normal"><a href="#__codelineno-0-250">250</a></span>
-<span class="normal"><a href="#__codelineno-0-251">251</a></span>
-<span class="normal"><a href="#__codelineno-0-252">252</a></span>
-<span class="normal"><a href="#__codelineno-0-253">253</a></span>
-<span class="normal"><a href="#__codelineno-0-254">254</a></span>
-<span class="normal"><a href="#__codelineno-0-255">255</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-230" name="__codelineno-0-230"></a><span class="k">def</span> <span class="nf">get_recorded</span><span class="p">(</span>
-<a id="__codelineno-0-231" name="__codelineno-0-231"></a>    <span class="n">simulation</span><span class="p">:</span> <span class="s2">&quot;Simulation&quot;</span><span class="p">,</span> <span class="n">var_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="kc">None</span>
-<a id="__codelineno-0-232" name="__codelineno-0-232"></a><span class="p">):</span>
-<a id="__codelineno-0-233" name="__codelineno-0-233"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-234" name="__codelineno-0-234"></a><span class="sd">    Retrieves a recorded time series from a simulation</span>
-<a id="__codelineno-0-235" name="__codelineno-0-235"></a>
-<a id="__codelineno-0-236" name="__codelineno-0-236"></a><span class="sd">    Retrieves a recorded time series from a simulation.</span>
-<a id="__codelineno-0-237" name="__codelineno-0-237"></a>
-<a id="__codelineno-0-238" name="__codelineno-0-238"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-239" name="__codelineno-0-239"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-240" name="__codelineno-0-240"></a><span class="sd">        var_ids (Any): name of the output variable recorded to a time series. &#39;Catchment|StreamflowRate&#39;. If missing, a multivariate time series of all recorded states is returned; this may be a large amount of data.</span>
-<a id="__codelineno-0-241" name="__codelineno-0-241"></a><span class="sd">        start_time (Any): An optional parameter, the start of a period to subset the time series</span>
-<a id="__codelineno-0-242" name="__codelineno-0-242"></a><span class="sd">        end_time (Any): An optional parameter, the end of a period to subset the time series</span>
-<a id="__codelineno-0-243" name="__codelineno-0-243"></a>
-<a id="__codelineno-0-244" name="__codelineno-0-244"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-245" name="__codelineno-0-245"></a><span class="sd">        an xts time series, possibly multivariate.</span>
-<a id="__codelineno-0-246" name="__codelineno-0-246"></a>
-<a id="__codelineno-0-247" name="__codelineno-0-247"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-248" name="__codelineno-0-248"></a>    <span class="k">if</span> <span class="n">si</span><span class="o">.</span><span class="n">is_ensemble_forecast_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">):</span>
-<a id="__codelineno-0-249" name="__codelineno-0-249"></a>        <span class="k">return</span> <span class="n">get_recorded_ensemble_forecast</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">)</span>
-<a id="__codelineno-0-250" name="__codelineno-0-250"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-251" name="__codelineno-0-251"></a>        <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
-<a id="__codelineno-0-252" name="__codelineno-0-252"></a>        <span class="k">if</span> <span class="n">var_ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-253" name="__codelineno-0-253"></a>            <span class="n">var_ids</span> <span class="o">=</span> <span class="n">get_recorded_varnames</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
-<a id="__codelineno-0-254" name="__codelineno-0-254"></a>        <span class="n">series</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">internal_get_recorded_tts</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">)</span>
-<a id="__codelineno-0-255" name="__codelineno-0-255"></a>        <span class="k">return</span> <span class="n">si</span><span class="o">.</span><span class="n">get_ts_window</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1574,49 +1441,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-272">272</a></span>
-<span class="normal"><a href="#__codelineno-0-273">273</a></span>
-<span class="normal"><a href="#__codelineno-0-274">274</a></span>
-<span class="normal"><a href="#__codelineno-0-275">275</a></span>
-<span class="normal"><a href="#__codelineno-0-276">276</a></span>
-<span class="normal"><a href="#__codelineno-0-277">277</a></span>
-<span class="normal"><a href="#__codelineno-0-278">278</a></span>
-<span class="normal"><a href="#__codelineno-0-279">279</a></span>
-<span class="normal"><a href="#__codelineno-0-280">280</a></span>
-<span class="normal"><a href="#__codelineno-0-281">281</a></span>
-<span class="normal"><a href="#__codelineno-0-282">282</a></span>
-<span class="normal"><a href="#__codelineno-0-283">283</a></span>
-<span class="normal"><a href="#__codelineno-0-284">284</a></span>
-<span class="normal"><a href="#__codelineno-0-285">285</a></span>
-<span class="normal"><a href="#__codelineno-0-286">286</a></span>
-<span class="normal"><a href="#__codelineno-0-287">287</a></span>
-<span class="normal"><a href="#__codelineno-0-288">288</a></span>
-<span class="normal"><a href="#__codelineno-0-289">289</a></span>
-<span class="normal"><a href="#__codelineno-0-290">290</a></span>
-<span class="normal"><a href="#__codelineno-0-291">291</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-272" name="__codelineno-0-272"></a><span class="k">def</span> <span class="nf">get_recorded_ensemble_forecast</span><span class="p">(</span>
-<a id="__codelineno-0-273" name="__codelineno-0-273"></a>    <span class="n">simulation</span><span class="p">,</span> <span class="n">var_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="kc">None</span>
-<a id="__codelineno-0-274" name="__codelineno-0-274"></a><span class="p">):</span>
-<a id="__codelineno-0-275" name="__codelineno-0-275"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-276" name="__codelineno-0-276"></a><span class="sd">    Retrieves a recorded time series from a simulation</span>
-<a id="__codelineno-0-277" name="__codelineno-0-277"></a>
-<a id="__codelineno-0-278" name="__codelineno-0-278"></a><span class="sd">    Retrieves a recorded time series from a simulation.</span>
-<a id="__codelineno-0-279" name="__codelineno-0-279"></a>
-<a id="__codelineno-0-280" name="__codelineno-0-280"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-281" name="__codelineno-0-281"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-282" name="__codelineno-0-282"></a><span class="sd">        var_ids (Any): name of the output variable recorded to a time series. &#39;Catchment|StreamflowRate&#39;. If missing, a multivariate time series of all recorded states is returned; this may be a large amount of data.</span>
-<a id="__codelineno-0-283" name="__codelineno-0-283"></a><span class="sd">        start_time (Any): NOT USED YET An optional parameter, the start of a period to subset the time series</span>
-<a id="__codelineno-0-284" name="__codelineno-0-284"></a><span class="sd">        end_time (Any): NOT USED YET An optional parameter, the end of a period to subset the time series</span>
-<a id="__codelineno-0-285" name="__codelineno-0-285"></a>
-<a id="__codelineno-0-286" name="__codelineno-0-286"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-287" name="__codelineno-0-287"></a><span class="sd">        an xts time series, possibly multivariate.</span>
-<a id="__codelineno-0-288" name="__codelineno-0-288"></a>
-<a id="__codelineno-0-289" name="__codelineno-0-289"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-290" name="__codelineno-0-290"></a>    <span class="n">si</span><span class="o">.</span><span class="n">check_ensemble_forecast_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
-<a id="__codelineno-0-291" name="__codelineno-0-291"></a>    <span class="k">return</span> <span class="n">swg</span><span class="o">.</span><span class="n">GetRecordedEnsembleForecastTimeSeries_py</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">var_id</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1677,37 +1501,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-296">296</a></span>
-<span class="normal"><a href="#__codelineno-0-297">297</a></span>
-<span class="normal"><a href="#__codelineno-0-298">298</a></span>
-<span class="normal"><a href="#__codelineno-0-299">299</a></span>
-<span class="normal"><a href="#__codelineno-0-300">300</a></span>
-<span class="normal"><a href="#__codelineno-0-301">301</a></span>
-<span class="normal"><a href="#__codelineno-0-302">302</a></span>
-<span class="normal"><a href="#__codelineno-0-303">303</a></span>
-<span class="normal"><a href="#__codelineno-0-304">304</a></span>
-<span class="normal"><a href="#__codelineno-0-305">305</a></span>
-<span class="normal"><a href="#__codelineno-0-306">306</a></span>
-<span class="normal"><a href="#__codelineno-0-307">307</a></span>
-<span class="normal"><a href="#__codelineno-0-308">308</a></span>
-<span class="normal"><a href="#__codelineno-0-309">309</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-296" name="__codelineno-0-296"></a><span class="k">def</span> <span class="nf">get_recorded_varnames</span><span class="p">(</span><span class="n">simulation</span><span class="p">):</span>
-<a id="__codelineno-0-297" name="__codelineno-0-297"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-298" name="__codelineno-0-298"></a><span class="sd">    Gets all the names of the recorded states</span>
-<a id="__codelineno-0-299" name="__codelineno-0-299"></a>
-<a id="__codelineno-0-300" name="__codelineno-0-300"></a><span class="sd">    Gets all the names of the recorded states</span>
-<a id="__codelineno-0-301" name="__codelineno-0-301"></a>
-<a id="__codelineno-0-302" name="__codelineno-0-302"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-303" name="__codelineno-0-303"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-304" name="__codelineno-0-304"></a>
-<a id="__codelineno-0-305" name="__codelineno-0-305"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-306" name="__codelineno-0-306"></a><span class="sd">        The names of the state variables being recorded into time series</span>
-<a id="__codelineno-0-307" name="__codelineno-0-307"></a>
-<a id="__codelineno-0-308" name="__codelineno-0-308"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-309" name="__codelineno-0-309"></a>    <span class="k">return</span> <span class="n">swg</span><span class="o">.</span><span class="n">GetRecordedVariableNames_py</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1771,49 +1564,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-155">155</a></span>
-<span class="normal"><a href="#__codelineno-0-156">156</a></span>
-<span class="normal"><a href="#__codelineno-0-157">157</a></span>
-<span class="normal"><a href="#__codelineno-0-158">158</a></span>
-<span class="normal"><a href="#__codelineno-0-159">159</a></span>
-<span class="normal"><a href="#__codelineno-0-160">160</a></span>
-<span class="normal"><a href="#__codelineno-0-161">161</a></span>
-<span class="normal"><a href="#__codelineno-0-162">162</a></span>
-<span class="normal"><a href="#__codelineno-0-163">163</a></span>
-<span class="normal"><a href="#__codelineno-0-164">164</a></span>
-<span class="normal"><a href="#__codelineno-0-165">165</a></span>
-<span class="normal"><a href="#__codelineno-0-166">166</a></span>
-<span class="normal"><a href="#__codelineno-0-167">167</a></span>
-<span class="normal"><a href="#__codelineno-0-168">168</a></span>
-<span class="normal"><a href="#__codelineno-0-169">169</a></span>
-<span class="normal"><a href="#__codelineno-0-170">170</a></span>
-<span class="normal"><a href="#__codelineno-0-171">171</a></span>
-<span class="normal"><a href="#__codelineno-0-172">172</a></span>
-<span class="normal"><a href="#__codelineno-0-173">173</a></span>
-<span class="normal"><a href="#__codelineno-0-174">174</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-155" name="__codelineno-0-155"></a><span class="k">def</span> <span class="nf">play_ensemble_forecast_input</span><span class="p">(</span>
-<a id="__codelineno-0-156" name="__codelineno-0-156"></a>    <span class="n">simulation</span><span class="p">:</span> <span class="s2">&quot;EnsembleForecastSimulation&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-157" name="__codelineno-0-157"></a>    <span class="n">input_ts</span><span class="p">:</span> <span class="s2">&quot;EnsembleForecastTimeSeries&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-158" name="__codelineno-0-158"></a>    <span class="n">var_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-0-159" name="__codelineno-0-159"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-160" name="__codelineno-0-160"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-161" name="__codelineno-0-161"></a><span class="sd">    Sets time series as input to a simulation</span>
-<a id="__codelineno-0-162" name="__codelineno-0-162"></a>
-<a id="__codelineno-0-163" name="__codelineno-0-163"></a><span class="sd">    Sets time series as input to a simulation</span>
-<a id="__codelineno-0-164" name="__codelineno-0-164"></a>
-<a id="__codelineno-0-165" name="__codelineno-0-165"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-166" name="__codelineno-0-166"></a><span class="sd">        simulation (Any): an S4 object &#39;ExternalObjRef&#39; [package &quot;cinterop&quot;] with external pointer type &quot;ENSEMBLE_FORECAST_SIMULATION_PTR&quot;</span>
-<a id="__codelineno-0-167" name="__codelineno-0-167"></a><span class="sd">        input_ts (Any): an S4 object &#39;ExternalObjRef&#39; [package &quot;cinterop&quot;] with external pointer type &quot;ENSEMBLE_FORECAST_TIME_SERIES_PTR&quot;</span>
-<a id="__codelineno-0-168" name="__codelineno-0-168"></a><span class="sd">        var_id (Any): character of length one, the variable identifier to use</span>
-<a id="__codelineno-0-169" name="__codelineno-0-169"></a>
-<a id="__codelineno-0-170" name="__codelineno-0-170"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-171" name="__codelineno-0-171"></a>    <span class="n">si</span><span class="o">.</span><span class="n">check_ensemble_forecast_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
-<a id="__codelineno-0-172" name="__codelineno-0-172"></a>    <span class="n">si</span><span class="o">.</span><span class="n">check_ensemble_forecast_time_series</span><span class="p">(</span><span class="n">input_ts</span><span class="p">)</span>
-<a id="__codelineno-0-173" name="__codelineno-0-173"></a>    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<a id="__codelineno-0-174" name="__codelineno-0-174"></a>    <span class="n">swg</span><span class="o">.</span><span class="n">PlayEnsembleForecastTimeSeries_py</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">input_ts</span><span class="p">,</span> <span class="n">var_id</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1877,61 +1627,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-79"> 79</a></span>
-<span class="normal"><a href="#__codelineno-0-80"> 80</a></span>
-<span class="normal"><a href="#__codelineno-0-81"> 81</a></span>
-<span class="normal"><a href="#__codelineno-0-82"> 82</a></span>
-<span class="normal"><a href="#__codelineno-0-83"> 83</a></span>
-<span class="normal"><a href="#__codelineno-0-84"> 84</a></span>
-<span class="normal"><a href="#__codelineno-0-85"> 85</a></span>
-<span class="normal"><a href="#__codelineno-0-86"> 86</a></span>
-<span class="normal"><a href="#__codelineno-0-87"> 87</a></span>
-<span class="normal"><a href="#__codelineno-0-88"> 88</a></span>
-<span class="normal"><a href="#__codelineno-0-89"> 89</a></span>
-<span class="normal"><a href="#__codelineno-0-90"> 90</a></span>
-<span class="normal"><a href="#__codelineno-0-91"> 91</a></span>
-<span class="normal"><a href="#__codelineno-0-92"> 92</a></span>
-<span class="normal"><a href="#__codelineno-0-93"> 93</a></span>
-<span class="normal"><a href="#__codelineno-0-94"> 94</a></span>
-<span class="normal"><a href="#__codelineno-0-95"> 95</a></span>
-<span class="normal"><a href="#__codelineno-0-96"> 96</a></span>
-<span class="normal"><a href="#__codelineno-0-97"> 97</a></span>
-<span class="normal"><a href="#__codelineno-0-98"> 98</a></span>
-<span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
-<span class="normal"><a href="#__codelineno-0-100">100</a></span>
-<span class="normal"><a href="#__codelineno-0-101">101</a></span>
-<span class="normal"><a href="#__codelineno-0-102">102</a></span>
-<span class="normal"><a href="#__codelineno-0-103">103</a></span>
-<span class="normal"><a href="#__codelineno-0-104">104</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-79" name="__codelineno-0-79"></a><span class="k">def</span> <span class="nf">play_input</span><span class="p">(</span>
-<a id="__codelineno-0-80" name="__codelineno-0-80"></a>    <span class="n">simulation</span><span class="p">:</span> <span class="s2">&quot;NdSimulation&quot;</span><span class="p">,</span> <span class="n">input_ts</span><span class="p">:</span> <span class="s2">&quot;TimeSeriesLike&quot;</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">:</span> <span class="n">VecStr</span> <span class="o">=</span> <span class="kc">None</span>
-<a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-82" name="__codelineno-0-82"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-83" name="__codelineno-0-83"></a><span class="sd">    Sets time series as input to a simulation</span>
-<a id="__codelineno-0-84" name="__codelineno-0-84"></a>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="sd">    Sets time series as input to a simulation</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="sd">        input_ts (Any): an xts time series, or an S4 object &#39;ExternalObjRef&#39; [package &quot;cinterop&quot;] with external pointer type &quot;ENSEMBLE_FORECAST_TIME_SERIES_PTR&quot;. if an xts time series column names must be valid model variable identifiers, unless explicitely provided via varIds</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="sd">        var_ids (Any): optional character, the variable identifiers to use, overriding the column names of the inputTs. If not NULL, must be of length equal to the number of columns in inputTs</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>
-<a id="__codelineno-0-92" name="__codelineno-0-92"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-93" name="__codelineno-0-93"></a>    <span class="k">if</span> <span class="n">si</span><span class="o">.</span><span class="n">is_ensemble_forecast_simulation</span><span class="p">(</span>
-<a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="n">simulation</span>
-<a id="__codelineno-0-95" name="__codelineno-0-95"></a>    <span class="p">)</span> <span class="ow">and</span> <span class="n">si</span><span class="o">.</span><span class="n">is_ensemble_forecast_time_series</span><span class="p">(</span><span class="n">input_ts</span><span class="p">):</span>
-<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="n">play_ensemble_forecast_input</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">input_ts</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">)</span>
-<a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="k">elif</span> <span class="n">si</span><span class="o">.</span><span class="n">is_ensemble_simulation</span><span class="p">(</span>
-<a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="n">simulation</span>
-<a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="p">):</span>  <span class="c1"># ??? and si.is_ensemble_forecast_time_series(input_ts):</span>
-<a id="__codelineno-0-100" name="__codelineno-0-100"></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;play input into ensemble simulation not supported&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-101" name="__codelineno-0-101"></a>    <span class="c1"># } else {</span>
-<a id="__codelineno-0-102" name="__codelineno-0-102"></a>    <span class="c1"># stopifnot(is.xts(input_ts))</span>
-<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-104" name="__codelineno-0-104"></a>        <span class="n">play_singular_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">input_ts</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -2014,71 +1709,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#__codelineno-0-50">50</a></span>
-<span class="normal"><a href="#__codelineno-0-51">51</a></span>
-<span class="normal"><a href="#__codelineno-0-52">52</a></span>
-<span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span>
-<span class="normal"><a href="#__codelineno-0-55">55</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="k">def</span> <span class="nf">play_inputs</span><span class="p">(</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="n">simulation</span><span class="p">:</span> <span class="s2">&quot;Simulation&quot;</span><span class="p">,</span> <span class="n">data_library</span><span class="p">:</span><span class="n">uc</span><span class="o">.</span><span class="n">TimeSeriesLibrary</span><span class="p">,</span> <span class="n">model_var_id</span><span class="p">:</span><span class="s2">&quot;VecStr&quot;</span><span class="p">,</span> <span class="n">data_id</span><span class="p">:</span><span class="s2">&quot;VecStr&quot;</span><span class="p">,</span> <span class="n">resample</span><span class="p">:</span><span class="s2">&quot;VecStr&quot;</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="p">):</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">    Assign input time series from a time series library to a model simulation</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="sd">        data_library (TimeSeriesLibrary): external pointer type ENSEMBLE_DATA_SET_PTR, or a Python class wrapper around it </span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="sd">        model_var_id (str or sequence of str): model state variable unique identifier(s)</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="sd">        data_id (str or sequence of str): identifier(s) for data in the data_library. If length is not the same as model_var_id, the elements of data_id are reused to match it</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">        resample (str or sequence of str): identifier(s) for how the series is resampled (aggregated or disaggregated). If length is not the same as model_var_id, the elements of resample are reused to match it</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="c1"># model_var_id &lt;- as.character(model_var_id)</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="c1"># data_id &lt;- as.character(data_id)</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="c1"># resample &lt;- as.character(resample)</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42"></a>    <span class="c1"># TODO: match the behavior of R, perhaps.</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_var_id</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_id</span><span class="p">)</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_var_id</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">resample</span><span class="p">)</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a>    <span class="c1"># if(len(model_var_id) != len(data_id)):</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="c1">#     # warning(&#39;Reusing argument `data_id` to match length of `model_var_id`&#39;)</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="c1">#     data_id = np.repeat(data_id, length.out=length(model_var_id))</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48"></a>
-<a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="c1"># if(length(resample)!=length(model_var_id)) {</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50"></a>    <span class="c1"># if(length(resample) != 1 || resample[1] != &#39;&#39;) warning(&#39;Reusing argument `resample` to match the length of `model_var_id`&#39;)</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51"></a>    <span class="c1"># resample &lt;- rep(resample, length.out=length(model_var_id))</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="c1"># }</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">swg</span><span class="o">.</span><span class="n">PlayDatasetInputs_py</span><span class="p">(</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54"></a>        <span class="n">simulation</span><span class="p">,</span> <span class="n">data_library</span><span class="p">,</span> <span class="n">model_var_id</span><span class="p">,</span> <span class="n">data_id</span><span class="p">,</span> <span class="n">resample</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_var_id</span><span class="p">)</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -2152,37 +1782,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-62">62</a></span>
-<span class="normal"><a href="#__codelineno-0-63">63</a></span>
-<span class="normal"><a href="#__codelineno-0-64">64</a></span>
-<span class="normal"><a href="#__codelineno-0-65">65</a></span>
-<span class="normal"><a href="#__codelineno-0-66">66</a></span>
-<span class="normal"><a href="#__codelineno-0-67">67</a></span>
-<span class="normal"><a href="#__codelineno-0-68">68</a></span>
-<span class="normal"><a href="#__codelineno-0-69">69</a></span>
-<span class="normal"><a href="#__codelineno-0-70">70</a></span>
-<span class="normal"><a href="#__codelineno-0-71">71</a></span>
-<span class="normal"><a href="#__codelineno-0-72">72</a></span>
-<span class="normal"><a href="#__codelineno-0-73">73</a></span>
-<span class="normal"><a href="#__codelineno-0-74">74</a></span>
-<span class="normal"><a href="#__codelineno-0-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="k">def</span> <span class="nf">play_subarea_input</span><span class="p">(</span><span class="n">simulation</span><span class="p">:</span> <span class="s2">&quot;Simulation&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">subarea_name</span><span class="p">,</span> <span class="n">input_name</span><span class="p">):</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="sd">    Sets time series as input to a simulation</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65"></a>
-<a id="__codelineno-0-66" name="__codelineno-0-66"></a><span class="sd">    Sets time series as input to a simulation</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="sd">        simulation (Simulation): A swift simulation object</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a><span class="sd">        input (Any): an xts time series.</span>
-<a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="sd">        subarea_name (Any): a valid name of the subarea</span>
-<a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="sd">        input_name (Any): the name of the input variable to the model (i.e. &#39;P&#39; for the precip of GR5H)</span>
-<a id="__codelineno-0-73" name="__codelineno-0-73"></a>
-<a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-75" name="__codelineno-0-75"></a>    <span class="n">play_input</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">_mkid</span><span class="p">(</span><span class="s2">&quot;subcatchment&quot;</span><span class="p">,</span> <span class="n">subarea_name</span><span class="p">,</span> <span class="n">input_name</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -2274,77 +1873,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/play_record.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-333">333</a></span>
-<span class="normal"><a href="#__codelineno-0-334">334</a></span>
-<span class="normal"><a href="#__codelineno-0-335">335</a></span>
-<span class="normal"><a href="#__codelineno-0-336">336</a></span>
-<span class="normal"><a href="#__codelineno-0-337">337</a></span>
-<span class="normal"><a href="#__codelineno-0-338">338</a></span>
-<span class="normal"><a href="#__codelineno-0-339">339</a></span>
-<span class="normal"><a href="#__codelineno-0-340">340</a></span>
-<span class="normal"><a href="#__codelineno-0-341">341</a></span>
-<span class="normal"><a href="#__codelineno-0-342">342</a></span>
-<span class="normal"><a href="#__codelineno-0-343">343</a></span>
-<span class="normal"><a href="#__codelineno-0-344">344</a></span>
-<span class="normal"><a href="#__codelineno-0-345">345</a></span>
-<span class="normal"><a href="#__codelineno-0-346">346</a></span>
-<span class="normal"><a href="#__codelineno-0-347">347</a></span>
-<span class="normal"><a href="#__codelineno-0-348">348</a></span>
-<span class="normal"><a href="#__codelineno-0-349">349</a></span>
-<span class="normal"><a href="#__codelineno-0-350">350</a></span>
-<span class="normal"><a href="#__codelineno-0-351">351</a></span>
-<span class="normal"><a href="#__codelineno-0-352">352</a></span>
-<span class="normal"><a href="#__codelineno-0-353">353</a></span>
-<span class="normal"><a href="#__codelineno-0-354">354</a></span>
-<span class="normal"><a href="#__codelineno-0-355">355</a></span>
-<span class="normal"><a href="#__codelineno-0-356">356</a></span>
-<span class="normal"><a href="#__codelineno-0-357">357</a></span>
-<span class="normal"><a href="#__codelineno-0-358">358</a></span>
-<span class="normal"><a href="#__codelineno-0-359">359</a></span>
-<span class="normal"><a href="#__codelineno-0-360">360</a></span>
-<span class="normal"><a href="#__codelineno-0-361">361</a></span>
-<span class="normal"><a href="#__codelineno-0-362">362</a></span>
-<span class="normal"><a href="#__codelineno-0-363">363</a></span>
-<span class="normal"><a href="#__codelineno-0-364">364</a></span>
-<span class="normal"><a href="#__codelineno-0-365">365</a></span>
-<span class="normal"><a href="#__codelineno-0-366">366</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-333" name="__codelineno-0-333"></a><span class="k">def</span> <span class="nf">record_state</span><span class="p">(</span>
-<a id="__codelineno-0-334" name="__codelineno-0-334"></a>    <span class="n">simulation</span><span class="p">,</span>
-<a id="__codelineno-0-335" name="__codelineno-0-335"></a>    <span class="n">var_ids</span><span class="p">:</span> <span class="n">VecStr</span> <span class="o">=</span> <span class="n">CATCHMENT_FLOWRATE_VARID</span><span class="p">,</span>
-<a id="__codelineno-0-336" name="__codelineno-0-336"></a>    <span class="n">recording_provider</span><span class="p">:</span> <span class="s2">&quot;TimeSeriesLibrary&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<a id="__codelineno-0-337" name="__codelineno-0-337"></a>    <span class="n">data_ids</span><span class="p">:</span> <span class="s2">&quot;VecStr&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<a id="__codelineno-0-338" name="__codelineno-0-338"></a><span class="p">):</span>
-<a id="__codelineno-0-339" name="__codelineno-0-339"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-340" name="__codelineno-0-340"></a><span class="sd">    Record a time series of one of the state of the model</span>
-<a id="__codelineno-0-341" name="__codelineno-0-341"></a>
-<a id="__codelineno-0-342" name="__codelineno-0-342"></a><span class="sd">    Record a time series of one of the state of the model</span>
-<a id="__codelineno-0-343" name="__codelineno-0-343"></a>
-<a id="__codelineno-0-344" name="__codelineno-0-344"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-345" name="__codelineno-0-345"></a><span class="sd">        simulation (Any): an S4 object &#39;ExternalObjRef&#39; [package &quot;cinterop&quot;] with external pointer type &quot;MODEL_SIMULATION_PTR&quot;, &quot;ENSEMBLE_SIMULATION_PTR&quot; or &quot;ENSEMBLE_FORECAST_SIMULATION_PTR&quot;</span>
-<a id="__codelineno-0-346" name="__codelineno-0-346"></a><span class="sd">        var_ids (VecStr, optional): identifier(s) of the output variable recorded to a time series, e.g. &#39;Catchment|StreamflowRate&#39; or &#39;subcatchment.Subarea.runoff&#39;. Defaults to CATCHMENT_FLOWRATE_VARID.</span>
-<a id="__codelineno-0-347" name="__codelineno-0-347"></a><span class="sd">        recording_provider (TimeSeriesLibrary, optional): _description_. Defaults to None.</span>
-<a id="__codelineno-0-348" name="__codelineno-0-348"></a><span class="sd">        data_ids (VecStr, optional): _description_. Defaults to None.</span>
-<a id="__codelineno-0-349" name="__codelineno-0-349"></a>
-<a id="__codelineno-0-350" name="__codelineno-0-350"></a><span class="sd">    Raises:</span>
-<a id="__codelineno-0-351" name="__codelineno-0-351"></a><span class="sd">        ValueError: _description_</span>
-<a id="__codelineno-0-352" name="__codelineno-0-352"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-353" name="__codelineno-0-353"></a>    <span class="c1"># checkRecordingConsistency(var_ids, recording_provider, data_ids)</span>
-<a id="__codelineno-0-354" name="__codelineno-0-354"></a>    <span class="c1"># var_ids &lt;- as.character(var_ids)</span>
-<a id="__codelineno-0-355" name="__codelineno-0-355"></a>    <span class="c1"># data_ids &lt;- as.character(data_ids)</span>
-<a id="__codelineno-0-356" name="__codelineno-0-356"></a>    <span class="c1"># recordSingularState(simulation, var_ids, recording_provider, data_ids)Err</span>
-<a id="__codelineno-0-357" name="__codelineno-0-357"></a>    <span class="k">if</span> <span class="n">si</span><span class="o">.</span><span class="n">is_ensemble_forecast_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">):</span>
-<a id="__codelineno-0-358" name="__codelineno-0-358"></a>        <span class="n">record_ensemble_forecast_state</span><span class="p">(</span>
-<a id="__codelineno-0-359" name="__codelineno-0-359"></a>            <span class="n">simulation</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">,</span> <span class="n">recording_provider</span><span class="p">,</span> <span class="n">data_ids</span>
-<a id="__codelineno-0-360" name="__codelineno-0-360"></a>        <span class="p">)</span>
-<a id="__codelineno-0-361" name="__codelineno-0-361"></a>    <span class="k">elif</span> <span class="n">si</span><span class="o">.</span><span class="n">is_ensemble_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">):</span>
-<a id="__codelineno-0-362" name="__codelineno-0-362"></a>        <span class="n">record_ensemble_state</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">,</span> <span class="n">recording_provider</span><span class="p">,</span> <span class="n">data_ids</span><span class="p">)</span>
-<a id="__codelineno-0-363" name="__codelineno-0-363"></a>    <span class="k">elif</span> <span class="n">si</span><span class="o">.</span><span class="n">is_singular_simulation</span><span class="p">(</span><span class="n">simulation</span><span class="p">):</span>
-<a id="__codelineno-0-364" name="__codelineno-0-364"></a>        <span class="n">record_singular_state</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">var_ids</span><span class="p">,</span> <span class="n">recording_provider</span><span class="p">,</span> <span class="n">data_ids</span><span class="p">)</span>
-<a id="__codelineno-0-365" name="__codelineno-0-365"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-366" name="__codelineno-0-366"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown type of simulation&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>

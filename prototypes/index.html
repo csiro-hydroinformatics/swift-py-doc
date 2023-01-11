@@ -60,7 +60,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue">
   
     
     
@@ -116,7 +116,7 @@
           
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -126,7 +126,7 @@
           
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -1115,97 +1115,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/prototypes.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-350">350</a></span>
-<span class="normal"><a href="#__codelineno-0-351">351</a></span>
-<span class="normal"><a href="#__codelineno-0-352">352</a></span>
-<span class="normal"><a href="#__codelineno-0-353">353</a></span>
-<span class="normal"><a href="#__codelineno-0-354">354</a></span>
-<span class="normal"><a href="#__codelineno-0-355">355</a></span>
-<span class="normal"><a href="#__codelineno-0-356">356</a></span>
-<span class="normal"><a href="#__codelineno-0-357">357</a></span>
-<span class="normal"><a href="#__codelineno-0-358">358</a></span>
-<span class="normal"><a href="#__codelineno-0-359">359</a></span>
-<span class="normal"><a href="#__codelineno-0-360">360</a></span>
-<span class="normal"><a href="#__codelineno-0-361">361</a></span>
-<span class="normal"><a href="#__codelineno-0-362">362</a></span>
-<span class="normal"><a href="#__codelineno-0-363">363</a></span>
-<span class="normal"><a href="#__codelineno-0-364">364</a></span>
-<span class="normal"><a href="#__codelineno-0-365">365</a></span>
-<span class="normal"><a href="#__codelineno-0-366">366</a></span>
-<span class="normal"><a href="#__codelineno-0-367">367</a></span>
-<span class="normal"><a href="#__codelineno-0-368">368</a></span>
-<span class="normal"><a href="#__codelineno-0-369">369</a></span>
-<span class="normal"><a href="#__codelineno-0-370">370</a></span>
-<span class="normal"><a href="#__codelineno-0-371">371</a></span>
-<span class="normal"><a href="#__codelineno-0-372">372</a></span>
-<span class="normal"><a href="#__codelineno-0-373">373</a></span>
-<span class="normal"><a href="#__codelineno-0-374">374</a></span>
-<span class="normal"><a href="#__codelineno-0-375">375</a></span>
-<span class="normal"><a href="#__codelineno-0-376">376</a></span>
-<span class="normal"><a href="#__codelineno-0-377">377</a></span>
-<span class="normal"><a href="#__codelineno-0-378">378</a></span>
-<span class="normal"><a href="#__codelineno-0-379">379</a></span>
-<span class="normal"><a href="#__codelineno-0-380">380</a></span>
-<span class="normal"><a href="#__codelineno-0-381">381</a></span>
-<span class="normal"><a href="#__codelineno-0-382">382</a></span>
-<span class="normal"><a href="#__codelineno-0-383">383</a></span>
-<span class="normal"><a href="#__codelineno-0-384">384</a></span>
-<span class="normal"><a href="#__codelineno-0-385">385</a></span>
-<span class="normal"><a href="#__codelineno-0-386">386</a></span>
-<span class="normal"><a href="#__codelineno-0-387">387</a></span>
-<span class="normal"><a href="#__codelineno-0-388">388</a></span>
-<span class="normal"><a href="#__codelineno-0-389">389</a></span>
-<span class="normal"><a href="#__codelineno-0-390">390</a></span>
-<span class="normal"><a href="#__codelineno-0-391">391</a></span>
-<span class="normal"><a href="#__codelineno-0-392">392</a></span>
-<span class="normal"><a href="#__codelineno-0-393">393</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-350" name="__codelineno-0-350"></a><span class="k">def</span> <span class="nf">estimate_transformation_parameters</span><span class="p">(</span>
-<a id="__codelineno-0-351" name="__codelineno-0-351"></a>    <span class="n">calib_obs</span><span class="p">:</span> <span class="n">TimeSeriesLike</span><span class="p">,</span>
-<a id="__codelineno-0-352" name="__codelineno-0-352"></a>    <span class="n">estimation_start</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-<a id="__codelineno-0-353" name="__codelineno-0-353"></a>    <span class="n">estimation_end</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-<a id="__codelineno-0-354" name="__codelineno-0-354"></a>    <span class="n">censor_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<a id="__codelineno-0-355" name="__codelineno-0-355"></a>    <span class="n">exclusion</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<a id="__codelineno-0-356" name="__codelineno-0-356"></a>    <span class="n">exclusion_start</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-<a id="__codelineno-0-357" name="__codelineno-0-357"></a>    <span class="n">exclusion_end</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-<a id="__codelineno-0-358" name="__codelineno-0-358"></a>    <span class="n">termination_condition</span><span class="p">:</span> <span class="s2">&quot;SceTerminationCondition&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<a id="__codelineno-0-359" name="__codelineno-0-359"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HypercubeParameteriser&quot;</span><span class="p">:</span>
-<a id="__codelineno-0-360" name="__codelineno-0-360"></a>    <span class="sd">&quot;&quot;&quot;Estimate the transformation parameters for a log-likelihood for a series of observations</span>
-<a id="__codelineno-0-361" name="__codelineno-0-361"></a>
-<a id="__codelineno-0-362" name="__codelineno-0-362"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-363" name="__codelineno-0-363"></a><span class="sd">        calib_obs (TimeSeriesLike):  An timeseries of observed data</span>
-<a id="__codelineno-0-364" name="__codelineno-0-364"></a><span class="sd">        estimation_start (datetime): Start of estimation period</span>
-<a id="__codelineno-0-365" name="__codelineno-0-365"></a><span class="sd">        estimation_end (datetime): End of estimation period</span>
-<a id="__codelineno-0-366" name="__codelineno-0-366"></a><span class="sd">        censor_threshold (float): The value below which observations are treated a censored data (Default=0.0)</span>
-<a id="__codelineno-0-367" name="__codelineno-0-367"></a><span class="sd">        exclusion (bool): Start of period exclued from estimation</span>
-<a id="__codelineno-0-368" name="__codelineno-0-368"></a><span class="sd">        exclusion_start (datetime): End of period exclued from estimation</span>
-<a id="__codelineno-0-369" name="__codelineno-0-369"></a><span class="sd">        exclusion_end (datetime): Use the exclusion period (bool)</span>
-<a id="__codelineno-0-370" name="__codelineno-0-370"></a><span class="sd">        termination_condition (SceTerminationCondition): A SWIFT termination condition used by the optimisation. Default max runtime of ~3 minutes if None.</span>
-<a id="__codelineno-0-371" name="__codelineno-0-371"></a>
-<a id="__codelineno-0-372" name="__codelineno-0-372"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-373" name="__codelineno-0-373"></a><span class="sd">        HypercubeParameteriser: transformation parameters</span>
-<a id="__codelineno-0-374" name="__codelineno-0-374"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-375" name="__codelineno-0-375"></a>    <span class="kn">import</span> <span class="nn">swift2.internal</span> <span class="k">as</span> <span class="nn">si</span>
-<a id="__codelineno-0-376" name="__codelineno-0-376"></a>
-<a id="__codelineno-0-377" name="__codelineno-0-377"></a>    <span class="n">CENS_OPTION</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-0-378" name="__codelineno-0-378"></a>    <span class="n">simple_ts</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">simplify_time_series</span><span class="p">(</span><span class="n">calib_obs</span><span class="p">)</span>
-<a id="__codelineno-0-379" name="__codelineno-0-379"></a>    <span class="k">if</span> <span class="n">termination_condition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-380" name="__codelineno-0-380"></a>        <span class="n">termination_condition</span> <span class="o">=</span> <span class="n">get_max_runtime_termination</span><span class="p">()</span>
-<a id="__codelineno-0-381" name="__codelineno-0-381"></a>
-<a id="__codelineno-0-382" name="__codelineno-0-382"></a>    <span class="k">return</span> <span class="n">swg</span><span class="o">.</span><span class="n">EstimateTransformationParameters_py</span><span class="p">(</span>
-<a id="__codelineno-0-383" name="__codelineno-0-383"></a>        <span class="n">obsValues</span><span class="o">=</span><span class="n">simple_ts</span><span class="p">[</span><span class="n">si</span><span class="o">.</span><span class="n">TS_INTEROP_VALUES_KEY</span><span class="p">],</span>
-<a id="__codelineno-0-384" name="__codelineno-0-384"></a>        <span class="n">obsGeom</span><span class="o">=</span><span class="n">simple_ts</span><span class="p">[</span><span class="n">si</span><span class="o">.</span><span class="n">TS_INTEROP_GEOM_KEY</span><span class="p">],</span>
-<a id="__codelineno-0-385" name="__codelineno-0-385"></a>        <span class="n">estimationStart</span><span class="o">=</span><span class="n">estimation_start</span><span class="p">,</span>
-<a id="__codelineno-0-386" name="__codelineno-0-386"></a>        <span class="n">estimationEnd</span><span class="o">=</span><span class="n">estimation_end</span><span class="p">,</span>
-<a id="__codelineno-0-387" name="__codelineno-0-387"></a>        <span class="n">censThr</span><span class="o">=</span><span class="n">censor_threshold</span><span class="p">,</span>
-<a id="__codelineno-0-388" name="__codelineno-0-388"></a>        <span class="n">censOpt</span><span class="o">=</span><span class="n">CENS_OPTION</span><span class="p">,</span>
-<a id="__codelineno-0-389" name="__codelineno-0-389"></a>        <span class="n">exclusionStart</span><span class="o">=</span><span class="n">exclusion_start</span><span class="p">,</span>
-<a id="__codelineno-0-390" name="__codelineno-0-390"></a>        <span class="n">exclusionEnd</span><span class="o">=</span><span class="n">exclusion_end</span><span class="p">,</span>
-<a id="__codelineno-0-391" name="__codelineno-0-391"></a>        <span class="n">exclusion</span><span class="o">=</span><span class="n">exclusion</span><span class="p">,</span>
-<a id="__codelineno-0-392" name="__codelineno-0-392"></a>        <span class="n">terminationCondition</span><span class="o">=</span><span class="n">termination_condition</span><span class="p">,</span>
-<a id="__codelineno-0-393" name="__codelineno-0-393"></a>    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>

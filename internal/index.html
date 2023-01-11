@@ -60,7 +60,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue">
   
     
     
@@ -116,7 +116,7 @@
           
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -126,7 +126,7 @@
           
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -1059,45 +1059,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/internal.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#__codelineno-0-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="k">def</span> <span class="nf">simplify_time_series</span><span class="p">(</span><span class="n">input_ts</span><span class="p">:</span> <span class="n">TimeSeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="sd">&quot;&quot;&quot;simplify a 1D time series object to a representation suitable for portable serialisation.</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="sd">        input_ts (TimeSeriesLike): time series</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38"></a>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="sd">        Dict[str,Any]: dictionary with keys &quot;tsgeom&quot; for the time series geometry, and &quot;tsvalues&quot; for its values.</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>
-<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="c1"># from cinterop.timeseries import getTsGeometry</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="c1"># stopifnot(is.xts(input_ts))</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a>    <span class="c1"># def getSeriesColumn(k):</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="c1">#     return(as.numeric(input_ts[,k]))</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="k">return</span> <span class="p">{</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48"></a>        <span class="n">TS_INTEROP_GEOM_KEY</span><span class="p">:</span> <span class="n">marshal</span><span class="o">.</span><span class="n">as_native_tsgeom</span><span class="p">(</span><span class="n">get_tsgeom</span><span class="p">(</span><span class="n">input_ts</span><span class="p">)),</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="n">TS_INTEROP_VALUES_KEY</span><span class="p">:</span> <span class="n">input_ts</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>  <span class="c1"># lapply(1:ncol(input_ts), FUN=getSeriesColumn)</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50"></a>    <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
@@ -1178,55 +1139,6 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>swift2/internal.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span>
-<span class="normal"><a href="#__codelineno-0-55">55</a></span>
-<span class="normal"><a href="#__codelineno-0-56">56</a></span>
-<span class="normal"><a href="#__codelineno-0-57">57</a></span>
-<span class="normal"><a href="#__codelineno-0-58">58</a></span>
-<span class="normal"><a href="#__codelineno-0-59">59</a></span>
-<span class="normal"><a href="#__codelineno-0-60">60</a></span>
-<span class="normal"><a href="#__codelineno-0-61">61</a></span>
-<span class="normal"><a href="#__codelineno-0-62">62</a></span>
-<span class="normal"><a href="#__codelineno-0-63">63</a></span>
-<span class="normal"><a href="#__codelineno-0-64">64</a></span>
-<span class="normal"><a href="#__codelineno-0-65">65</a></span>
-<span class="normal"><a href="#__codelineno-0-66">66</a></span>
-<span class="normal"><a href="#__codelineno-0-67">67</a></span>
-<span class="normal"><a href="#__codelineno-0-68">68</a></span>
-<span class="normal"><a href="#__codelineno-0-69">69</a></span>
-<span class="normal"><a href="#__codelineno-0-70">70</a></span>
-<span class="normal"><a href="#__codelineno-0-71">71</a></span>
-<span class="normal"><a href="#__codelineno-0-72">72</a></span>
-<span class="normal"><a href="#__codelineno-0-73">73</a></span>
-<span class="normal"><a href="#__codelineno-0-74">74</a></span>
-<span class="normal"><a href="#__codelineno-0-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="k">def</span> <span class="nf">to_interop_univariate_series</span><span class="p">(</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="n">ts</span><span class="p">:</span> <span class="n">TimeSeriesLike</span><span class="p">,</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="n">from_date</span><span class="p">:</span> <span class="n">ConvertibleToTimestamp</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="n">to_date</span><span class="p">:</span> <span class="n">ConvertibleToTimestamp</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">TimeSeriesGeometryNative</span><span class="p">]:</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="sd">&quot;&quot;&quot;Convert an univariate python time series to a representation suitable for interoperability with a C API</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59"></a>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-61" name="__codelineno-0-61"></a><span class="sd">        ts (TimeSeriesLike): Python native time series</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="sd">        from_date (ConvertibleToTimestamp, optional): start timestamp of the time series to subset to. Defaults to None.</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a><span class="sd">        to_date (ConvertibleToTimestamp, optional): end timestamp of the time series to subset to. Defaults to None.</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a>
-<a id="__codelineno-0-65" name="__codelineno-0-65"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66"></a><span class="sd">        Tuple[np.ndarray, TimeSeriesGeometryNative]: univeriate data and time series geometry for interop.</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a>    <span class="kn">from</span> <span class="nn">cinterop.timeseries</span> <span class="kn">import</span> <span class="n">ts_window</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69"></a>    <span class="kn">from</span> <span class="nn">swift2.internal</span> <span class="kn">import</span> <span class="n">simplify_time_series</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>
-<a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="n">from_date</span> <span class="o">=</span> <span class="n">as_timestamp</span><span class="p">(</span><span class="n">from_date</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">from_date</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-<a id="__codelineno-0-72" name="__codelineno-0-72"></a>    <span class="n">to_date</span> <span class="o">=</span> <span class="n">as_timestamp</span><span class="p">(</span><span class="n">to_date</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">from_date</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-<a id="__codelineno-0-73" name="__codelineno-0-73"></a>    <span class="n">observation</span> <span class="o">=</span> <span class="n">ts_window</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">)</span>
-<a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="n">simple_ts</span> <span class="o">=</span> <span class="n">simplify_time_series</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
-<a id="__codelineno-0-75" name="__codelineno-0-75"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">simple_ts</span><span class="p">[</span><span class="n">TS_INTEROP_VALUES_KEY</span><span class="p">],</span> <span class="n">simple_ts</span><span class="p">[</span><span class="n">TS_INTEROP_GEOM_KEY</span><span class="p">])</span>
-</code></pre></div></td></tr></table></div>
-      </details>
   </div>
 
 </div>
