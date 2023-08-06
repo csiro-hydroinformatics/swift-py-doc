@@ -5,6 +5,8 @@ swift python package documentation
 ## Dev notes
 
 ```bash
+conda activate hydrofc
+
 pkg_dir=${HOME}/src/swift/bindings/python/swift2
 doc_dir=${HOME}/src/swift-py-doc
 
@@ -30,12 +32,17 @@ declare -a fn=(calibrate_multisite.ipynb \
 mkdir -p ${doc_dir}/docs/notebooks
 
 cd ${doc_dir}/docs/notebooks
+cp ${pkg_dir}/notebooks/*.png ./
 
 for f in ${fn[@]} ; do
     echo "processing $f";
-    jupyter nbconvert --to notebook --execute ${pkg_dir}/notebooks/${f} --output-dir=./
+    jupyter nbconvert --to notebook --ExecutePreprocessor.kernel_name=hydrofc_release --execute ${pkg_dir}/notebooks/${f} --output-dir=./
 done
 ```
+
+`conda activate hydrofc`
+
+`mamba install -c conda-forge mkdocs mkdocs-material mkdocstrings mkdocs-material-extensions mkdocs-jupyter mkdocstrings-python`
 
 ```bash
 cd ${doc_dir}
@@ -44,6 +51,16 @@ mkdocs build --clean --site-dir _build/html --config-file mkdocs.yml
 
 or testing with `mkdocs serve`
 
+`mkdocs serve -w mkdocs.yml -w docs/ -w pysmall/`
+
 ```sh
 mkdocs gh-deploy --clean --site-dir _build/html --config-file mkdocs.yml
 ```
+
+## Resources
+
+Nice examplars:
+
+https://github.com/FasterSpeeding/Tanjun/blob/master/mkdocs.yml
+https://github.com/tiangolo/fastapi/blob/master/docs/en/mkdocs.yml
+
