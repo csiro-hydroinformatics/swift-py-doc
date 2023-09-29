@@ -25,18 +25,23 @@ declare -a fn=(calibrate_multisite.ipynb \
   getting_started.ipynb \
   log_likelihood.ipynb \
   meta_parameters.ipynb \
-  muskingum_multilink_calibration_explanation.ipynb \
   muskingum_multilink_calibration.ipynb \
   reservoir_geometry.ipynb)
+
+# muskingum_multilink_calibration_explanation.ipynb
 
 mkdir -p ${doc_dir}/docs/notebooks
 
 cd ${doc_dir}/docs/notebooks
+rm *.ipynb
 cp ${pkg_dir}/notebooks/*.png ./
+
+kernel_name=hydrofc_release
+kernel_name=hydrofc
 
 for f in ${fn[@]} ; do
     echo "processing $f";
-    jupyter nbconvert --to notebook --ExecutePreprocessor.kernel_name=hydrofc_release --execute ${pkg_dir}/notebooks/${f} --output-dir=./
+    jupyter nbconvert --to notebook --ExecutePreprocessor.kernel_name=${kernel_name} --execute ${pkg_dir}/notebooks/${f} --output-dir=./
 done
 ```
 
@@ -51,7 +56,7 @@ mkdocs build --clean --site-dir _build/html --config-file mkdocs.yml
 
 or testing with `mkdocs serve`
 
-`mkdocs serve -w mkdocs.yml -w docs/ -w pysmall/`
+`mkdocs serve -w mkdocs.yml -w docs/`
 
 ```sh
 mkdocs gh-deploy --clean --site-dir _build/html --config-file mkdocs.yml
@@ -61,6 +66,5 @@ mkdocs gh-deploy --clean --site-dir _build/html --config-file mkdocs.yml
 
 Nice examplars:
 
-https://github.com/FasterSpeeding/Tanjun/blob/master/mkdocs.yml
-https://github.com/tiangolo/fastapi/blob/master/docs/en/mkdocs.yml
-
+[https://github.com/FasterSpeeding/Tanjun/blob/master/mkdocs.yml](https://github.com/FasterSpeeding/Tanjun/blob/master/mkdocs.yml)
+[https://github.com/tiangolo/fastapi/blob/master/docs/en/mkdocs.yml](https://github.com/tiangolo/fastapi/blob/master/docs/en/mkdocs.yml)
