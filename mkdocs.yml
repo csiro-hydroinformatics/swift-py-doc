@@ -3,7 +3,7 @@
 # for ideas.
 
 # Project information
-site_name: "swift2 - Python package"
+site_name: "swift2 - python package"
 # site_url: https://squidfunk.github.io/mkdocs-material/
 site_author: "Jean-Michel Perraud"
 site_description: >-
@@ -16,30 +16,45 @@ repo_url: https://bitbucket.csiro.au/projects/SF/repos/swift
 docs_dir: './docs'
 
 # Copyright
-copyright: Copyright &copy; 2016 - 2022 CSIRO
+copyright: Copyright &copy; 2016 - 2025 CSIRO
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
 
 theme:
   # name: "readthedocs"
   name: "material"
   logo: images/ensembles.png
+  icon:
+    logo: images/wave-arrow-up
   #icon:
   #  logo: material/cube
   palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode  # Default values, taken from mkdocs_theme.yml
-  # Don't include MkDocs' JavaScript
-  include_search_page: false
-  search_index_only: true
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: indigo
+    accent: purple
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: black
+    accent: lime
+    toggle:
+      icon: material/weather-night
+      name: Switch to system preference
+  # # Don't include MkDocs' JavaScript
+  # I think these may be the defaults anyway?
+  # https://www.mkdocs.org/dev-guide/themes/#include_search_page
+  # include_search_page: false
+  # search_index_only: true
   language: en
   features:
     - content.code.annotate
@@ -80,26 +95,29 @@ plugins:
 markdown_extensions:
   - abbr
   - admonition
+  - callouts
   - attr_list
   - def_list
   - footnotes
   - meta
   - md_in_html
   - toc:
-      permalink: true
+      permalink: "¤"
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
   - pymdownx.details
+  - pymdownx.emoji
   # - pymdownx.emoji:
   #     emoji_generator: !!python/name:materialx.emoji.to_svg
   #     emoji_index: !!python/name:materialx.emoji.twemoji
   - pymdownx.highlight:
      anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      check_paths: true
   - pymdownx.superfences
   # - pymdownx.superfences:
   #     custom_fences:
@@ -150,6 +168,6 @@ nav:
     - log_likelihood: notebooks/log_likelihood.ipynb
     - muskingum_multilink_calibration: notebooks/muskingum_multilink_calibration.ipynb
     - error_correction_four_stages: notebooks/error_correction_four_stages.ipynb
-  - Appendix:
-    - Tech Notes: tech_notes.md
+  # - Appendix:
+  #   - Tech Notes: tech_notes.md
 
