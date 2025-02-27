@@ -9,7 +9,7 @@ This present documentation includes two types of information:
 
 ## Installation
 
-See the [instalation section of the onboarding guide for streamflow forecasting software tools](https://csiro-hydroinformatics.github.io/streamflow-forecasting-tools-onboard/installation.html)
+See the [installation section of the onboarding guide for streamflow forecasting software tools](https://csiro-hydroinformatics.github.io/streamflow-forecasting-tools-onboard/installation.html)
 
 ## License
 

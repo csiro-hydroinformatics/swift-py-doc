@@ -63,7 +63,7 @@ mamba activate hydrofc
 mamba install -c conda-forge mkdocs mkdocs-material mkdocstrings mkdocs-material-extensions mkdocs-jupyter mkdocstrings-python 
 ```
 
-`pip install markdown-callouts`  not on conda-forge
+`pip install markdown-callouts` not on conda-forge
 
 To test locally with `mkdocs serve`:
 
