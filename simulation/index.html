@@ -2487,11 +2487,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
 
             <details class="quote">
               <summary>Source code in <code>swift2/simulation.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-579">579</a></span>
-<span class="normal"><a href="#__codelineno-0-580">580</a></span>
-<span class="normal"><a href="#__codelineno-0-581">581</a></span>
-<span class="normal"><a href="#__codelineno-0-582">582</a></span>
-<span class="normal"><a href="#__codelineno-0-583">583</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-583">583</a></span>
 <span class="normal"><a href="#__codelineno-0-584">584</a></span>
 <span class="normal"><a href="#__codelineno-0-585">585</a></span>
 <span class="normal"><a href="#__codelineno-0-586">586</a></span>
@@ -2501,21 +2497,25 @@ This function is intended mostly for testing, not for usual modelling code.</p>
 <span class="normal"><a href="#__codelineno-0-590">590</a></span>
 <span class="normal"><a href="#__codelineno-0-591">591</a></span>
 <span class="normal"><a href="#__codelineno-0-592">592</a></span>
-<span class="normal"><a href="#__codelineno-0-593">593</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-579" name="__codelineno-0-579"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_subarea</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">area_km2</span><span class="p">):</span>
-<a id="__codelineno-0-580" name="__codelineno-0-580"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-581" name="__codelineno-0-581"></a><span class="sd">    Create a SWIFT subarea with a specified hydrologic model</span>
-<a id="__codelineno-0-582" name="__codelineno-0-582"></a>
-<a id="__codelineno-0-583" name="__codelineno-0-583"></a><span class="sd">    Create a SWIFT subarea with a specified hydrologic model</span>
-<a id="__codelineno-0-584" name="__codelineno-0-584"></a>
-<a id="__codelineno-0-585" name="__codelineno-0-585"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-586" name="__codelineno-0-586"></a><span class="sd">        model_name (Any): A valid, known SWIFT model name (e.g. &#39;GR5H&#39;)</span>
-<a id="__codelineno-0-587" name="__codelineno-0-587"></a><span class="sd">        area_km2 (Any): The area in square kilometres</span>
+<span class="normal"><a href="#__codelineno-0-593">593</a></span>
+<span class="normal"><a href="#__codelineno-0-594">594</a></span>
+<span class="normal"><a href="#__codelineno-0-595">595</a></span>
+<span class="normal"><a href="#__codelineno-0-596">596</a></span>
+<span class="normal"><a href="#__codelineno-0-597">597</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-583" name="__codelineno-0-583"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_subarea</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">area_km2</span><span class="p">):</span>
+<a id="__codelineno-0-584" name="__codelineno-0-584"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-585" name="__codelineno-0-585"></a><span class="sd">    Create a SWIFT subarea with a specified hydrologic model</span>
+<a id="__codelineno-0-586" name="__codelineno-0-586"></a>
+<a id="__codelineno-0-587" name="__codelineno-0-587"></a><span class="sd">    Create a SWIFT subarea with a specified hydrologic model</span>
 <a id="__codelineno-0-588" name="__codelineno-0-588"></a>
-<a id="__codelineno-0-589" name="__codelineno-0-589"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-590" name="__codelineno-0-590"></a><span class="sd">        A SWIFT simulation object (i.e. a model runner)</span>
-<a id="__codelineno-0-591" name="__codelineno-0-591"></a>
-<a id="__codelineno-0-592" name="__codelineno-0-592"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-593" name="__codelineno-0-593"></a>    <span class="k">return</span> <span class="n">swg</span><span class="o">.</span><span class="n">CreateSubarea_py</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">area_km2</span><span class="p">)</span>
+<a id="__codelineno-0-589" name="__codelineno-0-589"></a><span class="sd">    Args:</span>
+<a id="__codelineno-0-590" name="__codelineno-0-590"></a><span class="sd">        model_name (Any): A valid, known SWIFT model name (e.g. &#39;GR5H&#39;)</span>
+<a id="__codelineno-0-591" name="__codelineno-0-591"></a><span class="sd">        area_km2 (Any): The area in square kilometres</span>
+<a id="__codelineno-0-592" name="__codelineno-0-592"></a>
+<a id="__codelineno-0-593" name="__codelineno-0-593"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-594" name="__codelineno-0-594"></a><span class="sd">        A SWIFT simulation object (i.e. a model runner)</span>
+<a id="__codelineno-0-595" name="__codelineno-0-595"></a>
+<a id="__codelineno-0-596" name="__codelineno-0-596"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-597" name="__codelineno-0-597"></a>    <span class="k">return</span> <span class="n">swg</span><span class="o">.</span><span class="n">CreateSubarea_py</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">area_km2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2526,7 +2526,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
 
 
 <h2 id="swift2.simulation.create_subarea_simulation" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">create_subarea_simulation</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="s1">&#39;MMH&#39;</span><span class="p">,</span> <span class="n">simul_start</span><span class="o">=</span><span class="s1">&#39;1990-01-01&#39;</span><span class="p">,</span> <span class="n">simul_end</span><span class="o">=</span><span class="s1">&#39;2005-12-31&#39;</span><span class="p">,</span> <span class="n">model_id</span><span class="o">=</span><span class="s1">&#39;GR4J&#39;</span><span class="p">,</span> <span class="n">tstep</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">varname_rain</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">varname_pet</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">create_subarea_simulation</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="s1">&#39;MMH&#39;</span><span class="p">,</span> <span class="n">simul_start</span><span class="o">=</span><span class="s1">&#39;1990-01-01&#39;</span><span class="p">,</span> <span class="n">simul_end</span><span class="o">=</span><span class="s1">&#39;2005-12-31&#39;</span><span class="p">,</span> <span class="n">model_id</span><span class="o">=</span><span class="s1">&#39;GR4J&#39;</span><span class="p">,</span> <span class="n">tstep</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">varname_rain</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">varname_pet</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">data_rain_id</span><span class="o">=</span><span class="s1">&#39;rain&#39;</span><span class="p">,</span> <span class="n">data_evap_id</span><span class="o">=</span><span class="s1">&#39;evap&#39;</span><span class="p">)</span></code>
 
 <a href="#swift2.simulation.create_subarea_simulation" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -2553,7 +2553,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>data_id</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2569,7 +2569,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>simul_start</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2585,7 +2585,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>simul_end</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2601,7 +2601,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>model_id</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2617,7 +2617,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>tstep</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2633,7 +2633,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>varname_rain</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2649,7 +2649,7 @@ This function is intended mostly for testing, not for usual modelling code.</p>
                 <code>varname_pet</code>
             </td>
             <td>
-                  <code><span title="typing.Any">Any</span></code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2658,6 +2658,38 @@ This function is intended mostly for testing, not for usual modelling code.</p>
             </td>
             <td>
                   <code>&#39;E&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>data_rain_id</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>key to use to retrieve the rainfall series from the sample data</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;rain&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>data_evap_id</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>key to use to retrieve the evaporation series from the sample data</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;evap&#39;</code>
             </td>
           </tr>
       </tbody>
@@ -2730,50 +2762,58 @@ This function is intended mostly for testing, not for usual modelling code.</p>
 <span class="normal"><a href="#__codelineno-0-573">573</a></span>
 <span class="normal"><a href="#__codelineno-0-574">574</a></span>
 <span class="normal"><a href="#__codelineno-0-575">575</a></span>
-<span class="normal"><a href="#__codelineno-0-576">576</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-533" name="__codelineno-0-533"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_subarea_simulation</span><span class="p">(</span>
-<a id="__codelineno-0-534" name="__codelineno-0-534"></a>    <span class="n">data_id</span><span class="o">=</span><span class="s2">&quot;MMH&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-535" name="__codelineno-0-535"></a>    <span class="n">simul_start</span><span class="o">=</span><span class="s2">&quot;1990-01-01&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-536" name="__codelineno-0-536"></a>    <span class="n">simul_end</span><span class="o">=</span><span class="s2">&quot;2005-12-31&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-537" name="__codelineno-0-537"></a>    <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;GR4J&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-538" name="__codelineno-0-538"></a>    <span class="n">tstep</span><span class="o">=</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-539" name="__codelineno-0-539"></a>    <span class="n">varname_rain</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-540" name="__codelineno-0-540"></a>    <span class="n">varname_pet</span><span class="o">=</span><span class="s2">&quot;E&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-541" name="__codelineno-0-541"></a><span class="p">):</span>
-<a id="__codelineno-0-542" name="__codelineno-0-542"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-543" name="__codelineno-0-543"></a><span class="sd">    Creates a one sub-catchment simulation</span>
-<a id="__codelineno-0-544" name="__codelineno-0-544"></a>
-<a id="__codelineno-0-545" name="__codelineno-0-545"></a><span class="sd">    Creates a one sub-catchment simulation. This function is intended for creating sample simulations, not for use in production.</span>
+<span class="normal"><a href="#__codelineno-0-576">576</a></span>
+<span class="normal"><a href="#__codelineno-0-577">577</a></span>
+<span class="normal"><a href="#__codelineno-0-578">578</a></span>
+<span class="normal"><a href="#__codelineno-0-579">579</a></span>
+<span class="normal"><a href="#__codelineno-0-580">580</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-533" name="__codelineno-0-533"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_subarea_simulation</span><span class="p">(</span>
+<a id="__codelineno-0-534" name="__codelineno-0-534"></a>    <span class="n">data_id</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;MMH&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-535" name="__codelineno-0-535"></a>    <span class="n">simul_start</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;1990-01-01&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-536" name="__codelineno-0-536"></a>    <span class="n">simul_end</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;2005-12-31&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-537" name="__codelineno-0-537"></a>    <span class="n">model_id</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;GR4J&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-538" name="__codelineno-0-538"></a>    <span class="n">tstep</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-539" name="__codelineno-0-539"></a>    <span class="n">varname_rain</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-540" name="__codelineno-0-540"></a>    <span class="n">varname_pet</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;E&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-541" name="__codelineno-0-541"></a>    <span class="n">data_rain_id</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-542" name="__codelineno-0-542"></a>    <span class="n">data_evap_id</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;evap&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-543" name="__codelineno-0-543"></a><span class="p">):</span>
+<a id="__codelineno-0-544" name="__codelineno-0-544"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-545" name="__codelineno-0-545"></a><span class="sd">    Creates a one sub-catchment simulation</span>
 <a id="__codelineno-0-546" name="__codelineno-0-546"></a>
-<a id="__codelineno-0-547" name="__codelineno-0-547"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-548" name="__codelineno-0-548"></a><span class="sd">        data_id (Any): data identifier in swift_sample_data</span>
-<a id="__codelineno-0-549" name="__codelineno-0-549"></a><span class="sd">        simul_start (Any): ISO string for the simulation start date time</span>
-<a id="__codelineno-0-550" name="__codelineno-0-550"></a><span class="sd">        simul_end (Any): ISO string for the simulation end date time</span>
-<a id="__codelineno-0-551" name="__codelineno-0-551"></a><span class="sd">        model_id (Any): model identifier</span>
-<a id="__codelineno-0-552" name="__codelineno-0-552"></a><span class="sd">        tstep (Any): character, &#39;daily&#39; or &#39;hourly&#39;</span>
-<a id="__codelineno-0-553" name="__codelineno-0-553"></a><span class="sd">        varname_rain (Any): variable name to assign rainfall to</span>
-<a id="__codelineno-0-554" name="__codelineno-0-554"></a><span class="sd">        varname_pet (Any): variable name to assign PET to</span>
-<a id="__codelineno-0-555" name="__codelineno-0-555"></a>
-<a id="__codelineno-0-556" name="__codelineno-0-556"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-557" name="__codelineno-0-557"></a><span class="sd">        A SWIFT simulation object, clone of the simulation but with a new model type in use.</span>
-<a id="__codelineno-0-558" name="__codelineno-0-558"></a>
-<a id="__codelineno-0-559" name="__codelineno-0-559"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-560" name="__codelineno-0-560"></a>    <span class="kn">from</span><span class="w"> </span><span class="nn">swift2.doc_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">sample_series</span>
-<a id="__codelineno-0-561" name="__codelineno-0-561"></a>    <span class="kn">from</span><span class="w"> </span><span class="nn">swift2.wrap.swift_wrap_generated</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreateSubarea_py</span>
+<a id="__codelineno-0-547" name="__codelineno-0-547"></a><span class="sd">    Creates a one sub-catchment simulation. This function is intended for creating sample simulations, not for use in production.</span>
+<a id="__codelineno-0-548" name="__codelineno-0-548"></a>
+<a id="__codelineno-0-549" name="__codelineno-0-549"></a><span class="sd">    Args:</span>
+<a id="__codelineno-0-550" name="__codelineno-0-550"></a><span class="sd">        data_id (str): data identifier in swift_sample_data</span>
+<a id="__codelineno-0-551" name="__codelineno-0-551"></a><span class="sd">        simul_start (str): ISO string for the simulation start date time</span>
+<a id="__codelineno-0-552" name="__codelineno-0-552"></a><span class="sd">        simul_end (str): ISO string for the simulation end date time</span>
+<a id="__codelineno-0-553" name="__codelineno-0-553"></a><span class="sd">        model_id (str): model identifier</span>
+<a id="__codelineno-0-554" name="__codelineno-0-554"></a><span class="sd">        tstep (str): character, &#39;daily&#39; or &#39;hourly&#39;</span>
+<a id="__codelineno-0-555" name="__codelineno-0-555"></a><span class="sd">        varname_rain (str): variable name to assign rainfall to</span>
+<a id="__codelineno-0-556" name="__codelineno-0-556"></a><span class="sd">        varname_pet (str): variable name to assign PET to</span>
+<a id="__codelineno-0-557" name="__codelineno-0-557"></a><span class="sd">        data_rain_id (str): key to use to retrieve the rainfall series from the sample data</span>
+<a id="__codelineno-0-558" name="__codelineno-0-558"></a><span class="sd">        data_evap_id (str): key to use to retrieve the evaporation series from the sample data</span>
+<a id="__codelineno-0-559" name="__codelineno-0-559"></a>
+<a id="__codelineno-0-560" name="__codelineno-0-560"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-561" name="__codelineno-0-561"></a><span class="sd">        A SWIFT simulation object, clone of the simulation but with a new model type in use.</span>
 <a id="__codelineno-0-562" name="__codelineno-0-562"></a>
-<a id="__codelineno-0-563" name="__codelineno-0-563"></a>    <span class="n">s_span</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">simul_start</span><span class="p">,</span> <span class="n">simul_end</span><span class="p">)</span>
-<a id="__codelineno-0-564" name="__codelineno-0-564"></a>    <span class="n">rain</span> <span class="o">=</span> <span class="n">sample_series</span><span class="p">(</span><span class="n">data_id</span><span class="p">,</span> <span class="s2">&quot;rain&quot;</span><span class="p">)[</span><span class="n">s_span</span><span class="p">]</span>
-<a id="__codelineno-0-565" name="__codelineno-0-565"></a>    <span class="n">evap</span> <span class="o">=</span> <span class="n">sample_series</span><span class="p">(</span><span class="n">data_id</span><span class="p">,</span> <span class="s2">&quot;evap&quot;</span><span class="p">)[</span><span class="n">s_span</span><span class="p">]</span>
+<a id="__codelineno-0-563" name="__codelineno-0-563"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-564" name="__codelineno-0-564"></a>    <span class="kn">from</span><span class="w"> </span><span class="nn">swift2.doc_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">sample_series</span>
+<a id="__codelineno-0-565" name="__codelineno-0-565"></a>    <span class="kn">from</span><span class="w"> </span><span class="nn">swift2.wrap.swift_wrap_generated</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreateSubarea_py</span>
 <a id="__codelineno-0-566" name="__codelineno-0-566"></a>
-<a id="__codelineno-0-567" name="__codelineno-0-567"></a>    <span class="n">ms</span> <span class="o">=</span> <span class="n">CreateSubarea_py</span><span class="p">(</span><span class="n">model_id</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-<a id="__codelineno-0-568" name="__codelineno-0-568"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">rain</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-569" name="__codelineno-0-569"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">rain</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<a id="__codelineno-0-570" name="__codelineno-0-570"></a>    <span class="n">set_simulation_span</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-<a id="__codelineno-0-571" name="__codelineno-0-571"></a>    <span class="n">set_simulation_time_step</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">tstep</span><span class="p">)</span>
-<a id="__codelineno-0-572" name="__codelineno-0-572"></a>
-<a id="__codelineno-0-573" name="__codelineno-0-573"></a>    <span class="n">sa_name</span> <span class="o">=</span> <span class="n">swg</span><span class="o">.</span><span class="n">GetSubareaNames_py</span><span class="p">(</span><span class="n">ms</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-574" name="__codelineno-0-574"></a>    <span class="n">play_subarea_input</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">rain</span><span class="p">,</span> <span class="n">sa_name</span><span class="p">,</span> <span class="n">varname_rain</span><span class="p">)</span>
-<a id="__codelineno-0-575" name="__codelineno-0-575"></a>    <span class="n">play_subarea_input</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">evap</span><span class="p">,</span> <span class="n">sa_name</span><span class="p">,</span> <span class="n">varname_pet</span><span class="p">)</span>
-<a id="__codelineno-0-576" name="__codelineno-0-576"></a>    <span class="k">return</span> <span class="n">ms</span>
+<a id="__codelineno-0-567" name="__codelineno-0-567"></a>    <span class="n">s_span</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">simul_start</span><span class="p">,</span> <span class="n">simul_end</span><span class="p">)</span>
+<a id="__codelineno-0-568" name="__codelineno-0-568"></a>    <span class="n">rain</span> <span class="o">=</span> <span class="n">sample_series</span><span class="p">(</span><span class="n">data_id</span><span class="p">,</span> <span class="n">data_rain_id</span><span class="p">)[</span><span class="n">s_span</span><span class="p">]</span>
+<a id="__codelineno-0-569" name="__codelineno-0-569"></a>    <span class="n">evap</span> <span class="o">=</span> <span class="n">sample_series</span><span class="p">(</span><span class="n">data_id</span><span class="p">,</span> <span class="n">data_evap_id</span><span class="p">)[</span><span class="n">s_span</span><span class="p">]</span>
+<a id="__codelineno-0-570" name="__codelineno-0-570"></a>
+<a id="__codelineno-0-571" name="__codelineno-0-571"></a>    <span class="n">ms</span> <span class="o">=</span> <span class="n">CreateSubarea_py</span><span class="p">(</span><span class="n">model_id</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<a id="__codelineno-0-572" name="__codelineno-0-572"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">rain</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-573" name="__codelineno-0-573"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">rain</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-0-574" name="__codelineno-0-574"></a>    <span class="n">set_simulation_span</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-0-575" name="__codelineno-0-575"></a>    <span class="n">set_simulation_time_step</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">tstep</span><span class="p">)</span>
+<a id="__codelineno-0-576" name="__codelineno-0-576"></a>
+<a id="__codelineno-0-577" name="__codelineno-0-577"></a>    <span class="n">sa_name</span> <span class="o">=</span> <span class="n">swg</span><span class="o">.</span><span class="n">GetSubareaNames_py</span><span class="p">(</span><span class="n">ms</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-578" name="__codelineno-0-578"></a>    <span class="n">play_subarea_input</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">rain</span><span class="p">,</span> <span class="n">sa_name</span><span class="p">,</span> <span class="n">varname_rain</span><span class="p">)</span>
+<a id="__codelineno-0-579" name="__codelineno-0-579"></a>    <span class="n">play_subarea_input</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">evap</span><span class="p">,</span> <span class="n">sa_name</span><span class="p">,</span> <span class="n">varname_pet</span><span class="p">)</span>
+<a id="__codelineno-0-580" name="__codelineno-0-580"></a>    <span class="k">return</span> <span class="n">ms</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
