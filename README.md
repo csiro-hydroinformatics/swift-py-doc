@@ -82,6 +82,21 @@ then, provided you have an ssh key set up for authentication with `github.com`:
 mkdocs gh-deploy --clean --site-dir _build/html --config-file mkdocs.yml
 ```
 
+### Examples as markdown
+
+We can export the sample notebooks to markdown, with a view to use them as contexts for AI code aids.
+
+```sh
+cd ${doc_dir}/docs/notebooks
+
+for f in ${fn[@]} ; do
+    echo "processing $f";
+    jupyter nbconvert --to markdown ./${f} --output-dir=./
+done
+
+jupyter nbconvert mynotebook.ipynb --to markdown
+```
+
 ## Resources
 
 Grateful for examplars for configuring `mkdocs`, at least as of 2023 or so:
