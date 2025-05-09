@@ -1,0 +1,25 @@
+# swift2 - Python package
+
+> Bindings to access the SWIFT2 libraries, from Python.
+
+Python package for ensemble streamflow forecasting. It can equally be used in non-ensemble simulation mode for other, “traditional” semi-distributed hydrologic modelling.
+
+## API documentation
+
+- [classes](https://csiro-hydroinformatics.github.io/swift-py-doc/classes/index.md)
+- [common](https://csiro-hydroinformatics.github.io/swift-py-doc/common/index.md)
+- [const](https://csiro-hydroinformatics.github.io/swift-py-doc/const/index.md)
+- [doc_helper](https://csiro-hydroinformatics.github.io/swift-py-doc/doc_helper/index.md)
+- [helpers](https://csiro-hydroinformatics.github.io/swift-py-doc/helpers/index.md)
+- [internal](https://csiro-hydroinformatics.github.io/swift-py-doc/internal/index.md)
+- [model_definitions](https://csiro-hydroinformatics.github.io/swift-py-doc/model_definitions/index.md)
+- [parameteriser](https://csiro-hydroinformatics.github.io/swift-py-doc/parameteriser/index.md)
+- [play_record](https://csiro-hydroinformatics.github.io/swift-py-doc/play_record/index.md)
+- [proto](https://csiro-hydroinformatics.github.io/swift-py-doc/proto/index.md)
+- [prototypes](https://csiro-hydroinformatics.github.io/swift-py-doc/prototypes/index.md)
+- [simulation](https://csiro-hydroinformatics.github.io/swift-py-doc/simulation/index.md)
+- [statistics](https://csiro-hydroinformatics.github.io/swift-py-doc/statistics/index.md)
+- [system](https://csiro-hydroinformatics.github.io/swift-py-doc/system/index.md)
+- [utils](https://csiro-hydroinformatics.github.io/swift-py-doc/utils/index.md)
+- [vis](https://csiro-hydroinformatics.github.io/swift-py-doc/vis/index.md)
+
