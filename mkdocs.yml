@@ -11,8 +11,10 @@ site_description: >-
   Bindings to access the SWIFT2 libraries, from Python.
 
 # Repository
-repo_name: bitbucket/SWIFT2
-repo_url: https://bitbucket.csiro.au/projects/SF/repos/swift
+repo_name: csiro-hydroinformatics/swift-py-doc
+repo_url: https://github.com/csiro-hydroinformatics/swift-py-doc/
+# repo_name: bitbucket/SWIFT2
+# repo_url: https://bitbucket.csiro.au/projects/SF/repos/swift
 
 docs_dir: './docs'
 
@@ -43,7 +45,6 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode  # Default values, taken from mkdocs_theme.yml
-  # Don't include MkDocs' JavaScript
   include_search_page: false
   search_index_only: true
   language: en
@@ -75,42 +76,48 @@ plugins:
         python:
           options:
             docstring_style: google
-  # minify seems advanced. https://squidfunk.github.io/mkdocs-material/customization/#theme-development  
-  # - minify:
-  #   minify_html: true
-  #- llmstxt:
-  #    markdown_description: Python package for ensemble streamflow forecasting. It can equally be used in non-ensemble simulation mode for other, “traditional” semi-distributed hydrologic modelling.
-  #    full_output: llms-ctx.txt
-  #    sections:
-  #      API documentation:
-  #        - classes.md
-  #        - common.md
-  #        - const.md
-  #        - doc_helper.md
-  #        - helpers.md
-  #        - internal.md
-  #        - model_definitions.md
-  #        - parameteriser.md
-  #        - play_record.md
-  #        - proto.md
-  #        - prototypes.md
-  #        - simulation.md
-  #        - statistics.md
-  #        - system.md
-  #        - utils.md
-  #        - vis.md
-  #      # including jpt notebooks seems not to work intuitively, not yet (fair enough!)
-  #      # Examples:
-  #      #   - notebooks/getting_started.ipynb
-  #      #   - notebooks/meta_parameters.ipynb
-  #      #   - notebooks/ensemble_model_runs.ipynb
-  #      #   - notebooks/calibration_initial_states.ipynb
-  #      #   - notebooks/calibrate_multisite.ipynb
-  #      #   - notebooks/reservoir_geometry.ipynb
-  #      #   - notebooks/calibrate_subcatchments.ipynb
-  #      #   - notebooks/log_likelihood.ipynb
-  #      #   - notebooks/muskingum_multilink_calibration.ipynb
-  #      #   - notebooks/error_correction_four_stages.ipynb
+  # minify seems advanced. https://squidfunk.github.io/mkdocs-material/customization/#theme-development
+  # https://github.com/byrnereese/mkdocs-minify-plugin May 2025 try to use. May now be a default anyway in mkdocs-material
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+          remove_comments: true
+      cache_safe: true
+  - llmstxt:
+      markdown_description: Python package for ensemble streamflow forecasting. It can equally be used in non-ensemble simulation mode for other, “traditional” semi-distributed hydrologic modelling.
+      full_output: llms-ctx.txt
+      sections:
+        API documentation:
+          - classes.md
+          - common.md
+          - const.md
+          - doc_helper.md
+          - helpers.md
+          - internal.md
+          - model_definitions.md
+          - parameteriser.md
+          - play_record.md
+          - proto.md
+          - prototypes.md
+          - simulation.md
+          - statistics.md
+          - system.md
+          - utils.md
+          - vis.md
+        # including jpt notebooks seems not to work intuitively, not yet (fair enough!)
+        # Examples:
+        #   - notebooks/getting_started.ipynb
+        #   - notebooks/meta_parameters.ipynb
+        #   - notebooks/ensemble_model_runs.ipynb
+        #   - notebooks/calibration_initial_states.ipynb
+        #   - notebooks/calibrate_multisite.ipynb
+        #   - notebooks/reservoir_geometry.ipynb
+        #   - notebooks/calibrate_subcatchments.ipynb
+        #   - notebooks/log_likelihood.ipynb
+        #   - notebooks/muskingum_multilink_calibration.ipynb
+        #   - notebooks/error_correction_four_stages.ipynb
   - mkdocs-jupyter
 
 
