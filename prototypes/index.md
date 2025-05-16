@@ -12,7 +12,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `HypercubeParameteriser` | `HypercubeParameteriser` | transformation parameters |
 
-Source code in `swift2/prototypes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/prototypes.py`
 
 ```
 def estimate_transformation_parameters(

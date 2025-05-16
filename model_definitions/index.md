@@ -12,7 +12,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def cookie_cut_dendritic_catchment(
@@ -91,7 +91,7 @@ Examples:
 
 ```
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def get_catchment_structure(simulation) -> Dict:
@@ -149,7 +149,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a catchment simulation. |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def model_from_json_file(file_path:str) -> "Simulation":
@@ -176,7 +176,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | Catchment simulation | *required* | | `file_path` | `str` | file path to save to | *required* |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def model_to_json_file(simulation: "Simulation", file_path:str) -> None:
@@ -226,7 +226,7 @@ remainder
 
 ```
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def split_to_subcatchments(
@@ -318,7 +318,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def subset_catchment(

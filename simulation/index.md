@@ -10,7 +10,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def check_simulation(simulation) -> Dict:
@@ -46,7 +46,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_catchment(
@@ -126,7 +126,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | An external pointer |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_ensemble_forecast_simulation(
@@ -197,7 +197,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object (i.e. a model runner) |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_subarea(model_name, area_km2):
@@ -218,7 +218,7 @@ def create_subarea(model_name, area_km2):
 
 ```
 
-## `create_subarea_simulation(data_id='MMH', simul_start='1990-01-01', simul_end='2005-12-31', model_id='GR4J', tstep='daily', varname_rain='P', varname_pet='E')`
+## `create_subarea_simulation(data_id='MMH', simul_start='1990-01-01', simul_end='2005-12-31', model_id='GR4J', tstep='daily', varname_rain='P', varname_pet='E', data_rain_id='rain', data_evap_id='evap')`
 
 Creates a one sub-catchment simulation
 
@@ -226,23 +226,25 @@ Creates a one sub-catchment simulation. This function is intended for creating s
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `data_id` | `Any` | data identifier in swift_sample_data | `'MMH'` | | `simul_start` | `Any` | ISO string for the simulation start date time | `'1990-01-01'` | | `simul_end` | `Any` | ISO string for the simulation end date time | `'2005-12-31'` | | `model_id` | `Any` | model identifier | `'GR4J'` | | `tstep` | `Any` | character, 'daily' or 'hourly' | `'daily'` | | `varname_rain` | `Any` | variable name to assign rainfall to | `'P'` | | `varname_pet` | `Any` | variable name to assign PET to | `'E'` |
+| Name | Type | Description | Default | | --- | --- | --- | --- | | `data_id` | `str` | data identifier in swift_sample_data | `'MMH'` | | `simul_start` | `str` | ISO string for the simulation start date time | `'1990-01-01'` | | `simul_end` | `str` | ISO string for the simulation end date time | `'2005-12-31'` | | `model_id` | `str` | model identifier | `'GR4J'` | | `tstep` | `str` | character, 'daily' or 'hourly' | `'daily'` | | `varname_rain` | `str` | variable name to assign rainfall to | `'P'` | | `varname_pet` | `str` | variable name to assign PET to | `'E'` | | `data_rain_id` | `str` | key to use to retrieve the rainfall series from the sample data | `'rain'` | | `data_evap_id` | `str` | key to use to retrieve the evaporation series from the sample data | `'evap'` |
 
 Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_subarea_simulation(
-    data_id="MMH",
-    simul_start="1990-01-01",
-    simul_end="2005-12-31",
-    model_id="GR4J",
-    tstep="daily",
-    varname_rain="P",
-    varname_pet="E",
+    data_id:str="MMH",
+    simul_start:str="1990-01-01",
+    simul_end:str="2005-12-31",
+    model_id:str="GR4J",
+    tstep:str="daily",
+    varname_rain:str="P",
+    varname_pet:str="E",
+    data_rain_id:str="rain",
+    data_evap_id:str="evap",
 ):
     """
     Creates a one sub-catchment simulation
@@ -250,13 +252,15 @@ def create_subarea_simulation(
     Creates a one sub-catchment simulation. This function is intended for creating sample simulations, not for use in production.
 
     Args:
-        data_id (Any): data identifier in swift_sample_data
-        simul_start (Any): ISO string for the simulation start date time
-        simul_end (Any): ISO string for the simulation end date time
-        model_id (Any): model identifier
-        tstep (Any): character, 'daily' or 'hourly'
-        varname_rain (Any): variable name to assign rainfall to
-        varname_pet (Any): variable name to assign PET to
+        data_id (str): data identifier in swift_sample_data
+        simul_start (str): ISO string for the simulation start date time
+        simul_end (str): ISO string for the simulation end date time
+        model_id (str): model identifier
+        tstep (str): character, 'daily' or 'hourly'
+        varname_rain (str): variable name to assign rainfall to
+        varname_pet (str): variable name to assign PET to
+        data_rain_id (str): key to use to retrieve the rainfall series from the sample data
+        data_evap_id (str): key to use to retrieve the evaporation series from the sample data
 
     Returns:
         A SWIFT simulation object, clone of the simulation but with a new model type in use.
@@ -266,8 +270,8 @@ def create_subarea_simulation(
     from swift2.wrap.swift_wrap_generated import CreateSubarea_py
 
     s_span = slice(simul_start, simul_end)
-    rain = sample_series(data_id, "rain")[s_span]
-    evap = sample_series(data_id, "evap")[s_span]
+    rain = sample_series(data_id, data_rain_id)[s_span]
+    evap = sample_series(data_id, data_evap_id)[s_span]
 
     ms = CreateSubarea_py(model_id, 1.0)
     s = rain.index[0]
@@ -292,7 +296,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `reset_initial_states` | `Any` | logical, should the states of the model be reinitialized before the first time step. | `True` |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def exec_simulation(simulation: "Simulation", reset_initial_states=True):
@@ -331,7 +335,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the links in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_link_ids(simulation):
@@ -365,7 +369,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the links in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_link_names(simulation):
@@ -400,7 +404,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the nodes in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_node_ids(simulation):
@@ -434,7 +438,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the nodes in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_node_names(simulation):
@@ -466,7 +470,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | numeric vector, value(s) of the requested model states |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_state_value(simulation: "Simulation", var_id: "VecStr"):
@@ -512,7 +516,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the sub-areas in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_subarea_ids(simulation):
@@ -546,7 +550,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the sub-areas in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_subarea_names(simulation):
@@ -581,7 +585,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | character vector, names (identifiers) of model states in the element |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_variable_ids(simulation: "Simulation", element_id=None, full_id=True):
@@ -620,7 +624,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | logical vector |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def is_variable_id(simulation: "Simulation", var_id: "VecStr"):
@@ -654,7 +658,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def reset_model_states(simulation: "Simulation"):
@@ -677,7 +681,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `model_id` | `str` | the identifier of the new model to use, e.g. 'ERRIS' | *required* | | `element_id` | `str` | the identifier of the catchment element (node, link, subcatchment) whose outflow rate is corrected. | *required* | | `length` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `1` | | `seed` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `0` |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_error_correction_model(
@@ -710,7 +714,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `start` | `Any` | the start date of the simulation. The time zone will be forced to UTC. | *required* | | `end` | `Any` | the end date of the simulation. The time zone will be forced to UTC. | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_simulation_span(simulation: "Simulation", start, end):
@@ -741,7 +745,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `name` | `Any` | a time step identifier, The identifier is made lower case in the function. Supported time steps include "hourly", "daily", "monthly_qpp", "monthly", and time deltas such as "24:00:00", "01:00:00", "03:00:00". An exception is raised if the string could not be parsed. | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_simulation_time_step(simulation: "Simulation", name: str):
@@ -771,7 +775,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `var_id` | `(str, Sequence[str])` | character, model variable state identifier(s) | *required* | | `value` | `(float, int, bool, Sequence)` | numeric value(s) | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_state_value(
@@ -834,7 +838,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* | | `states` | `MemoryStates` | memory states | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_states(simulation: "Simulation", states: "MemoryStates"):
@@ -860,7 +864,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `MemoryStates` | `MemoryStates` | memory states, that can be stored and reapplied |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def snapshot_state(simulation: "Simulation") -> "MemoryStates":
@@ -890,7 +894,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | values in split_element_ids sorted by simulation execution order |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def sort_by_execution_order(
@@ -930,7 +934,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def swap_model(simulation: "Simulation", model_id, what="runoff"):

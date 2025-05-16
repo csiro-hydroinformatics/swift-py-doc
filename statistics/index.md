@@ -14,7 +14,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | objective evaluator |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def createCompositeObjective(
@@ -67,7 +67,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A SWIFT simulation object (i.e. a model runner) | *required* | | `statspec` | `DataFrame` | dataframe defining the objectives used. See function multi_statistic_definition to help build this dataframe. | *required* | | `observations` | `Sequence[TimeSeriesLike]` | A list of (time series) observations to calculated the statistics. Must be of same length as the number of rows of statspec. | *required* | | `weights` | `Dict[str, float]` | numeric vector of weights to ponderate each objective. | *required* | | `Examples` | | todo() | *required* |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def create_multisite_objective(
@@ -114,7 +114,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A SWIFT simulation object (i.e. a model runner) | *required* | | `state_name` | `Any` | The name identifying the model state variable to calibrate against the observation | *required* | | `observation` | `TimeSeriesLike` | an xts | *required* | | `statistic` | `str` | statistic identifier, e.g. "NSE" | *required* | | `start_date` | `ConvertibleToTimestamp` | start date of the period to calculate statistics on | *required* | | `end_date` | `ConvertibleToTimestamp` | end date of the period to calculate statistics on | *required* |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def create_objective(
@@ -172,7 +172,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: score(s), and a data frame representation of the input parameters. |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def get_score(
@@ -205,7 +205,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `model_var_ids` | `Any` | character vector, model state identifiers where statistics are calculated | *required* | | `statistic_ids` | `Any` | character vector, identifiers for bivariate statistics (e.g. nse, lognse, et.) | *required* | | `objective_ids` | `Any` | character vector, identifiers for the objectives. Can be the same as modelVarIds. | *required* | | `objective_names` | `Any` | character vector, display names for the objectives. Can be the same as modelVarIds. | *required* | | `starts` | `Any` | POSIXct vector of start dates for statistics | *required* | | `ends` | `Any` | POSIXct vector of end dates for statistics | *required* |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def multi_statistic_definition(

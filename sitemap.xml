@@ -2,162 +2,118 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/classes/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/code-reference/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/common/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/const/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/doc_helper/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/helpers/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/internal/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/license/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/model_definitions/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/parameteriser/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/play_record/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/proto/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/prototypes/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/simulation/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/statistics/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/system/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/tech_notes/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/utils/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/vis/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_subcatchments/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_subcatchments/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibration_initial_states/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibration_initial_states/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/ensemble_model_runs/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/ensemble_model_runs/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/error_correction_four_stages/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/error_correction_four_stages/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/getting_started/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/getting_started/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/log_likelihood/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/log_likelihood/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/meta_parameters/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/meta_parameters/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/muskingum_multilink_calibration/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/muskingum_multilink_calibration/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
     <url>
          <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/reservoir_geometry/</loc>
-         <lastmod>2025-05-09</lastmod>
-    </url>
-    <url>
-         <loc>https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/reservoir_geometry/</loc>
-         <lastmod>2025-05-09</lastmod>
+         <lastmod>2025-05-16</lastmod>
     </url>
 </urlset>

@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#package-tech-notes" class="md-skip">
+        <a href="#swift-py-doc" class="md-skip">
           Skip to content
         </a>
       
@@ -320,6 +320,8 @@
         <div class="md-main__inner md-grid">
           
             
+              
+                
               
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
@@ -1239,36 +1241,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#release-steps" class="md-nav__link">
+  <a href="#updating-the-content-of-site" class="md-nav__link">
     <span class="md-ellipsis">
-      Release steps
+      Updating the content of site
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating the content of site">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copy-doc-files-from-reference-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy doc files from reference repo
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#code" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#execute-notebooks-in-place" class="md-nav__link">
     <span class="md-ellipsis">
-      Code
+      Execute notebooks in-place
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#building-the-site" class="md-nav__link">
     <span class="md-ellipsis">
-      Documentation
+      Building the site
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#examples-as-markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples as markdown
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Troubleshooting
+      Resources
     </span>
   </a>
   
@@ -1298,6 +1324,8 @@
             
             
               
+                
+              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -1317,36 +1345,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#release-steps" class="md-nav__link">
+  <a href="#updating-the-content-of-site" class="md-nav__link">
     <span class="md-ellipsis">
-      Release steps
+      Updating the content of site
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating the content of site">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copy-doc-files-from-reference-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy doc files from reference repo
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#code" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#execute-notebooks-in-place" class="md-nav__link">
     <span class="md-ellipsis">
-      Code
+      Execute notebooks in-place
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#building-the-site" class="md-nav__link">
     <span class="md-ellipsis">
-      Documentation
+      Building the site
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#examples-as-markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples as markdown
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Troubleshooting
+      Resources
     </span>
   </a>
   
@@ -1365,58 +1417,109 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
 
 
 
-<h1 id="package-tech-notes">package tech notes<a class="headerlink" href="#package-tech-notes" title="Permanent link">&para;</a></h1>
-<p><strong>These are notes for the package maintainer(s)</strong>. Most users can ignore them.</p>
-<p>Note to self: as of Jan 2019 also using github_jm\didactique\doc\know_how.md to log the exploratory and release processes around <code>refcount</code></p>
-<h2 id="release-steps">Release steps<a class="headerlink" href="#release-steps" title="Permanent link">&para;</a></h2>
+
+<h1 id="swift-py-doc">swift-py-doc<a class="headerlink" href="#swift-py-doc" title="Permanent link">&para;</a></h1>
+<p>This site is to host the documentation for the <code>swift2</code> python package, which is part of a suite of tools for <a href="https://csiro-hydroinformatics.github.io/streamflow-forecasting-tools-onboard/">Streamflow Forecasting</a>.</p>
+<h2 id="updating-the-content-of-site">Updating the content of site<a class="headerlink" href="#updating-the-content-of-site" title="Permanent link">&para;</a></h2>
+<p><em>These are notes to "self"</em></p>
+<h3 id="copy-doc-files-from-reference-repo">Copy doc files from reference repo<a class="headerlink" href="#copy-doc-files-from-reference-repo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">pkg_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/src/swift/bindings/python/swift2
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">doc_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/src/swift-py-doc
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">declare</span><span class="w"> </span>-a<span class="w"> </span><span class="nv">fn</span><span class="o">=(</span>calibrate_multisite.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>calibrate_subcatchments.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>calibration_initial_states.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>ensemble_model_runs.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>error_correction_four_stages.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>getting_started.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span>log_likelihood.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span>meta_parameters.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span>muskingum_multilink_calibration.ipynb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span>reservoir_geometry.ipynb<span class="o">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># WARNING: rm -r...</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>rm<span class="w"> </span>-r<span class="w"> </span>docs
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>cp<span class="w"> </span><span class="si">${</span><span class="nv">pkg_dir</span><span class="si">}</span>/mkdocs.yml<span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>cp<span class="w"> </span>-r<span class="w"> </span><span class="si">${</span><span class="nv">pkg_dir</span><span class="si">}</span>/docs<span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>cp<span class="w"> </span><span class="si">${</span><span class="nv">pkg_dir</span><span class="si">}</span>/LICENSE.txt<span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/docs/license.md
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c1"># Iterate through the array &#39;fn&#39;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">fn</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">  </span><span class="nv">file</span><span class="o">=</span><span class="si">${</span><span class="nv">pkg_dir</span><span class="si">}</span>/notebooks/<span class="si">${</span><span class="nv">f</span><span class="si">}</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">  </span><span class="c1"># Check if the file exists</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;File &#39;</span><span class="nv">$file</span><span class="s2">&#39; does NOT exist.&quot;</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="k">done</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="c1"># muskingum_multilink_calibration_explanation.ipynb</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/docs/notebooks
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/docs/notebooks
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>rm<span class="w"> </span>*.ipynb
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>cp<span class="w"> </span><span class="si">${</span><span class="nv">pkg_dir</span><span class="si">}</span>/notebooks/*.png<span class="w"> </span>./
+</code></pre></div>
+<h3 id="execute-notebooks-in-place">Execute notebooks in-place<a class="headerlink" href="#execute-notebooks-in-place" title="Permanent link">&para;</a></h3>
+<p>This may take a few minutes to run, esp. if run from debug build.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># kernel_name=hydrofc_release</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">kernel_name</span><span class="o">=</span>hydrofc
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">fn</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;processing </span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>notebook<span class="w"> </span>--ExecutePreprocessor.kernel_name<span class="o">=</span><span class="si">${</span><span class="nv">kernel_name</span><span class="si">}</span><span class="w"> </span>--execute<span class="w"> </span><span class="si">${</span><span class="nv">pkg_dir</span><span class="si">}</span>/notebooks/<span class="si">${</span><span class="nv">f</span><span class="si">}</span><span class="w"> </span>--output-dir<span class="o">=</span>./
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">done</span>
+</code></pre></div>
+<h3 id="building-the-site">Building the site<a class="headerlink" href="#building-the-site" title="Permanent link">&para;</a></h3>
+<p>May 2025 moving to use <a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code></a> to manage the python environment.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>/src/swift-py-doc
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>uv<span class="w"> </span>venv<span class="w"> </span>.venv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>/src/swift-py-doc
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.<span class="w"> </span>.venv/bin/activate
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>mkdocs<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>mkdocs-material<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>mkdocstrings<span class="w">  </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>mkdocs-material-extensions<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span>mkdocs-jupyter<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span>mkdocstrings-python<span class="w">  </span><span class="se">\</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span>markdown-callouts<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span>mkdocs-llmstxt
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># May 2025 I am trying to produce llms.txt files</span>
+</code></pre></div>
+<p>To test locally with <code>mkdocs serve</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mkdocs<span class="w"> </span>serve<span class="w"> </span>-w<span class="w"> </span>mkdocs.yml<span class="w"> </span>-w<span class="w"> </span>docs/
+</code></pre></div>
+<p>to build and deploy the site:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mkdocs<span class="w"> </span>build<span class="w"> </span>--clean<span class="w"> </span>--site-dir<span class="w"> </span>_build/html<span class="w"> </span>--config-file<span class="w"> </span>mkdocs.yml
+</code></pre></div>
+<p>then, provided you have an ssh key set up for authentication with <code>github.com</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--clean<span class="w"> </span>--site-dir<span class="w"> </span>_build/html<span class="w"> </span>--config-file<span class="w"> </span>mkdocs.yml
+</code></pre></div>
+<h3 id="examples-as-markdown">Examples as markdown<a class="headerlink" href="#examples-as-markdown" title="Permanent link">&para;</a></h3>
+<p>We can export the sample notebooks to markdown, with a view to use them as contexts for AI code aids.</p>
+<p><strong>Note</strong> that is important to <strong>NOT</strong> output to <code>${doc_dir}/docs/notebooks</code>, as it messes up the web site layout (see <a href="https://github.com/csiro-hydroinformatics/swift-py-doc/issues/1">issue 2</a>)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/docs/notebooks
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">out_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">doc_dir</span><span class="si">}</span>/attic/docs/notebooks/
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">out_dir</span><span class="si">}</span><span class="w"> </span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">fn</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;processing </span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>markdown<span class="w"> </span>./<span class="si">${</span><span class="nv">f</span><span class="si">}</span><span class="w"> </span>--output-dir<span class="o">=</span><span class="si">${</span><span class="nv">out_dir</span><span class="si">}</span><span class="w"> </span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">done</span>
+</code></pre></div>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<p>Grateful for examplars for configuring <code>mkdocs</code>, at least as of 2023 or so:</p>
 <ul>
-<li>all UT pass</li>
-<li>Merge new features/fixes to devel branch.</li>
-<li>version.py updated</li>
-<li>check readme is up to date</li>
+<li><a href="https://github.com/FasterSpeeding/Tanjun/blob/master/mkdocs.yml">https://github.com/FasterSpeeding/Tanjun/blob/master/mkdocs.yml</a></li>
+<li><a href="https://github.com/tiangolo/fastapi/blob/master/docs/en/mkdocs.yml">https://github.com/tiangolo/fastapi/blob/master/docs/en/mkdocs.yml</a></li>
 </ul>
-<h2 id="code">Code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/src/csiro/stash/swift/bindings/python/swift2/
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">source</span><span class="w"> </span>~/anaconda3/bin/activate
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">my_env_name</span><span class="o">=</span>wqml
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># conda create --name ${my_env_name} python=3.6</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>conda<span class="w"> </span>activate<span class="w"> </span><span class="si">${</span><span class="nv">my_env_name</span><span class="si">}</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>conda<span class="w"> </span>install<span class="w">  </span>wheel<span class="w"> </span>twine<span class="w"> </span>six<span class="w"> </span>pytest
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>conda<span class="w"> </span>activate<span class="w"> </span><span class="si">${</span><span class="nv">my_env_name</span><span class="si">}</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>rm<span class="w"> </span>dist/*
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>python3<span class="w"> </span>setup.py<span class="w"> </span>sdist<span class="w"> </span>bdist_wheel
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>rm<span class="w"> </span>dist/*.tar
-</code></pre></div>
-<p>Importantly to not end up with incorrect display of the readme:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>twine<span class="w"> </span>check<span class="w"> </span>dist/*
-</code></pre></div>
-<p>Test locally with <code>pip install --force-reinstall  dist/lakeoned-0.1-py2.py3-none-any.whl</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>twine<span class="w"> </span>upload<span class="w"> </span>--repository-url<span class="w"> </span>https://test.pypi.org/legacy/<span class="w"> </span>dist/*
-</code></pre></div>
-<p>Then and only then:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>twine<span class="w"> </span>upload<span class="w"> </span>dist/*
-</code></pre></div>
-<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
-<p>2023-01: I used in the past sphinx with napoleon extensions to document <a href="https://pyela.readthedocs.io/en/latest">ela</a>. This was a trial run. Did something more substantial for an internal project (WAA). Since then came accross mkdocs, which at some point was better at handling markdown than sphinx based documentation (may not be as true now). Noticed <a href="https://chrieke.medium.com/documenting-a-python-package-with-code-reference-via-mkdocs-material-b4a45197f95b">this blog on mkdocs-material</a>.</p>
-<p>Unclear from RTD where to create a new mkdocs project (supposed to be in the root of the python package?) not sure. for now:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>doc
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>mkdir<span class="w"> </span>mkd
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">cd</span><span class="w"> </span>mkd/
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>mkdocs<span class="w"> </span>new<span class="w"> </span>.
-</code></pre></div>
-<p><code>mamba install -c conda-forge mkdocs-material mkdocstrings mkdocs-material-extensions</code></p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pandoc<span class="w"> </span>-f<span class="w"> </span>markdown<span class="w"> </span>-t<span class="w"> </span>rst<span class="w"> </span>README.md<span class="w">  </span>&gt;<span class="w"> </span>README.rst
-</code></pre></div>
-<p>Can view with the <code>retext</code> program (did not find VScode RST extensions working, or giving out blank output if not, perhaps)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>setup.py<span class="w"> </span>check<span class="w"> </span>--restructuredtext
-</code></pre></div>
+<!-- Try to add a reference to autodoc: [get_single_series][efts_io.wrapper.EftsDataSet.get_single_series] -->
 
 
 
@@ -1424,8 +1527,15 @@
 
 
 
+  
+  
 
 
+
+
+  
+    
+  
 
 
 
@@ -1475,10 +1585,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>

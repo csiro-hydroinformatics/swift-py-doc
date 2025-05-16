@@ -10,7 +10,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A character, the message for the last known error in SWIFT. |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def get_last_swift_error():
@@ -38,7 +38,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | character vector, names (identifiers) of runoff models |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def runoff_model_ids():
@@ -69,7 +69,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | a character vector, the known model variable that can be set/gotten |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def runoff_model_var_ids(model_id):
@@ -99,7 +99,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `n_threads` | `int` | number of threads. Positive, or -1 to mean "as many as available" | `-1` |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def set_default_max_parallelism_threads(n_threads: int = -1):
@@ -122,7 +122,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `optimizer` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "OPTIMIZER_PTR" | *required* | | `n_threads` | `Any` | integer, maximum number of threads allowed. If -1, the system defaults to using all but one of the CPU cores detected on the hardware. | `-1` |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def set_maximum_threads(optimiser, n_threads=-1):

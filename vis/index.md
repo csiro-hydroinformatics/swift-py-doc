@@ -2,7 +2,7 @@
 
 ## `OptimisationPlots`
 
-Source code in `swift2/vis.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/vis.py`
 
 ```
 class OptimisationPlots:
@@ -118,7 +118,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Any` | sns.FacetGrid: FacetGrid object |
 
-Source code in `swift2/vis.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/vis.py`
 
 ```
 def shuffles(self, x: str, y: str, obj_lims: Sequence[float] = None) -> Any:

@@ -12,7 +12,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: dictionary with keys "tsgeom" for the time series geometry, and "tsvalues" for its values. |
 
-Source code in `swift2/internal.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/internal.py`
 
 ```
 def simplify_time_series(input_ts: TimeSeriesLike) -> Dict[str, Any]:
@@ -48,7 +48,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Tuple[ndarray, TimeSeriesGeometryNative]` | Tuple\[np.ndarray, TimeSeriesGeometryNative\]: univeriate data and time series geometry for interop. |
 
-Source code in `swift2/internal.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/internal.py`
 
 ```
 def to_interop_univariate_series(

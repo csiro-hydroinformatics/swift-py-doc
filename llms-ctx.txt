@@ -14,7 +14,7 @@ Bases: `HypercubeParameteriser`
 
 A parameteriser defined as the concatenation of several parameterisers
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class CompositeParameteriser(HypercubeParameteriser):
@@ -71,7 +71,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `p` | `HypercubeParameteriser` | hypercube to append to this | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def append(self, p: "HypercubeParameteriser"):
@@ -96,7 +96,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `CompositeParameteriser` | `CompositeParameteriser` | A concatenated parameteriser |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -123,7 +123,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `CompositeParameteriser` | `CompositeParameteriser` | composite parameteriser |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -143,7 +143,7 @@ Bases: `DeletableCffiNativeHandle`
 
 A simulation designed to facilitate model runs over ensemble of inputs
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class EnsembleSimulation(DeletableCffiNativeHandle):
@@ -212,7 +212,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str, Any\]: simulation span |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_simulation_span(self) -> Dict[str, Any]:
@@ -233,7 +233,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `variable_id` | `str` | state variable identifier | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def record(self, variable_id:str) -> None:
@@ -254,7 +254,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `var_ids` | `VecStr` | Model variable identierfier(s). Defaults to CATCHMENT_FLOWRATE_VARID. | `CATCHMENT_FLOWRATE_VARID` | | `recording_provider` | `Optional[TimeSeriesLibrary]` | An optional time series library to record to. Defaults to None. | `None` | | `data_ids` | `Optional[VecStr]` | Data identifier(s). Defaults to None. | `None` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def record_ensemble_state(
@@ -282,7 +282,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `forecast_start` | `datetime` | Start date for the simulation | *required* | | `ensemble_size` | `int` | size of the ensemble | *required* | | `forecast_horizon_length` | `int` | length of the simulation in numbers of time steps. | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def setup(self, forecast_start: datetime, ensemble_size: int, forecast_horizon_length: int) -> None:
@@ -303,7 +303,7 @@ def setup(self, forecast_start: datetime, ensemble_size: int, forecast_horizon_l
 
 Bases: `Parameteriser`
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class HypercubeParameteriser(Parameteriser):
@@ -538,7 +538,7 @@ class HypercubeParameteriser(Parameteriser):
 
 representation
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def __repr__(self):
@@ -551,7 +551,7 @@ def __repr__(self):
 
 string representation
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def __str__(self):
@@ -564,7 +564,7 @@ def __str__(self):
 
 Add a parameter to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def add_parameter_to_hypercube(
@@ -584,7 +584,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def add_to_hypercube(self, specs: pd.DataFrame):
@@ -605,7 +605,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `DataFrame` | pd.DataFrame: pandas data frame |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def as_dataframe(self) -> pd.DataFrame:
@@ -650,7 +650,7 @@ Name    Value   Min     Max
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def backtransform(self) -> "HypercubeParameteriser":
@@ -698,7 +698,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `CandidateFactorySeed` | `CandidateFactorySeed` | a sampler, aka candidate factory |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def create_parameter_sampler(self, seed: int = 0, type: str = "urs") -> "CandidateFactorySeed":
@@ -719,7 +719,7 @@ def create_parameter_sampler(self, seed: int = 0, type: str = "urs") -> "Candida
 
 Wrap a parameteriser in a filter that can hide some parameters
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def filtered_parameters(self) -> "FilteringParameteriser":
@@ -756,7 +756,7 @@ Examples:
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -796,7 +796,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `patterns` | `[type]` | character, one or more pattern to match and hide matching parameters. Match according to other parameters. | *required* | | `regex` | `bool` | logical, defaults False, should the patterns be used as regular expressions.. Defaults to False. | `False` | | `starts_with` | `bool` | logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False. | `False` | | `strict` | `bool` | logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False. | `False` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def hide_parameters(self, patterns, regex=False, starts_with=False, strict=False):
@@ -833,7 +833,7 @@ Examples:
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def make_state_init_parameteriser(self) -> "StateInitParameteriser":
@@ -865,7 +865,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `int` | `int` | Number of free parameters |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def num_free_parameters(self) -> int:
@@ -886,7 +886,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_hypercube(self, specs: pd.DataFrame):
@@ -907,7 +907,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `variable_name` | `VecStr` | one or more parameter name(s) | *required* | | `value` | `VecScalars` | one or more parameter value(s) | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_max_parameter_value(self, variable_name: "VecStr", value: "VecScalars"):
@@ -929,7 +929,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `variable_name` | `VecStr` | one or more parameter name(s) | *required* | | `value` | `VecScalars` | one or more parameter value(s) | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_min_parameter_value(self, variable_name: "VecStr", value: "VecScalars"):
@@ -951,7 +951,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `variable_name` | `str` | parameter name | *required* | | `min` | `float` | min | *required* | | `max` | `float` | max | *required* | | `value` | `float` | value | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_parameter_definition(
@@ -977,7 +977,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `variable_name` | `VecStr` | one or more parameter name(s) | *required* | | `value` | `VecScalars` | one or more parameter value(s) | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_parameter_value(self, variable_name: "VecStr", value: "VecScalars"):
@@ -999,7 +999,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `patterns` | `[type]` | character, one or more pattern to match and show matching parameters. Match according to other parameters | *required* | | `regex` | `bool` | should the patterns be used as regular expressions. Defaults to False. | `False` | | `starts_with` | `bool` | should the patterns be used as starting strings in the parameter names. Defaults to False. | `False` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def show_parameters(self, patterns, regex=False, starts_with=False):
@@ -1024,7 +1024,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `TransformParameteriser` | `TransformParameteriser` | A new parameteriser (TransformParameteriser) which has methods to define parameter transforms |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def wrap_transform(self) -> "TransformParameteriser":
@@ -1045,7 +1045,7 @@ Bases: `DeletableCffiNativeHandle`
 
 Objective Evaluator
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class ObjectiveEvaluator(DeletableCffiNativeHandle):
@@ -1139,7 +1139,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `ObjectiveEvaluator` | `ObjectiveEvaluator` | An objective evaluator that can be use by an optimiser |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -1174,7 +1174,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Optimiser` | `Optimiser` | SCE optimiser |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def create_sce_optim_swift(
@@ -1211,7 +1211,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: score(s), and a data frame representation of the input parameters. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_score(self, p_set: "HypercubeParameteriser") -> Dict[str,Any]:
@@ -1239,7 +1239,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, float]` | Dict\[str,float\]: score(s) |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_scores(self, p_set: "HypercubeParameteriser") -> Dict[str,float]:
@@ -1259,7 +1259,7 @@ def get_scores(self, p_set: "HypercubeParameteriser") -> Dict[str,float]:
 
 Bases: `DeletableCffiNativeHandle`
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class ObjectiveScores(DeletableCffiNativeHandle):
@@ -1312,7 +1312,7 @@ The parameteriser associated with this object
 
 string representation
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def __str__(self):
@@ -1329,7 +1329,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def apply_sys_config(self, simulation: 'Simulation') -> None:
@@ -1346,7 +1346,7 @@ def apply_sys_config(self, simulation: 'Simulation') -> None:
 
 Bases: `DeletableCffiNativeHandle`
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class Optimiser(DeletableCffiNativeHandle):
@@ -1414,7 +1414,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `MhData` | `MhData` | an object with methods to analyse the optimisation log |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def extract_optimisation_log(self, fitness_name:str="log.likelihood") -> 'sp.MhData':
@@ -1438,7 +1438,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `type` | `str` | The type of logger. Unused for now, future option e.g. 'text', 'database'. Defaults to "". | `''` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_calibration_logger(self, type:str="") -> None:
@@ -1455,7 +1455,7 @@ def set_calibration_logger(self, type:str="") -> None:
 
 Set the maximum number of threads (compute cores) to use in the optimisation, if possible. -1 means "as many as available".
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_maximum_threads(self, n_threads: int = -1):
@@ -1468,7 +1468,7 @@ def set_maximum_threads(self, n_threads: int = -1):
 
 Set the maximum number of threads (compute cores) to use in the optimisation, such that at least `n_free_cores` are left for other tasks, if feasible given hardware constraints.
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_maximum_threads_free_cores(self, n_free_cores: int = 1):
@@ -1488,7 +1488,7 @@ Note
 
 This is a parent class for more common types such as swift2.classes.HypercubeParameteriser
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class Parameteriser(DeletableCffiNativeHandle):
@@ -1559,7 +1559,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def apply_sys_config(self, simulation:"Simulation"):
@@ -1576,7 +1576,7 @@ def apply_sys_config(self, simulation:"Simulation"):
 
 Computes the value of an objective for this given set of parameters
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def score_for_objective(self, objective: "ObjectiveEvaluator") -> Dict[str, Any]:
@@ -1609,7 +1609,7 @@ Examples:
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def subcatchment_parameteriser(self, subcatchment):
@@ -1638,7 +1638,7 @@ def subcatchment_parameteriser(self, subcatchment):
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def supports_thread_safe_cloning(self) -> bool:
@@ -1651,7 +1651,7 @@ def supports_thread_safe_cloning(self) -> bool:
 
 Bases: `TransformParameteriser`
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class ScalingParameteriser(TransformParameteriser):
@@ -1770,7 +1770,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `ScalingParameteriser` | | new ScalingParameteriser |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -1828,7 +1828,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `ScalingParameteriser` | | ScalingParameteriser |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -1855,7 +1855,7 @@ Bases: `DeletableCffiNativeHandle`, `SimulationMixin`
 
 Wrapper around single dimension simulation objects
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class Simulation(DeletableCffiNativeHandle, SimulationMixin):
@@ -2674,7 +2674,7 @@ class Simulation(DeletableCffiNativeHandle, SimulationMixin):
 
 string representation
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def __str__(self):
@@ -2688,7 +2688,7 @@ def __str__(self):
 
 Adds a state initialiser to any prior list of state initialisers
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def add_state_initialiser(self, state_initialiser: "StateInitialiser"):
@@ -2703,7 +2703,7 @@ DRAFT Advanced/technical. Record states to a record provider using a callable fu
 
 Likely not for end users. This is used by methods such as EnsembleSimulation.record_ensemble_state.
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def apply_recording_function(
@@ -2729,7 +2729,7 @@ def apply_recording_function(
 
 Checks whether a simulation is configured to a state where it is executable
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def check_simulation(self) -> Dict:
@@ -2748,7 +2748,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | A new simulation object |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def clone(self) -> "Simulation":
@@ -2773,7 +2773,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def cookie_cut_dendritic_catchment(
@@ -2806,7 +2806,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `EnsembleForecastSimulation` | An external pointer |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def create_ensemble_forecast_simulation(
@@ -2939,7 +2939,7 @@ Index: []}
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def create_multisite_objective(
@@ -3035,7 +3035,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `ObjectiveEvaluator` | `ObjectiveEvaluator` | single objective evaluator |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def create_objective(
@@ -3077,7 +3077,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Dict` | `Dict` | A dictionary representation of the catchment structure |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def describe(self, verbosity:Optional[int]=None) -> Dict:
@@ -3105,7 +3105,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `EnsembleSimulation` | `EnsembleSimulation` | Ensemble simulation (ensemble simulation runner) |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def ensemble_simulation(self, ensemble_size: int) -> "EnsembleSimulation":
@@ -3133,7 +3133,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `EnsembleSimulation` | `EnsembleSimulation` | Ensemble simulation (ensemble simulation runner) |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def erris_ensemble_simulation(
@@ -3178,7 +3178,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a catchment simulation. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 @staticmethod
@@ -3199,7 +3199,7 @@ def from_json_file(file_path:str) -> "Simulation":
 
 Gets all the time series of models variables into which input time sereis is/are played
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_all_played(self) -> xr.DataArray:
@@ -3212,7 +3212,7 @@ def get_all_played(self) -> xr.DataArray:
 
 Gets all the time series of models variables recorded from
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_all_recorded(self) -> xr.DataArray:
@@ -3267,7 +3267,7 @@ Examples:
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_catchment_structure(self) -> Dict[str, Any]:
@@ -3317,7 +3317,7 @@ def get_catchment_structure(self) -> Dict[str, Any]:
 
 Gets all the identifiers of the links in the catchment
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_link_ids(self) -> List[str]:
@@ -3332,7 +3332,7 @@ def get_link_ids(self) -> List[str]:
 
 Gets all the names of the links in the catchment
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_link_names(self) -> List[str]:
@@ -3347,7 +3347,7 @@ def get_link_names(self) -> List[str]:
 
 Gets all the identifiers of the nodes in the catchment
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_node_ids(self) -> List[str]:
@@ -3362,7 +3362,7 @@ def get_node_ids(self) -> List[str]:
 
 Gets all the names of the nodes in the catchment
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_node_names(self) -> List[str]:
@@ -3385,7 +3385,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `DataArray` | xr.DataArray: a time series, possibly multivariate. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_played(
@@ -3414,7 +3414,7 @@ def get_played(
 
 Gets all the names of model states fed an input time series
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_played_varnames(self) -> List[str]:
@@ -3437,7 +3437,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `DataArray` | xr.DataArray: a time series, possibly multivariate. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_recorded(
@@ -3470,7 +3470,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: information on start, end, time step |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_simulation_span(self) -> Dict[str, Any]:
@@ -3495,7 +3495,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Union[Dict[str, float], float]` | value(s) of the requested model states |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_state_value(self, var_id: "VecStr") -> Union[Dict[str, float], float]:
@@ -3516,7 +3516,7 @@ def get_state_value(self, var_id: "VecStr") -> Union[Dict[str, float], float]:
 
 Gets all the identifiers of the subareas in the catchment
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_subarea_ids(self) -> List[str]:
@@ -3531,7 +3531,7 @@ def get_subarea_ids(self) -> List[str]:
 
 Gets all the names of the subareas in the catchment
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_subarea_names(self) -> List[str]:
@@ -3550,7 +3550,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `element_id` | `Optional[str]` | a character, identifier of the element within the catchment | `None` | | `full_id` | `bool` | boolean, if TRUE return the full hierarchical identifier | `True` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_variable_ids(
@@ -3580,7 +3580,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Union[Dict[str, bool], bool]` | Union\[Dict[str, bool], bool\]: whether the identifier(s) are valid. A dictionary is returned if the input is vectorised rather than scalar. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def is_variable_id(self, var_id: "VecStr") -> Union[Dict[str, bool], bool]:
@@ -3617,7 +3617,7 @@ Examples:
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def muskingum_param_constraints(
@@ -3657,7 +3657,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `input_ts` | `TimeSeriesLike` | univariate time series. If an xts time series column names must be valid model variable identifiers, unless explicitely provided via varIds | *required* | | `var_ids` | `optional str or sequence of str` | optional character, the variable identifiers to use, overriding the column names of the inputTs. If not NULL, must be of length equal to the number of columns in inputTs | `None` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def play_input(
@@ -3682,7 +3682,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `data_library` | `TimeSeriesLibrary` | external pointer type ENSEMBLE_DATA_SET_PTR, or a Python class wrapper around it | *required* | | `model_var_id` | `str or sequence of str` | model state variable unique identifier(s) | *required* | | `data_id` | `str or sequence of str` | identifier(s) for data in the data_library. If length is not the same as model_var_id, the elements of data_id are reused to match it | *required* | | `resample` | `str or sequence of str` | identifier(s) for how the series is resampled (aggregated or disaggregated). If length is not the same as model_var_id, the elements of resample are reused to match it | `''` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def play_inputs(
@@ -3714,7 +3714,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `input` | `TimeSeriesLike` | univariate time series. | *required* | | `subarea_name` | `str` | a valid name of the subarea | *required* | | `input_name` | `str` | the name of the input variable to the model (i.e. 'P' for the precip of GR5H) | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def play_subarea_input(
@@ -3745,7 +3745,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `EnsembleSimulation` | `EnsembleSimulation` | Ensemble simulation (ensemble simulation runner) |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def prepare_dual_pass_forecasting(
@@ -3797,7 +3797,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `EnsembleSimulation` | `EnsembleSimulation` | Ensemble simulation (ensemble simulation runner) |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def prepare_erris_forecasting(
@@ -3835,7 +3835,7 @@ DRAFT Advanced/technical. Record states to a record provider.
 
 Likely not for end users.
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def record_singular_state(
@@ -3856,7 +3856,7 @@ def record_singular_state(
 
 Forces the removal of any state initialiser.
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def remove_state_initialisers(self):
@@ -3869,7 +3869,7 @@ def remove_state_initialisers(self):
 
 Reset the model states of a simulation, and apply one or more state initialers if the simulation is configured with any.
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def reset_model_states(self) -> None:
@@ -3886,7 +3886,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `model_id` | `str` | the identifier of the new model to use, e.g. 'ERRIS' | *required* | | `element_id` | `str` | the identifier of the catchment element (node, link, subcatchment) whose outflow rate is corrected. | *required* | | `length` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `1` | | `seed` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `0` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_error_correction_model(
@@ -3914,7 +3914,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `element_id` | `str` | Element with a suitable reservoir supporting a geometry description | *required* | | `level` | `ndarray` | array of water surface levels, in S.I. units (m) TO BE CONFIRMED | *required* | | `storage` | `ndarray` | array of volume storages, in S.I. units (m3) TO BE CONFIRMED | *required* | | `area` | `ndarray` | array of surfce areas, in S.I. units (m2) TO BE CONFIRMED | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_reservoir_geometry(
@@ -3943,7 +3943,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `element_id` | `str` | Element with a suitable reservoir supporting a geometry description | *required* | | `level` | `ndarray` | array of levels (m) | *required* | | `discharge` | `ndarray` | array of maximum discharges (m3/s) | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_reservoir_max_discharge(
@@ -3969,7 +3969,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `element_id` | `str` | Element with a suitable reservoir supporting a geometry description | *required* | | `level` | `ndarray` | array of levels (m) | *required* | | `discharge` | `ndarray` | array of minimum discharges (m3/s) | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_reservoir_min_discharge(
@@ -3995,7 +3995,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `new_model_id` | `str` | Currently one of: "ControlledReleaseReservoir", "LevelVolumeAreaReservoir", "FarmDamReservoir"; | *required* | | `element_id` | `str` | description | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_reservoir_model(self, new_model_id: str, element_id: str) -> None:
@@ -4017,7 +4017,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `start` | `ConvertibleToTimestamp` | the start date of the simulation. The time zone will be forced to UTC. | *required* | | `end` | `ConvertibleToTimestamp` | the end date of the simulation. The time zone will be forced to UTC. | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_simulation_span(
@@ -4042,7 +4042,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `name` | `str` | a time step identifier, currently 'daily' or 'hourly' are supported. The identifier is made lower case in the function. | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_simulation_time_step(self, name: str) -> None:
@@ -4064,7 +4064,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `var_id` | `Any` | character, model variable state identifier(s) | *required* | | `value` | `Any` | numeric value(s) | `None` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_state_value(
@@ -4092,7 +4092,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `states` | `MemoryStates` | memory states | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def set_states(self, states: "MemoryStates") -> None:
@@ -4113,7 +4113,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `MemoryStates` | `MemoryStates` | memory states, that can be stored and reapplied |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def snapshot_state(self) -> "MemoryStates":
@@ -4138,7 +4138,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `List[str]` | List\[str\]: values in split_element_ids sorted by simulation execution order |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def sort_by_execution_order(
@@ -4193,7 +4193,7 @@ remainder
 
 ```
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def split_to_subcatchments(
@@ -4242,7 +4242,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def subset_catchment(self, element_id: str, action: str = "keep_above"):
@@ -4271,7 +4271,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def swap_model(self, model_id: str, what: str = "runoff") -> "Simulation":
@@ -4298,7 +4298,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `file_path` | `str` | file path to save to | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def to_json_file(self, file_path:str) -> None:
@@ -4319,7 +4319,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `state_initialiser` | `StateInitialiser` | the new state initialiser to use | *required* |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def use_state_initialises(self, state_initialiser: "StateInitialiser"):
@@ -4336,7 +4336,7 @@ def use_state_initialises(self, state_initialiser: "StateInitialiser"):
 
 A parent class for simulation objects. Most users are unlikely to explicitly use it.
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class SimulationMixin:
@@ -4404,7 +4404,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `reset_initial_states` | `bool` | logical, should the states of the model be reinitialized before the first time step. | `True` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def exec_simulation(self, reset_initial_states: bool = True) -> None:
@@ -4427,7 +4427,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `List[str]` | List\[str\]: The names of the state variables fed over the simulation with values from a time series |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_played_varnames(self) -> List[str]:
@@ -4449,7 +4449,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `List[str]` | List\[str\]: The names of the state variables being recorded into time series |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def get_recorded_varnames(self) -> List[str]:
@@ -4475,7 +4475,7 @@ Raises:
 
 | Type | Description | | --- | --- | | `ValueError` | description |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def record_state(
@@ -4503,7 +4503,7 @@ def record_state(
 
 Bases: `HypercubeParameteriser`
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class TransformParameteriser(HypercubeParameteriser):
@@ -4554,7 +4554,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `param_name` | `str` | the name of the meta-parameter. Note that it can be the same value as inner_param_name, but this is NOT recommended. | *required* | | `inner_param_name` | `str` | the name of the parameter being transformed | *required* | | `transform_id` | `str` | identifier for a known bijective univariate function | *required* | | `a` | `float` | parameter in Y = F(ax+b). Defaults to 1.0. | `1.0` | | `b` | `float` | parameter in Y = F(ax+b). Defaults to 0.0. | `0.0` |
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def add_transform(
@@ -4584,7 +4584,7 @@ def add_transform(
 
 Bases: `DeletableCffiNativeHandle`
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 class VectorObjectiveScores(DeletableCffiNativeHandle):
@@ -4633,7 +4633,7 @@ class VectorObjectiveScores(DeletableCffiNativeHandle):
 
 representation
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def __repr__(self):
@@ -4646,7 +4646,7 @@ def __repr__(self):
 
 string representation
 
-Source code in `swift2/classes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/classes.py`
 
 ```
 def __str__(self):
@@ -4671,7 +4671,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def check_simulation(simulation) -> Dict:
@@ -4699,7 +4699,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def configure_daily_gr4j(simulation):
@@ -4727,7 +4727,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def configure_hourly_gr4j(simulation):
@@ -4763,7 +4763,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_catchment(
@@ -4843,7 +4843,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | An external pointer |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_ensemble_forecast_simulation(
@@ -4910,7 +4910,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `HyperCubeParameteriser` | | a parameter set that can be applied to SWIFT systems with GR4J |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def create_gr4jh_parameters(hourly:bool = True):
@@ -4954,7 +4954,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object (i.e. a model runner) |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_subarea(model_name, area_km2):
@@ -4975,7 +4975,7 @@ def create_subarea(model_name, area_km2):
 
 ```
 
-## `create_subarea_simulation(data_id='MMH', simul_start='1990-01-01', simul_end='2005-12-31', model_id='GR4J', tstep='daily', varname_rain='P', varname_pet='E')`
+## `create_subarea_simulation(data_id='MMH', simul_start='1990-01-01', simul_end='2005-12-31', model_id='GR4J', tstep='daily', varname_rain='P', varname_pet='E', data_rain_id='rain', data_evap_id='evap')`
 
 Creates a one sub-catchment simulation
 
@@ -4983,23 +4983,25 @@ Creates a one sub-catchment simulation. This function is intended for creating s
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `data_id` | `Any` | data identifier in swift_sample_data | `'MMH'` | | `simul_start` | `Any` | ISO string for the simulation start date time | `'1990-01-01'` | | `simul_end` | `Any` | ISO string for the simulation end date time | `'2005-12-31'` | | `model_id` | `Any` | model identifier | `'GR4J'` | | `tstep` | `Any` | character, 'daily' or 'hourly' | `'daily'` | | `varname_rain` | `Any` | variable name to assign rainfall to | `'P'` | | `varname_pet` | `Any` | variable name to assign PET to | `'E'` |
+| Name | Type | Description | Default | | --- | --- | --- | --- | | `data_id` | `str` | data identifier in swift_sample_data | `'MMH'` | | `simul_start` | `str` | ISO string for the simulation start date time | `'1990-01-01'` | | `simul_end` | `str` | ISO string for the simulation end date time | `'2005-12-31'` | | `model_id` | `str` | model identifier | `'GR4J'` | | `tstep` | `str` | character, 'daily' or 'hourly' | `'daily'` | | `varname_rain` | `str` | variable name to assign rainfall to | `'P'` | | `varname_pet` | `str` | variable name to assign PET to | `'E'` | | `data_rain_id` | `str` | key to use to retrieve the rainfall series from the sample data | `'rain'` | | `data_evap_id` | `str` | key to use to retrieve the evaporation series from the sample data | `'evap'` |
 
 Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_subarea_simulation(
-    data_id="MMH",
-    simul_start="1990-01-01",
-    simul_end="2005-12-31",
-    model_id="GR4J",
-    tstep="daily",
-    varname_rain="P",
-    varname_pet="E",
+    data_id:str="MMH",
+    simul_start:str="1990-01-01",
+    simul_end:str="2005-12-31",
+    model_id:str="GR4J",
+    tstep:str="daily",
+    varname_rain:str="P",
+    varname_pet:str="E",
+    data_rain_id:str="rain",
+    data_evap_id:str="evap",
 ):
     """
     Creates a one sub-catchment simulation
@@ -5007,13 +5009,15 @@ def create_subarea_simulation(
     Creates a one sub-catchment simulation. This function is intended for creating sample simulations, not for use in production.
 
     Args:
-        data_id (Any): data identifier in swift_sample_data
-        simul_start (Any): ISO string for the simulation start date time
-        simul_end (Any): ISO string for the simulation end date time
-        model_id (Any): model identifier
-        tstep (Any): character, 'daily' or 'hourly'
-        varname_rain (Any): variable name to assign rainfall to
-        varname_pet (Any): variable name to assign PET to
+        data_id (str): data identifier in swift_sample_data
+        simul_start (str): ISO string for the simulation start date time
+        simul_end (str): ISO string for the simulation end date time
+        model_id (str): model identifier
+        tstep (str): character, 'daily' or 'hourly'
+        varname_rain (str): variable name to assign rainfall to
+        varname_pet (str): variable name to assign PET to
+        data_rain_id (str): key to use to retrieve the rainfall series from the sample data
+        data_evap_id (str): key to use to retrieve the evaporation series from the sample data
 
     Returns:
         A SWIFT simulation object, clone of the simulation but with a new model type in use.
@@ -5023,8 +5027,8 @@ def create_subarea_simulation(
     from swift2.wrap.swift_wrap_generated import CreateSubarea_py
 
     s_span = slice(simul_start, simul_end)
-    rain = sample_series(data_id, "rain")[s_span]
-    evap = sample_series(data_id, "evap")[s_span]
+    rain = sample_series(data_id, data_rain_id)[s_span]
+    evap = sample_series(data_id, data_evap_id)[s_span]
 
     ms = CreateSubarea_py(model_id, 1.0)
     s = rain.index[0]
@@ -5053,7 +5057,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `TransformParameteriser` | | a parameterizer for GR4J, combining time and area scaling and superimposed with log10 transforms for x1, x3, x4 and arc-sinh for x2 |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def define_gr4j_scaled_parameter(ref_area:float=250, time_span:int=3600, pspec_gr4j:Optional[pd.DataFrame]=None):
@@ -5100,7 +5104,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `reset_initial_states` | `Any` | logical, should the states of the model be reinitialized before the first time step. | `True` |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def exec_simulation(simulation: "Simulation", reset_initial_states=True):
@@ -5143,7 +5147,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def get_catchment_dot_graph(simulation):
@@ -5186,7 +5190,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | a data frame with Min, Max, Value, Name |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def get_free_params(model_id):
@@ -5433,7 +5437,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the links in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_link_ids(simulation):
@@ -5467,7 +5471,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the links in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_link_names(simulation):
@@ -5502,7 +5506,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the nodes in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_node_ids(simulation):
@@ -5536,7 +5540,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the nodes in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_node_names(simulation):
@@ -5568,7 +5572,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | numeric vector, value(s) of the requested model states |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_state_value(simulation: "Simulation", var_id: "VecStr"):
@@ -5614,7 +5618,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the sub-areas in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_subarea_ids(simulation):
@@ -5648,7 +5652,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the sub-areas in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_subarea_names(simulation):
@@ -5683,7 +5687,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | character vector, names (identifiers) of model states in the element |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_variable_ids(simulation: "Simulation", element_id=None, full_id=True):
@@ -5722,7 +5726,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT catchment parameterizer for GR4 model structures |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def gr4j_scaled_parameteriser(reference_area: float = 240, t_step_seconds: int = 3600):
@@ -5761,7 +5765,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def inspect(simulation: "Simulation", element="link", id="1", full_names=False):
@@ -5810,7 +5814,7 @@ def inspect(simulation: "Simulation", element="link", id="1", full_names=False):
 
 True if an object is iterable but not a string (str)
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def is_common_iterable(obj: Any) -> bool:
@@ -5837,7 +5841,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | logical vector |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def is_variable_id(simulation: "Simulation", var_id: "VecStr"):
@@ -5867,7 +5871,7 @@ def is_variable_id(simulation: "Simulation", var_id: "VecStr"):
 
 Port of R paste0 function
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste0(*lists, collapse=None):
@@ -5886,7 +5890,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `input` | `Any` | an xts time series. | *required* | | `subarea_name` | `Any` | a valid name of the subarea | *required* | | `input_name` | `Any` | the name of the input variable to the model (i.e. 'P' for the precip of GR5H) | *required* |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def play_subarea_input(simulation: "Simulation", input, subarea_name, input_name):
@@ -5914,7 +5918,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def reset_model_states(simulation: "Simulation"):
@@ -5941,7 +5945,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | a model simulation |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def sample_catchment_model(site_id="South_Esk", config_id="catchment"):
@@ -5988,7 +5992,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | an xts time series with UTC time indexing |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def sample_series(site_id="MMH", var_name="rain"):
@@ -6029,7 +6033,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, float]` | Dict\[str,float\]: SCE hyperparameters |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def sce_parameter(nparams: int, nshuffle: int = 40) -> Dict[str, float]:
@@ -6062,7 +6066,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `model_id` | `str` | the identifier of the new model to use, e.g. 'ERRIS' | *required* | | `element_id` | `str` | the identifier of the catchment element (node, link, subcatchment) whose outflow rate is corrected. | *required* | | `length` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `1` | | `seed` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `0` |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_error_correction_model(
@@ -6099,7 +6103,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def set_loglik_param_keys(
@@ -6151,7 +6155,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `model_sim` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "MODEL_SIMULATION_PTR" | *required* | | `site_id` | `Any` | sample data site identifier | `'MMH'` | | `rain_data_var` | `Any` | time series ID for the rainfall in the sample data | `'rain'` | | `evap_data_var` | `Any` | time series ID for the evaporation in the sample data | `'evap'` | | `rain_model_var` | `Any` | sub-area runoff model state identifier for the rainfall, e.g. 'P' | `'P'` | | `evap_model_var` | `Any` | sub-area runoff model state identifier for the evaporation, e.g. 'E' | `'E'` | | `t_step` | `Any` | identifier for the time step to set the simulation to. | `'daily'` |
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def set_sample_data(
@@ -6200,7 +6204,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `start` | `Any` | the start date of the simulation. The time zone will be forced to UTC. | *required* | | `end` | `Any` | the end date of the simulation. The time zone will be forced to UTC. | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_simulation_span(simulation: "Simulation", start, end):
@@ -6231,7 +6235,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `name` | `Any` | a time step identifier, The identifier is made lower case in the function. Supported time steps include "hourly", "daily", "monthly_qpp", "monthly", and time deltas such as "24:00:00", "01:00:00", "03:00:00". An exception is raised if the string could not be parsed. | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_simulation_time_step(simulation: "Simulation", name: str):
@@ -6261,7 +6265,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `var_id` | `(str, Sequence[str])` | character, model variable state identifier(s) | *required* | | `value` | `(float, int, bool, Sequence)` | numeric value(s) | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_state_value(
@@ -6324,7 +6328,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* | | `states` | `MemoryStates` | memory states | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_states(simulation: "Simulation", states: "MemoryStates"):
@@ -6360,7 +6364,7 @@ Examples:
 
 ```
 
-Source code in `swift2/doc_helper.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/doc_helper.py`
 
 ```
 def short_var_id(var_ids: "VecStr") -> "VecStr":
@@ -6399,7 +6403,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `MemoryStates` | `MemoryStates` | memory states, that can be stored and reapplied |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def snapshot_state(simulation: "Simulation") -> "MemoryStates":
@@ -6429,7 +6433,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | values in split_element_ids sorted by simulation execution order |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def sort_by_execution_order(
@@ -6469,7 +6473,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def swap_model(simulation: "Simulation", model_id, what="runoff"):
@@ -6514,7 +6518,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: dictionary with keys "tsgeom" for the time series geometry, and "tsvalues" for its values. |
 
-Source code in `swift2/internal.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/internal.py`
 
 ```
 def simplify_time_series(input_ts: TimeSeriesLike) -> Dict[str, Any]:
@@ -6550,7 +6554,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Tuple[ndarray, TimeSeriesGeometryNative]` | Tuple\[np.ndarray, TimeSeriesGeometryNative\]: univeriate data and time series geometry for interop. |
 
-Source code in `swift2/internal.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/internal.py`
 
 ```
 def to_interop_univariate_series(
@@ -6593,7 +6597,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def cookie_cut_dendritic_catchment(
@@ -6672,7 +6676,7 @@ Examples:
 
 ```
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def get_catchment_structure(simulation) -> Dict:
@@ -6730,7 +6734,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a catchment simulation. |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def model_from_json_file(file_path:str) -> "Simulation":
@@ -6757,7 +6761,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | Catchment simulation | *required* | | `file_path` | `str` | file path to save to | *required* |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def model_to_json_file(simulation: "Simulation", file_path:str) -> None:
@@ -6807,7 +6811,7 @@ remainder
 
 ```
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def split_to_subcatchments(
@@ -6899,7 +6903,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `swift2/model_definitions.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
 
 ```
 def subset_catchment(
@@ -6943,7 +6947,7 @@ def subset_catchment(
 
 Data log from metaheuristic calibration processes
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 class MhData:
@@ -7071,7 +7075,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `DataFrame` | pd.DataFrame: log data with bound fitness |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def bound_fitness(self, obj_lims: Sequence[float] = None) -> pd.DataFrame:
@@ -7105,7 +7109,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `FacetGrid` | | The plot to display |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def facet_plot(
@@ -7152,7 +7156,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `colnames_map` | `Dict[str, str]` | mapping | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def rename_columns(self, colnames_map: Dict[str, str]) -> None:
@@ -7181,7 +7185,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Any` | `MhData` | New MhData object with subset data |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def subset_by_message(
@@ -7211,7 +7215,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `Any` | `MhData` | New MhData object with subset data |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def subset_by_pattern(self, colname: str, pattern: str) -> "MhData":
@@ -7239,7 +7243,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def add_to_hypercube(parameteriser, specs):
@@ -7266,7 +7270,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `TransformParameteriser` | A TransformParameteriser wrapper, or a type inheriting from it | *required* | | `param_name` | `str` | the name of the meta-parameter. Note that it can be the same value as inner_param_name, but this is NOT recommended. | *required* | | `inner_param_name` | `str` | the name of the parameter being transformed | *required* | | `transform_id` | `str` | identifier for a known bijective univariate function | *required* | | `a` | `float` | parameter in Y = F(ax+b). Defaults to 1.0. | `1.0` | | `b` | `float` | parameter in Y = F(ax+b). Defaults to 0.0. | `0.0` |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def add_transform(
@@ -7303,7 +7307,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `simulation` | `Simulation` | simulation | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def apply_sys_config(parameteriser, simulation):
@@ -7332,7 +7336,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def as_py_structure(x: Any):
@@ -7369,7 +7373,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | \[HypercubeParameteriser\]: The parameters definitions without the transforms (if there are any) |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def backtransform(parameteriser):
@@ -7400,7 +7404,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def bound_values_df(x, colname, lim=None):
@@ -7432,7 +7436,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `CompositeParameteriser` | `CompositeParameteriser` | A concatenated parameteriser |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def concatenate_parameterisers(
@@ -7463,7 +7467,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def create_multisite_obj_parameteriser(
@@ -7530,7 +7534,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def create_muskingum_param_constraints(
@@ -7570,7 +7574,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def create_parameter_sampler(seed, parameteriser, type: str):
@@ -7600,7 +7604,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | \[HypercubeParameteriser\]: new parameteriser |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def create_parameteriser(type="Generic subareas", specs: pd.DataFrame = None):
@@ -7634,7 +7638,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def create_sce_optim_swift(
@@ -7690,7 +7694,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `SceTerminationCondition` | `SceTerminationCondition` | [description] |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def create_sce_termination_wila(
@@ -7721,7 +7725,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def evaluate_score_for_parameters(objective, parameteriser):
@@ -7750,7 +7754,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def example_parameteriser(type: str, strict=False):
@@ -7797,7 +7801,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def execute_optimisation(optimiser):
@@ -7825,7 +7829,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `MhData` | `MhData` | an object with methods to analyse the optimisation log |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def extract_optimisation_log(estimator, fitness_name="log.likelihood") -> 'MhData':
@@ -7860,7 +7864,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def feasible_muskingum_bounds(simulation: "Simulation", delta_t_hours=1):
@@ -7889,7 +7893,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def filtered_parameters(parameteriser):
@@ -7917,7 +7921,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_best_score(scores_population, score_name="NSE", convert_to_py=False):
@@ -7948,7 +7952,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_default_sce_parameters():
@@ -7975,7 +7979,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `DataFrame` | pd.DataFrame: The data log of the optimiser |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_logger_content(optimiser:DeletableCffiNativeHandle, add_numbering:bool=False) -> pd.DataFrame:
@@ -8009,7 +8013,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_marginal_termination(tolerance=1e-06, cutoff_no_improvement=10, max_hours=0.05):
@@ -8043,7 +8047,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_max_iteration_termination(max_iterations=1000):
@@ -8071,7 +8075,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_max_runtime_termination(max_hours=0.05):
@@ -8099,7 +8103,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def get_score_at_index(scores_population, index: int):
@@ -8124,7 +8128,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `patterns` | `[type]` | character, one or more pattern to match and hide matching parameters. Match according to other parameters. | *required* | | `regex` | `bool` | logical, defaults False, should the patterns be used as regular expressions.. Defaults to False. | `False` | | `starts_with` | `bool` | logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False. | `False` | | `strict` | `bool` | logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False. | `False` |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def hide_parameters(
@@ -8155,7 +8159,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def is_hypercube(p_set: CffiNativeHandle):
@@ -8199,7 +8203,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def is_sampler_seeding(obj: CffiNativeHandle):
@@ -8230,7 +8234,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def is_score(x):
@@ -8260,7 +8264,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def is_set_of_scores(x):
@@ -8300,7 +8304,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | \[ScalingParameteriser\]: new ScalingParameteriser |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def linear_parameteriser(
@@ -8376,7 +8380,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def linear_parameteriser_from(
@@ -8418,7 +8422,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | \[StateInitParameteriser\]: new state initialisation parameteriser |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def make_state_init_parameteriser(parameteriser):
@@ -8446,7 +8450,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | \[type\]: [a data frame] |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def parameteriser_as_dataframe(parameteriser):
@@ -8474,7 +8478,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def parameteriser_for_score(score:'ObjectiveScores'):
@@ -8502,7 +8506,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def scores_as_dataframe(scores_population):
@@ -8530,7 +8534,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def set_calibration_logger(optimiser, type=""):
@@ -8555,7 +8559,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def set_hypercube(parameteriser: "HypercubeParameteriser", specs: pd.DataFrame):
@@ -8577,7 +8581,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `variable_name` | `str or iterable of str` | model variable state identifier(s) | *required* | | `value` | `numeric or iterable of numeric` | value(s) | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def set_max_parameter_value(parameteriser, variable_name, value):
@@ -8602,7 +8606,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `variable_name` | `str or iterable of str` | model variable state identifier(s) | *required* | | `value` | `numeric or iterable of numeric` | value(s) | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def set_min_parameter_value(parameteriser, variable_name, value):
@@ -8627,7 +8631,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `variable_name` | `str or iterable of str` | model variable state identifier(s) | *required* | | `value` | `numeric or iterable of numeric` | value(s) | *required* |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def set_parameter_value(parameteriser, variable_name, value):
@@ -8650,7 +8654,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `patterns` | `[type]` | character, one or more pattern to match and show matching parameters. Match according to other parameters | *required* | | `regex` | `bool` | should the patterns be used as regular expressions. Defaults to False. | `False` | | `starts_with` | `bool` | should the patterns be used as starting strings in the parameter names. Defaults to False. | `False` |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def show_parameters(parameteriser, patterns, regex=False, starts_with=False):
@@ -8678,7 +8682,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `VectorObjectiveScores` | | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def sort_by_score(scores_population, score_name="NSE"):
@@ -8719,7 +8723,7 @@ Examples:
 
 ```
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def subcatchment_parameteriser(parameteriser, subcatchment):
@@ -8760,7 +8764,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `TransformParameteriser` | | A new parameteriser (TransformParameteriser) which has methods to define parameter transforms |
 
-Source code in `swift2/parameteriser.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
 
 ```
 def wrap_transform(parameteriser):
@@ -8794,7 +8798,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | an xts time series, possibly multivariate. |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def get_played(simulation: "Simulation", var_ids=None, start_time=None, end_time=None):
@@ -8836,7 +8840,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the state variables fed over the simulation with values from a time series |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def get_played_varnames(simulation):
@@ -8870,7 +8874,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | an xts time series, possibly multivariate. |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def get_recorded(
@@ -8916,7 +8920,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | an xts time series, possibly multivariate. |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def get_recorded_ensemble_forecast(
@@ -8956,7 +8960,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the state variables being recorded into time series |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def get_recorded_varnames(simulation):
@@ -8986,7 +8990,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_SIMULATION_PTR" | *required* | | `input_ts` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_TIME_SERIES_PTR" | *required* | | `var_id` | `Any` | character of length one, the variable identifier to use | *required* |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def play_ensemble_forecast_input(
@@ -9022,7 +9026,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `input_ts` | `Any` | an xts time series, or an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_TIME_SERIES_PTR". if an xts time series column names must be valid model variable identifiers, unless explicitely provided via varIds | *required* | | `var_ids` | `Any` | optional character, the variable identifiers to use, overriding the column names of the inputTs. If not NULL, must be of length equal to the number of columns in inputTs | `None` |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def play_input(
@@ -9062,7 +9066,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `data_library` | `TimeSeriesLibrary` | external pointer type ENSEMBLE_DATA_SET_PTR, or a Python class wrapper around it | *required* | | `model_var_id` | `str or sequence of str` | model state variable unique identifier(s) | *required* | | `data_id` | `str or sequence of str` | identifier(s) for data in the data_library. If length is not the same as model_var_id, the elements of data_id are reused to match it | *required* | | `resample` | `str or sequence of str` | identifier(s) for how the series is resampled (aggregated or disaggregated). If length is not the same as model_var_id, the elements of resample are reused to match it | `''` |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def play_inputs(
@@ -9109,7 +9113,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `input` | `Any` | an xts time series. | *required* | | `subarea_name` | `Any` | a valid name of the subarea | *required* | | `input_name` | `Any` | the name of the input variable to the model (i.e. 'P' for the precip of GR5H) | *required* |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def play_subarea_input(simulation: "Simulation", input, subarea_name, input_name):
@@ -9143,7 +9147,7 @@ Raises:
 
 | Type | Description | | --- | --- | | `ValueError` | description |
 
-Source code in `swift2/play_record.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
 
 ```
 def record_state(
@@ -9201,7 +9205,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `HypercubeParameteriser` | `HypercubeParameteriser` | transformation parameters |
 
-Source code in `swift2/prototypes.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/prototypes.py`
 
 ```
 def estimate_transformation_parameters(
@@ -9263,7 +9267,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def check_simulation(simulation) -> Dict:
@@ -9299,7 +9303,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_catchment(
@@ -9379,7 +9383,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | An external pointer |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_ensemble_forecast_simulation(
@@ -9450,7 +9454,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object (i.e. a model runner) |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_subarea(model_name, area_km2):
@@ -9471,7 +9475,7 @@ def create_subarea(model_name, area_km2):
 
 ```
 
-## `create_subarea_simulation(data_id='MMH', simul_start='1990-01-01', simul_end='2005-12-31', model_id='GR4J', tstep='daily', varname_rain='P', varname_pet='E')`
+## `create_subarea_simulation(data_id='MMH', simul_start='1990-01-01', simul_end='2005-12-31', model_id='GR4J', tstep='daily', varname_rain='P', varname_pet='E', data_rain_id='rain', data_evap_id='evap')`
 
 Creates a one sub-catchment simulation
 
@@ -9479,23 +9483,25 @@ Creates a one sub-catchment simulation. This function is intended for creating s
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `data_id` | `Any` | data identifier in swift_sample_data | `'MMH'` | | `simul_start` | `Any` | ISO string for the simulation start date time | `'1990-01-01'` | | `simul_end` | `Any` | ISO string for the simulation end date time | `'2005-12-31'` | | `model_id` | `Any` | model identifier | `'GR4J'` | | `tstep` | `Any` | character, 'daily' or 'hourly' | `'daily'` | | `varname_rain` | `Any` | variable name to assign rainfall to | `'P'` | | `varname_pet` | `Any` | variable name to assign PET to | `'E'` |
+| Name | Type | Description | Default | | --- | --- | --- | --- | | `data_id` | `str` | data identifier in swift_sample_data | `'MMH'` | | `simul_start` | `str` | ISO string for the simulation start date time | `'1990-01-01'` | | `simul_end` | `str` | ISO string for the simulation end date time | `'2005-12-31'` | | `model_id` | `str` | model identifier | `'GR4J'` | | `tstep` | `str` | character, 'daily' or 'hourly' | `'daily'` | | `varname_rain` | `str` | variable name to assign rainfall to | `'P'` | | `varname_pet` | `str` | variable name to assign PET to | `'E'` | | `data_rain_id` | `str` | key to use to retrieve the rainfall series from the sample data | `'rain'` | | `data_evap_id` | `str` | key to use to retrieve the evaporation series from the sample data | `'evap'` |
 
 Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def create_subarea_simulation(
-    data_id="MMH",
-    simul_start="1990-01-01",
-    simul_end="2005-12-31",
-    model_id="GR4J",
-    tstep="daily",
-    varname_rain="P",
-    varname_pet="E",
+    data_id:str="MMH",
+    simul_start:str="1990-01-01",
+    simul_end:str="2005-12-31",
+    model_id:str="GR4J",
+    tstep:str="daily",
+    varname_rain:str="P",
+    varname_pet:str="E",
+    data_rain_id:str="rain",
+    data_evap_id:str="evap",
 ):
     """
     Creates a one sub-catchment simulation
@@ -9503,13 +9509,15 @@ def create_subarea_simulation(
     Creates a one sub-catchment simulation. This function is intended for creating sample simulations, not for use in production.
 
     Args:
-        data_id (Any): data identifier in swift_sample_data
-        simul_start (Any): ISO string for the simulation start date time
-        simul_end (Any): ISO string for the simulation end date time
-        model_id (Any): model identifier
-        tstep (Any): character, 'daily' or 'hourly'
-        varname_rain (Any): variable name to assign rainfall to
-        varname_pet (Any): variable name to assign PET to
+        data_id (str): data identifier in swift_sample_data
+        simul_start (str): ISO string for the simulation start date time
+        simul_end (str): ISO string for the simulation end date time
+        model_id (str): model identifier
+        tstep (str): character, 'daily' or 'hourly'
+        varname_rain (str): variable name to assign rainfall to
+        varname_pet (str): variable name to assign PET to
+        data_rain_id (str): key to use to retrieve the rainfall series from the sample data
+        data_evap_id (str): key to use to retrieve the evaporation series from the sample data
 
     Returns:
         A SWIFT simulation object, clone of the simulation but with a new model type in use.
@@ -9519,8 +9527,8 @@ def create_subarea_simulation(
     from swift2.wrap.swift_wrap_generated import CreateSubarea_py
 
     s_span = slice(simul_start, simul_end)
-    rain = sample_series(data_id, "rain")[s_span]
-    evap = sample_series(data_id, "evap")[s_span]
+    rain = sample_series(data_id, data_rain_id)[s_span]
+    evap = sample_series(data_id, data_evap_id)[s_span]
 
     ms = CreateSubarea_py(model_id, 1.0)
     s = rain.index[0]
@@ -9545,7 +9553,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `reset_initial_states` | `Any` | logical, should the states of the model be reinitialized before the first time step. | `True` |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def exec_simulation(simulation: "Simulation", reset_initial_states=True):
@@ -9584,7 +9592,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the links in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_link_ids(simulation):
@@ -9618,7 +9626,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the links in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_link_names(simulation):
@@ -9653,7 +9661,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the nodes in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_node_ids(simulation):
@@ -9687,7 +9695,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the nodes in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_node_names(simulation):
@@ -9719,7 +9727,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | numeric vector, value(s) of the requested model states |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_state_value(simulation: "Simulation", var_id: "VecStr"):
@@ -9765,7 +9773,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The identifiers of the sub-areas in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_subarea_ids(simulation):
@@ -9799,7 +9807,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | The names of the sub-areas in the catchment |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_subarea_names(simulation):
@@ -9834,7 +9842,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | character vector, names (identifiers) of model states in the element |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def get_variable_ids(simulation: "Simulation", element_id=None, full_id=True):
@@ -9873,7 +9881,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | logical vector |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def is_variable_id(simulation: "Simulation", var_id: "VecStr"):
@@ -9907,7 +9915,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def reset_model_states(simulation: "Simulation"):
@@ -9930,7 +9938,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `model_id` | `str` | the identifier of the new model to use, e.g. 'ERRIS' | *required* | | `element_id` | `str` | the identifier of the catchment element (node, link, subcatchment) whose outflow rate is corrected. | *required* | | `length` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `1` | | `seed` | `int` | other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported. | `0` |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_error_correction_model(
@@ -9963,7 +9971,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `start` | `Any` | the start date of the simulation. The time zone will be forced to UTC. | *required* | | `end` | `Any` | the end date of the simulation. The time zone will be forced to UTC. | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_simulation_span(simulation: "Simulation", start, end):
@@ -9994,7 +10002,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `name` | `Any` | a time step identifier, The identifier is made lower case in the function. Supported time steps include "hourly", "daily", "monthly_qpp", "monthly", and time deltas such as "24:00:00", "01:00:00", "03:00:00". An exception is raised if the string could not be parsed. | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_simulation_time_step(simulation: "Simulation", name: str):
@@ -10024,7 +10032,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `var_id` | `(str, Sequence[str])` | character, model variable state identifier(s) | *required* | | `value` | `(float, int, bool, Sequence)` | numeric value(s) | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_state_value(
@@ -10087,7 +10095,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | simulation | *required* | | `states` | `MemoryStates` | memory states | *required* |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def set_states(simulation: "Simulation", states: "MemoryStates"):
@@ -10113,7 +10121,7 @@ Returns:
 
 | Name | Type | Description | | --- | --- | --- | | `MemoryStates` | `MemoryStates` | memory states, that can be stored and reapplied |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def snapshot_state(simulation: "Simulation") -> "MemoryStates":
@@ -10143,7 +10151,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | values in split_element_ids sorted by simulation execution order |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def sort_by_execution_order(
@@ -10183,7 +10191,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A SWIFT simulation object, clone of the simulation but with a new model type in use. |
 
-Source code in `swift2/simulation.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/simulation.py`
 
 ```
 def swap_model(simulation: "Simulation", model_id, what="runoff"):
@@ -10228,7 +10236,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | objective evaluator |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def createCompositeObjective(
@@ -10281,7 +10289,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A SWIFT simulation object (i.e. a model runner) | *required* | | `statspec` | `DataFrame` | dataframe defining the objectives used. See function multi_statistic_definition to help build this dataframe. | *required* | | `observations` | `Sequence[TimeSeriesLike]` | A list of (time series) observations to calculated the statistics. Must be of same length as the number of rows of statspec. | *required* | | `weights` | `Dict[str, float]` | numeric vector of weights to ponderate each objective. | *required* | | `Examples` | | todo() | *required* |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def create_multisite_objective(
@@ -10328,7 +10336,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A SWIFT simulation object (i.e. a model runner) | *required* | | `state_name` | `Any` | The name identifying the model state variable to calibrate against the observation | *required* | | `observation` | `TimeSeriesLike` | an xts | *required* | | `statistic` | `str` | statistic identifier, e.g. "NSE" | *required* | | `start_date` | `ConvertibleToTimestamp` | start date of the period to calculate statistics on | *required* | | `end_date` | `ConvertibleToTimestamp` | end date of the period to calculate statistics on | *required* |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def create_objective(
@@ -10386,7 +10394,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: score(s), and a data frame representation of the input parameters. |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def get_score(
@@ -10419,7 +10427,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `model_var_ids` | `Any` | character vector, model state identifiers where statistics are calculated | *required* | | `statistic_ids` | `Any` | character vector, identifiers for bivariate statistics (e.g. nse, lognse, et.) | *required* | | `objective_ids` | `Any` | character vector, identifiers for the objectives. Can be the same as modelVarIds. | *required* | | `objective_names` | `Any` | character vector, display names for the objectives. Can be the same as modelVarIds. | *required* | | `starts` | `Any` | POSIXct vector of start dates for statistics | *required* | | `ends` | `Any` | POSIXct vector of end dates for statistics | *required* |
 
-Source code in `swift2/statistics.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/statistics.py`
 
 ```
 def multi_statistic_definition(
@@ -10471,7 +10479,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | A character, the message for the last known error in SWIFT. |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def get_last_swift_error():
@@ -10499,7 +10507,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | character vector, names (identifiers) of runoff models |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def runoff_model_ids():
@@ -10530,7 +10538,7 @@ Returns:
 
 | Type | Description | | --- | --- | | | a character vector, the known model variable that can be set/gotten |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def runoff_model_var_ids(model_id):
@@ -10560,7 +10568,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `n_threads` | `int` | number of threads. Positive, or -1 to mean "as many as available" | `-1` |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def set_default_max_parallelism_threads(n_threads: int = -1):
@@ -10583,7 +10591,7 @@ Parameters:
 
 | Name | Type | Description | Default | | --- | --- | --- | --- | | `optimizer` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "OPTIMIZER_PTR" | *required* | | `n_threads` | `Any` | integer, maximum number of threads allowed. If -1, the system defaults to using all but one of the CPU cores detected on the hardware. | `-1` |
 
-Source code in `swift2/system.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/system.py`
 
 ```
 def set_maximum_threads(optimiser, n_threads=-1):
@@ -10614,7 +10622,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `ndarray` | np.ndarray: [description] |
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def c(*args) -> np.ndarray:
@@ -10631,7 +10639,7 @@ def c(*args) -> np.ndarray:
 
 True if an object is iterable but not a string (str)
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def is_common_iterable(obj: Any) -> bool:
@@ -10658,7 +10666,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def mk_full_data_id(*args):
@@ -10694,7 +10702,7 @@ def mk_full_data_id(*args):
 
 Port of R paste function
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste(*lists, sep=" ", collapse=None):
@@ -10710,7 +10718,7 @@ def paste(*lists, sep=" ", collapse=None):
 
 Port of R paste0 function
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste0(*lists, collapse=None):
@@ -10723,7 +10731,7 @@ def paste0(*lists, collapse=None):
 
 Port of R vectorised paste, for 2 elements
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste_2(x: VecScalars, y: VecScalars, sep: str = " "):
@@ -10757,7 +10765,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def sort_by(x, unsorted_reference, sorted_reference):
@@ -10817,7 +10825,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Union[str, Sequence[str]]` | Union\[str,Sequence[str]\]: pasted scalars |
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def vpaste(root: VecScalars, vars: VecScalars) -> Union[str, Sequence[str]]:
@@ -10838,7 +10846,7 @@ def vpaste(root: VecScalars, vars: VecScalars) -> Union[str, Sequence[str]]:
 
 ## `OptimisationPlots`
 
-Source code in `swift2/vis.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/vis.py`
 
 ```
 class OptimisationPlots:
@@ -10954,7 +10962,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Any` | sns.FacetGrid: FacetGrid object |
 
-Source code in `swift2/vis.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/vis.py`
 
 ```
 def shuffles(self, x: str, y: str, obj_lims: Sequence[float] = None) -> Any:

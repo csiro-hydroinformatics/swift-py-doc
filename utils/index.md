@@ -8,7 +8,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `ndarray` | np.ndarray: [description] |
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def c(*args) -> np.ndarray:
@@ -25,7 +25,7 @@ def c(*args) -> np.ndarray:
 
 True if an object is iterable but not a string (str)
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def is_common_iterable(obj: Any) -> bool:
@@ -52,7 +52,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def mk_full_data_id(*args):
@@ -88,7 +88,7 @@ def mk_full_data_id(*args):
 
 Port of R paste function
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste(*lists, sep=" ", collapse=None):
@@ -104,7 +104,7 @@ def paste(*lists, sep=" ", collapse=None):
 
 Port of R paste0 function
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste0(*lists, collapse=None):
@@ -117,7 +117,7 @@ def paste0(*lists, collapse=None):
 
 Port of R vectorised paste, for 2 elements
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def paste_2(x: VecScalars, y: VecScalars, sep: str = " "):
@@ -151,7 +151,7 @@ Examples:
 
 TODO
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def sort_by(x, unsorted_reference, sorted_reference):
@@ -211,7 +211,7 @@ Returns:
 
 | Type | Description | | --- | --- | | `Union[str, Sequence[str]]` | Union\[str,Sequence[str]\]: pasted scalars |
 
-Source code in `swift2/utils.py`
+Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
 
 ```
 def vpaste(root: VecScalars, vars: VecScalars) -> Union[str, Sequence[str]]:
