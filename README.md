@@ -65,6 +65,18 @@ mamba install -c conda-forge mkdocs mkdocs-material mkdocstrings mkdocs-material
 
 `pip install markdown-callouts` not on conda-forge
 
+May 2025 I am trying to produce llms.txt files
+
+```sh
+mamba update mkdocs
+mamba install beautifulsoup4 markdownify
+mamba install markdown-it-py
+mamba install mdformat
+mamba install mdurl
+mamba install soupsieve
+pip install mkdocs-llmstxt
+```
+
 To test locally with `mkdocs serve`:
 
 `mkdocs serve -w mkdocs.yml -w docs/`

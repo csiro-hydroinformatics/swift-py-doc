@@ -4,7 +4,7 @@
 
 # Project information
 site_name: "swift2 - Python package"
-# site_url: https://squidfunk.github.io/mkdocs-material/
+site_url: https://csiro-hydroinformatics.github.io/swift-py-doc/ # required by mkdocs-llmstxt
 site_author: "Jean-Michel Perraud"
 site_description: >-
   Bindings to access the SWIFT2 libraries, from Python.
@@ -72,8 +72,40 @@ plugins:
   # minify seems advanced. https://squidfunk.github.io/mkdocs-material/customization/#theme-development  
   # - minify:
   #   minify_html: true
+  #- llmstxt:
+  #    markdown_description: Python package for ensemble streamflow forecasting. It can equally be used in non-ensemble simulation mode for other, “traditional” semi-distributed hydrologic modelling.
+  #    full_output: llms-ctx.txt
+  #    sections:
+  #      API documentation:
+  #        - classes.md
+  #        - common.md
+  #        - const.md
+  #        - doc_helper.md
+  #        - helpers.md
+  #        - internal.md
+  #        - model_definitions.md
+  #        - parameteriser.md
+  #        - play_record.md
+  #        - proto.md
+  #        - prototypes.md
+  #        - simulation.md
+  #        - statistics.md
+  #        - system.md
+  #        - utils.md
+  #        - vis.md
+  #      # including jpt notebooks seems not to work intuitively, not yet (fair enough!)
+  #      # Examples:
+  #      #   - notebooks/getting_started.ipynb
+  #      #   - notebooks/meta_parameters.ipynb
+  #      #   - notebooks/ensemble_model_runs.ipynb
+  #      #   - notebooks/calibration_initial_states.ipynb
+  #      #   - notebooks/calibrate_multisite.ipynb
+  #      #   - notebooks/reservoir_geometry.ipynb
+  #      #   - notebooks/calibrate_subcatchments.ipynb
+  #      #   - notebooks/log_likelihood.ipynb
+  #      #   - notebooks/muskingum_multilink_calibration.ipynb
+  #      #   - notebooks/error_correction_four_stages.ipynb
   - mkdocs-jupyter
-
 
 
 # Extensions
