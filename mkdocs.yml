@@ -3,8 +3,9 @@
 # for ideas.
 
 # Project information
-site_name: "swift2 - Python package"
+site_name: "swift2 - python package"
 site_url: https://csiro-hydroinformatics.github.io/swift-py-doc/ # required by mkdocs-llmstxt
+# site_url: https://squidfunk.github.io/mkdocs-material/
 site_author: "Jean-Michel Perraud"
 site_description: >-
   Bindings to access the SWIFT2 libraries, from Python.
@@ -16,7 +17,12 @@ repo_url: https://bitbucket.csiro.au/projects/SF/repos/swift
 docs_dir: './docs'
 
 # Copyright
-copyright: Copyright &copy; 2016 - 2022 CSIRO
+copyright: Copyright &copy; 2016 - 2025 CSIRO
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
 
 theme:
   # name: "readthedocs"
@@ -112,6 +118,7 @@ plugins:
 markdown_extensions:
   - abbr
   - admonition
+  - callouts
   - attr_list
   - def_list
   - footnotes
@@ -131,7 +138,8 @@ markdown_extensions:
   - pymdownx.highlight:
      anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      check_paths: true
   - pymdownx.superfences
   # - pymdownx.superfences:
   #     custom_fences:
