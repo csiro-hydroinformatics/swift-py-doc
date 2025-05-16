@@ -9,8 +9,6 @@ _These are notes to "self"_
 ### Execute notebooks
 
 ```bash
-mamba activate hydrofc
-
 pkg_dir=${HOME}/src/swift/bindings/python/swift2
 doc_dir=${HOME}/src/swift-py-doc
 declare -a fn=(calibrate_multisite.ipynb \
@@ -58,24 +56,28 @@ done
 
 ### Building the site
 
+May 2025 moving to use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) to manage the python environment.
+
 ```sh
-mamba activate hydrofc
-mamba install -c conda-forge mkdocs mkdocs-material mkdocstrings mkdocs-material-extensions mkdocs-jupyter mkdocstrings-python 
+cd $HOME/src/swift-py-doc
+uv venv .venv
 ```
 
-`pip install markdown-callouts` not on conda-forge
+```sh
+cd $HOME/src/swift-py-doc
+. .venv/bin/activate
+uv pip install \
+mkdocs 
+mkdocs-material
+mkdocstrings 
+mkdocs-material-extensions
+mkdocs-jupyter
+mkdocstrings-python 
+markdown-callouts
+mkdocs-llmstxt
+```
 
 May 2025 I am trying to produce llms.txt files
-
-```sh
-mamba update mkdocs
-mamba install beautifulsoup4 markdownify
-mamba install markdown-it-py
-mamba install mdformat
-mamba install mdurl
-mamba install soupsieve
-pip install mkdocs-llmstxt
-```
 
 To test locally with `mkdocs serve`:
 
@@ -98,15 +100,16 @@ mkdocs gh-deploy --clean --site-dir _build/html --config-file mkdocs.yml
 
 We can export the sample notebooks to markdown, with a view to use them as contexts for AI code aids.
 
+Note that is important not to output to `${doc_dir}/docs/notebooks`, as it messes up the web site layout (see issue 2)
+
 ```sh
 cd ${doc_dir}/docs/notebooks
-
+out_dir=${doc_dir}/attic/docs/notebooks/
+mkdir -p ${out_dir} 
 for f in ${fn[@]} ; do
     echo "processing $f";
-    jupyter nbconvert --to markdown ./${f} --output-dir=./
+    jupyter nbconvert --to markdown ./${f} --output-dir=${out_dir} 
 done
-
-jupyter nbconvert mynotebook.ipynb --to markdown
 ```
 
 ## Resources
