@@ -6,7 +6,7 @@ This site is to host the documentation for the `swift2` python package, which is
 
 _These are notes to "self"_
 
-### Execute notebooks
+### Copy doc files from reference repo
 
 ```bash
 pkg_dir=${HOME}/src/swift/bindings/python/swift2
@@ -23,6 +23,7 @@ declare -a fn=(calibrate_multisite.ipynb \
   reservoir_geometry.ipynb)
 
 cd ${doc_dir}
+# WARNING: rm -r...
 rm -r docs
 cp ${pkg_dir}/mkdocs.yml ${doc_dir}/
 cp -r ${pkg_dir}/docs ${doc_dir}/
@@ -39,12 +40,17 @@ for f in "${fn[@]}"; do
 done
 # muskingum_multilink_calibration_explanation.ipynb
 
-
 mkdir -p ${doc_dir}/docs/notebooks
 cd ${doc_dir}/docs/notebooks
 rm *.ipynb
 cp ${pkg_dir}/notebooks/*.png ./
+```
 
+### Execute notebooks in-place
+
+This may take a few minutes to run, esp. if run from debug build.
+
+```sh
 # kernel_name=hydrofc_release
 kernel_name=hydrofc
 
@@ -58,6 +64,7 @@ done
 
 May 2025 moving to use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) to manage the python environment.
 
+
 ```sh
 cd $HOME/src/swift-py-doc
 uv venv .venv
@@ -67,21 +74,23 @@ uv venv .venv
 cd $HOME/src/swift-py-doc
 . .venv/bin/activate
 uv pip install \
-mkdocs 
-mkdocs-material
-mkdocstrings 
-mkdocs-material-extensions
-mkdocs-jupyter
-mkdocstrings-python 
-markdown-callouts
-mkdocs-llmstxt
+  mkdocs \
+  mkdocs-material \
+  mkdocstrings  \
+  mkdocs-material-extensions \
+  mkdocs-jupyter \
+  mkdocstrings-python  \
+  markdown-callouts \
+  mkdocs-llmstxt
+# May 2025 I am trying to produce llms.txt files
 ```
-
-May 2025 I am trying to produce llms.txt files
 
 To test locally with `mkdocs serve`:
 
-`mkdocs serve -w mkdocs.yml -w docs/`
+```sh
+cd ${doc_dir}
+mkdocs serve -w mkdocs.yml -w docs/
+```
 
 to build and deploy the site:
 
@@ -100,7 +109,7 @@ mkdocs gh-deploy --clean --site-dir _build/html --config-file mkdocs.yml
 
 We can export the sample notebooks to markdown, with a view to use them as contexts for AI code aids.
 
-Note that is important not to output to `${doc_dir}/docs/notebooks`, as it messes up the web site layout (see issue 2)
+**Note** that is important to **NOT** output to `${doc_dir}/docs/notebooks`, as it messes up the web site layout (see [issue 2](https://github.com/csiro-hydroinformatics/swift-py-doc/issues/1))
 
 ```sh
 cd ${doc_dir}/docs/notebooks
