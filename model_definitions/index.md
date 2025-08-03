@@ -6,17 +6,23 @@ cookie cut a dendritic catchment (without confluences)
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | base catchment simulation | *required* | | `bottom_element_id` | `str` | identifier of the most downstream element to keep | *required* | | `top_element_ids` | `str` | identifier(s) of the most upstream element(s) to keep | *required* |
+| Name                | Type         | Description                                           | Default    |
+| ------------------- | ------------ | ----------------------------------------------------- | ---------- |
+| `simulation`        | `Simulation` | base catchment simulation                             | *required* |
+| `bottom_element_id` | `str`        | identifier of the most downstream element to keep     | *required* |
+| `top_element_ids`   | `str`        | identifier(s) of the most upstream element(s) to keep | *required* |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
+| Name         | Type         | Description                                                                            |
+| ------------ | ------------ | -------------------------------------------------------------------------------------- |
+| `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
+Source code in `swift2/model_definitions.py`
 
 ```
 def cookie_cut_dendritic_catchment(
-    simulation: "Simulation", bottom_element_id: str, top_element_ids: str
+    simulation: "Simulation", bottom_element_id: str, top_element_ids: "VecStr"
 ) -> "Simulation":
     """cookie cut a dendritic catchment (without confluences)
 
@@ -28,6 +34,8 @@ def cookie_cut_dendritic_catchment(
     Returns:
         Simulation: a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
     """
+    top_element_ids = top_element_ids or []
+    top_element_ids = [top_element_ids] if isinstance(top_element_ids, str) else top_element_ids
     # stopifnot(element_id %in% as.character(swift_cal_element_ids))
     select_network_above_element = True
     include_element_in_selection = True
@@ -51,11 +59,15 @@ Gets the essential connective structure of a catchment
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | base catchment simulation | *required* |
+| Name         | Type         | Description               | Default    |
+| ------------ | ------------ | ------------------------- | ---------- |
+| `simulation` | `Simulation` | base catchment simulation | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | `Dict` | |
+| Type   | Description |
+| ------ | ----------- |
+| `Dict` |             |
 
 Examples:
 
@@ -91,7 +103,7 @@ Examples:
 
 ```
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
+Source code in `swift2/model_definitions.py`
 
 ```
 def get_catchment_structure(simulation) -> Dict:
@@ -143,13 +155,17 @@ Create a model simulation from a file with a JSON serialisation.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `file_path` | `str` | valid file path. | *required* |
+| Name        | Type  | Description      | Default    |
+| ----------- | ----- | ---------------- | ---------- |
+| `file_path` | `str` | valid file path. | *required* |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a catchment simulation. |
+| Name         | Type         | Description             |
+| ------------ | ------------ | ----------------------- |
+| `Simulation` | `Simulation` | a catchment simulation. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
+Source code in `swift2/model_definitions.py`
 
 ```
 def model_from_json_file(file_path:str) -> "Simulation":
@@ -174,9 +190,12 @@ Save a model simulation from a file with a JSON serialisation.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | Catchment simulation | *required* | | `file_path` | `str` | file path to save to | *required* |
+| Name         | Type         | Description          | Default    |
+| ------------ | ------------ | -------------------- | ---------- |
+| `simulation` | `Simulation` | Catchment simulation | *required* |
+| `file_path`  | `str`        | file path to save to | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
+Source code in `swift2/model_definitions.py`
 
 ```
 def model_to_json_file(simulation: "Simulation", file_path:str) -> None:
@@ -196,11 +215,17 @@ Split a catchment in subcatchments, given a list of node/link element identifier
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | base catchment simulation | *required* | | `split_element_ids` | `str` | element identifiers such as 'node.n1', 'link.linkId_2' | *required* | | `include_upstream` | `bool` | indicates whether for each element in split_element_ids it should be including in the upstream portion of the subcatchment. Defaults to None. | `None` |
+| Name                | Type         | Description                                                                                                                                   | Default    |
+| ------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `simulation`        | `Simulation` | base catchment simulation                                                                                                                     | *required* |
+| `split_element_ids` | `str`        | element identifiers such as 'node.n1', 'link.linkId_2'                                                                                        | *required* |
+| `include_upstream`  | `bool`       | indicates whether for each element in split_element_ids it should be including in the upstream portion of the subcatchment. Defaults to None. | `None`     |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `OrderedDict` | `OrderedDict[str, Simulation]` | list of subcatchments resulting from the split |
+| Name          | Type                           | Description                                    |
+| ------------- | ------------------------------ | ---------------------------------------------- |
+| `OrderedDict` | `OrderedDict[str, Simulation]` | list of subcatchments resulting from the split |
 
 Examples:
 
@@ -226,7 +251,7 @@ remainder
 
 ```
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
+Source code in `swift2/model_definitions.py`
 
 ```
 def split_to_subcatchments(
@@ -312,13 +337,19 @@ Subsets a catchment, keeping only a portion above or below a node, link or subar
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "MODEL_SIMULATION_PTR" | *required* | | `element_id` | `str` | id of the element to cut at. | *required* | | `action` | `str` | how to cut; currently limited to 'keep_above' | `'keep_above'` |
+| Name         | Type         | Description                                                                                          | Default        |
+| ------------ | ------------ | ---------------------------------------------------------------------------------------------------- | -------------- |
+| `simulation` | `Simulation` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "MODEL_SIMULATION_PTR" | *required*     |
+| `element_id` | `str`        | id of the element to cut at.                                                                         | *required*     |
+| `action`     | `str`        | how to cut; currently limited to 'keep_above'                                                        | `'keep_above'` |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
+| Name         | Type         | Description                                                                            |
+| ------------ | ------------ | -------------------------------------------------------------------------------------- |
+| `Simulation` | `Simulation` | a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/model_definitions.py`
+Source code in `swift2/model_definitions.py`
 
 ```
 def subset_catchment(

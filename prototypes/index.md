@@ -6,13 +6,24 @@ Estimate the transformation parameters for a log-likelihood for a series of obse
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `calib_obs` | `TimeSeriesLike` | An timeseries of observed data | *required* | | `estimation_start` | `datetime` | Start of estimation period | *required* | | `estimation_end` | `datetime` | End of estimation period | *required* | | `censor_threshold` | `float` | The value below which observations are treated a censored data (Default=0.0) | *required* | | `exclusion` | `bool` | Start of period exclued from estimation | *required* | | `exclusion_start` | `datetime` | End of period exclued from estimation | *required* | | `exclusion_end` | `datetime` | Use the exclusion period (bool) | *required* | | `termination_condition` | `SceTerminationCondition` | A SWIFT termination condition used by the optimisation. Default max runtime of ~3 minutes if None. | `None` |
+| Name                    | Type                      | Description                                                                                        | Default    |
+| ----------------------- | ------------------------- | -------------------------------------------------------------------------------------------------- | ---------- |
+| `calib_obs`             | `TimeSeriesLike`          | An timeseries of observed data                                                                     | *required* |
+| `estimation_start`      | `datetime`                | Start of estimation period                                                                         | *required* |
+| `estimation_end`        | `datetime`                | End of estimation period                                                                           | *required* |
+| `censor_threshold`      | `float`                   | The value below which observations are treated a censored data (Default=0.0)                       | *required* |
+| `exclusion`             | `bool`                    | Start of period exclued from estimation                                                            | *required* |
+| `exclusion_start`       | `datetime`                | End of period exclued from estimation                                                              | *required* |
+| `exclusion_end`         | `datetime`                | Use the exclusion period (bool)                                                                    | *required* |
+| `termination_condition` | `SceTerminationCondition` | A SWIFT termination condition used by the optimisation. Default max runtime of ~3 minutes if None. | `None`     |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `HypercubeParameteriser` | `HypercubeParameteriser` | transformation parameters |
+| Name                     | Type                     | Description               |
+| ------------------------ | ------------------------ | ------------------------- |
+| `HypercubeParameteriser` | `HypercubeParameteriser` | transformation parameters |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/prototypes.py`
+Source code in `swift2/prototypes.py`
 
 ```
 def estimate_transformation_parameters(

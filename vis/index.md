@@ -2,7 +2,7 @@
 
 ## `OptimisationPlots`
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/vis.py`
+Source code in `swift2/vis.py`
 
 ```
 class OptimisationPlots:
@@ -112,13 +112,19 @@ Plot the value of a parameter along the optimisation process. The color scale is
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `x` | `str` | the exact name of one of the model parameters | *required* | | `y` | `str` | the exact name of a second model parameter | *required* | | `obj_lims` | `Sequence[float]` | min/max limits to plot the fitness, for example min 0 for NSE. Defaults to None. | `None` |
+| Name       | Type              | Description                                                                      | Default    |
+| ---------- | ----------------- | -------------------------------------------------------------------------------- | ---------- |
+| `x`        | `str`             | the exact name of one of the model parameters                                    | *required* |
+| `y`        | `str`             | the exact name of a second model parameter                                       | *required* |
+| `obj_lims` | `Sequence[float]` | min/max limits to plot the fitness, for example min 0 for NSE. Defaults to None. | `None`     |
 
 Returns:
 
-| Type | Description | | --- | --- | | `Any` | sns.FacetGrid: FacetGrid object |
+| Type  | Description                     |
+| ----- | ------------------------------- |
+| `Any` | sns.FacetGrid: FacetGrid object |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/vis.py`
+Source code in `swift2/vis.py`
 
 ```
 def shuffles(self, x: str, y: str, obj_lims: Sequence[float] = None) -> Any:

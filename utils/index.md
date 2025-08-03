@@ -6,9 +6,11 @@ Emulate the R c (concatenate) function, somewhat.
 
 Returns:
 
-| Type | Description | | --- | --- | | `ndarray` | np.ndarray: [description] |
+| Type      | Description               |
+| --------- | ------------------------- |
+| `ndarray` | np.ndarray: [description] |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def c(*args) -> np.ndarray:
@@ -25,7 +27,7 @@ def c(*args) -> np.ndarray:
 
 True if an object is iterable but not a string (str)
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def is_common_iterable(obj: Any) -> bool:
@@ -46,13 +48,15 @@ Create swift IDs (dot separated hierarchical naming scheme). Note that the behav
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `args` | `Any` | one or more character vectors. | `()` |
+| Name   | Type  | Description                    | Default |
+| ------ | ----- | ------------------------------ | ------- |
+| `args` | `Any` | one or more character vectors. | `()`    |
 
 Examples:
 
 TODO
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def mk_full_data_id(*args):
@@ -88,7 +92,7 @@ def mk_full_data_id(*args):
 
 Port of R paste function
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def paste(*lists, sep=" ", collapse=None):
@@ -104,7 +108,7 @@ def paste(*lists, sep=" ", collapse=None):
 
 Port of R paste0 function
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def paste0(*lists, collapse=None):
@@ -117,7 +121,7 @@ def paste0(*lists, collapse=None):
 
 Port of R vectorised paste, for 2 elements
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def paste_2(x: VecScalars, y: VecScalars, sep: str = " "):
@@ -141,17 +145,23 @@ Sort one vector according to the known reordering of another
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `x` | `Any` | values to sort | *required* | | `unsorted_reference` | `Any` | unique 'keys' corresponding to each element in x | *required* | | `sorted_reference` | `Any` | set of 'keys', identical as a set to unsorted_reference, but sorted | *required* |
+| Name                 | Type  | Description                                                         | Default    |
+| -------------------- | ----- | ------------------------------------------------------------------- | ---------- |
+| `x`                  | `Any` | values to sort                                                      | *required* |
+| `unsorted_reference` | `Any` | unique 'keys' corresponding to each element in x                    | *required* |
+| `sorted_reference`   | `Any` | set of 'keys', identical as a set to unsorted_reference, but sorted | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | the values in x reordered such that the same reordering of unsorted_reference matches sorted_reference |
+| Type | Description                                                                                            |
+| ---- | ------------------------------------------------------------------------------------------------------ |
+|      | the values in x reordered such that the same reordering of unsorted_reference matches sorted_reference |
 
 Examples:
 
 TODO
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def sort_by(x, unsorted_reference, sorted_reference):
@@ -205,13 +215,18 @@ vectorised paste for 2 elements; Port of R paste0 in spirit
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `root` | `VecScalars` | left hand side(s) of the paste | *required* | | `vars` | `VecScalars` | right hand side(s) of the paste | *required* |
+| Name   | Type         | Description                     | Default    |
+| ------ | ------------ | ------------------------------- | ---------- |
+| `root` | `VecScalars` | left hand side(s) of the paste  | *required* |
+| `vars` | `VecScalars` | right hand side(s) of the paste | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | `Union[str, Sequence[str]]` | Union\[str,Sequence[str]\]: pasted scalars |
+| Type                        | Description                                |
+| --------------------------- | ------------------------------------------ |
+| `Union[str, Sequence[str]]` | Union\[str,Sequence[str]\]: pasted scalars |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/utils.py`
+Source code in `swift2/utils.py`
 
 ```
 def vpaste(root: VecScalars, vars: VecScalars) -> Union[str, Sequence[str]]:

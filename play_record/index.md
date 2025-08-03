@@ -8,13 +8,20 @@ Retrieves a played time series from a simulation.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `var_ids` | `Any` | name of the output variable played to a time series. 'Catchment|StreamflowRate'. If missing, a multivariate time series of all played states is returned; this may be a large amount of data. | `None` | | `start_time` | `Any` | An optional parameter, the start of a period to subset the time series | `None` | | `end_time` | `Any` | An optional parameter, the end of a period to subset the time series | `None` |
+| Name         | Type         | Description                                                            | Default                                                                                                                       |
+| ------------ | ------------ | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `simulation` | `Simulation` | A swift simulation object                                              | *required*                                                                                                                    |
+| `var_ids`    | `Any`        | name of the output variable played to a time series. 'Catchment        | StreamflowRate'. If missing, a multivariate time series of all played states is returned; this may be a large amount of data. |
+| `start_time` | `Any`        | An optional parameter, the start of a period to subset the time series | `None`                                                                                                                        |
+| `end_time`   | `Any`        | An optional parameter, the end of a period to subset the time series   | `None`                                                                                                                        |
 
 Returns:
 
-| Type | Description | | --- | --- | | | an xts time series, possibly multivariate. |
+| Type | Description                                |
+| ---- | ------------------------------------------ |
+|      | an xts time series, possibly multivariate. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def get_played(simulation: "Simulation", var_ids=None, start_time=None, end_time=None):
@@ -50,13 +57,17 @@ Gets all the names of states fed an input time series
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
+| Name         | Type         | Description               | Default    |
+| ------------ | ------------ | ------------------------- | ---------- |
+| `simulation` | `Simulation` | A swift simulation object | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | The names of the state variables fed over the simulation with values from a time series |
+| Type | Description                                                                             |
+| ---- | --------------------------------------------------------------------------------------- |
+|      | The names of the state variables fed over the simulation with values from a time series |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def get_played_varnames(simulation):
@@ -84,13 +95,20 @@ Retrieves a recorded time series from a simulation.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `var_ids` | `Any` | name of the output variable recorded to a time series. 'Catchment|StreamflowRate'. If missing, a multivariate time series of all recorded states is returned; this may be a large amount of data. | `None` | | `start_time` | `Any` | An optional parameter, the start of a period to subset the time series | `None` | | `end_time` | `Any` | An optional parameter, the end of a period to subset the time series | `None` |
+| Name         | Type         | Description                                                            | Default                                                                                                                         |
+| ------------ | ------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `simulation` | `Simulation` | A swift simulation object                                              | *required*                                                                                                                      |
+| `var_ids`    | `Any`        | name of the output variable recorded to a time series. 'Catchment      | StreamflowRate'. If missing, a multivariate time series of all recorded states is returned; this may be a large amount of data. |
+| `start_time` | `Any`        | An optional parameter, the start of a period to subset the time series | `None`                                                                                                                          |
+| `end_time`   | `Any`        | An optional parameter, the end of a period to subset the time series   | `None`                                                                                                                          |
 
 Returns:
 
-| Type | Description | | --- | --- | | | an xts time series, possibly multivariate. |
+| Type | Description                                |
+| ---- | ------------------------------------------ |
+|      | an xts time series, possibly multivariate. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def get_recorded(
@@ -130,13 +148,20 @@ Retrieves a recorded time series from a simulation.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `var_ids` | `Any` | name of the output variable recorded to a time series. 'Catchment|StreamflowRate'. If missing, a multivariate time series of all recorded states is returned; this may be a large amount of data. | *required* | | `start_time` | `Any` | NOT USED YET An optional parameter, the start of a period to subset the time series | `None` | | `end_time` | `Any` | NOT USED YET An optional parameter, the end of a period to subset the time series | `None` |
+| Name         | Type         | Description                                                                         | Default                                                                                                                         |
+| ------------ | ------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `simulation` | `Simulation` | A swift simulation object                                                           | *required*                                                                                                                      |
+| `var_ids`    | `Any`        | name of the output variable recorded to a time series. 'Catchment                   | StreamflowRate'. If missing, a multivariate time series of all recorded states is returned; this may be a large amount of data. |
+| `start_time` | `Any`        | NOT USED YET An optional parameter, the start of a period to subset the time series | `None`                                                                                                                          |
+| `end_time`   | `Any`        | NOT USED YET An optional parameter, the end of a period to subset the time series   | `None`                                                                                                                          |
 
 Returns:
 
-| Type | Description | | --- | --- | | | an xts time series, possibly multivariate. |
+| Type | Description                                |
+| ---- | ------------------------------------------ |
+|      | an xts time series, possibly multivariate. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def get_recorded_ensemble_forecast(
@@ -170,13 +195,17 @@ Gets all the names of the recorded states
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* |
+| Name         | Type         | Description               | Default    |
+| ------------ | ------------ | ------------------------- | ---------- |
+| `simulation` | `Simulation` | A swift simulation object | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | The names of the state variables being recorded into time series |
+| Type | Description                                                      |
+| ---- | ---------------------------------------------------------------- |
+|      | The names of the state variables being recorded into time series |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def get_recorded_varnames(simulation):
@@ -204,9 +233,13 @@ Sets time series as input to a simulation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_SIMULATION_PTR" | *required* | | `input_ts` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_TIME_SERIES_PTR" | *required* | | `var_id` | `Any` | character of length one, the variable identifier to use | *required* |
+| Name         | Type  | Description                                                                                                       | Default    |
+| ------------ | ----- | ----------------------------------------------------------------------------------------------------------------- | ---------- |
+| `simulation` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_SIMULATION_PTR"  | *required* |
+| `input_ts`   | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_TIME_SERIES_PTR" | *required* |
+| `var_id`     | `Any` | character of length one, the variable identifier to use                                                           | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def play_ensemble_forecast_input(
@@ -240,9 +273,13 @@ Sets time series as input to a simulation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `input_ts` | `Any` | an xts time series, or an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_TIME_SERIES_PTR". if an xts time series column names must be valid model variable identifiers, unless explicitely provided via varIds | *required* | | `var_ids` | `Any` | optional character, the variable identifiers to use, overriding the column names of the inputTs. If not NULL, must be of length equal to the number of columns in inputTs | `None` |
+| Name         | Type         | Description                                                                                                                                                                                                                                                   | Default    |
+| ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `simulation` | `Simulation` | A swift simulation object                                                                                                                                                                                                                                     | *required* |
+| `input_ts`   | `Any`        | an xts time series, or an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "ENSEMBLE_FORECAST_TIME_SERIES_PTR". if an xts time series column names must be valid model variable identifiers, unless explicitely provided via varIds | *required* |
+| `var_ids`    | `Any`        | optional character, the variable identifiers to use, overriding the column names of the inputTs. If not NULL, must be of length equal to the number of columns in inputTs                                                                                     | `None`     |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def play_input(
@@ -280,9 +317,15 @@ Assign input time series from a time series library to a model simulation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `data_library` | `TimeSeriesLibrary` | external pointer type ENSEMBLE_DATA_SET_PTR, or a Python class wrapper around it | *required* | | `model_var_id` | `str or sequence of str` | model state variable unique identifier(s) | *required* | | `data_id` | `str or sequence of str` | identifier(s) for data in the data_library. If length is not the same as model_var_id, the elements of data_id are reused to match it | *required* | | `resample` | `str or sequence of str` | identifier(s) for how the series is resampled (aggregated or disaggregated). If length is not the same as model_var_id, the elements of resample are reused to match it | `''` |
+| Name           | Type                     | Description                                                                                                                                                             | Default    |
+| -------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `simulation`   | `Simulation`             | A swift simulation object                                                                                                                                               | *required* |
+| `data_library` | `TimeSeriesLibrary`      | external pointer type ENSEMBLE_DATA_SET_PTR, or a Python class wrapper around it                                                                                        | *required* |
+| `model_var_id` | `str or sequence of str` | model state variable unique identifier(s)                                                                                                                               | *required* |
+| `data_id`      | `str or sequence of str` | identifier(s) for data in the data_library. If length is not the same as model_var_id, the elements of data_id are reused to match it                                   | *required* |
+| `resample`     | `str or sequence of str` | identifier(s) for how the series is resampled (aggregated or disaggregated). If length is not the same as model_var_id, the elements of resample are reused to match it | `''`       |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def play_inputs(
@@ -327,9 +370,14 @@ Sets time series as input to a simulation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | A swift simulation object | *required* | | `input` | `Any` | an xts time series. | *required* | | `subarea_name` | `Any` | a valid name of the subarea | *required* | | `input_name` | `Any` | the name of the input variable to the model (i.e. 'P' for the precip of GR5H) | *required* |
+| Name           | Type         | Description                                                                   | Default    |
+| -------------- | ------------ | ----------------------------------------------------------------------------- | ---------- |
+| `simulation`   | `Simulation` | A swift simulation object                                                     | *required* |
+| `input`        | `Any`        | an xts time series.                                                           | *required* |
+| `subarea_name` | `Any`        | a valid name of the subarea                                                   | *required* |
+| `input_name`   | `Any`        | the name of the input variable to the model (i.e. 'P' for the precip of GR5H) | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def play_subarea_input(simulation: "Simulation", input, subarea_name, input_name):
@@ -357,13 +405,20 @@ Record a time series of one of the state of the model
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Any` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "MODEL_SIMULATION_PTR", "ENSEMBLE_SIMULATION_PTR" or "ENSEMBLE_FORECAST_SIMULATION_PTR" | *required* | | `var_ids` | `VecStr` | identifier(s) of the output variable recorded to a time series, e.g. 'Catchment|StreamflowRate' or 'subcatchment.Subarea.runoff'. Defaults to CATCHMENT_FLOWRATE_VARID. | `CATCHMENT_FLOWRATE_VARID` | | `recording_provider` | `TimeSeriesLibrary` | description. Defaults to None. | `None` | | `data_ids` | `VecStr` | description. Defaults to None. | `None` |
+| Name                 | Type                | Description                                                                                                                                                           | Default                                                                                 |
+| -------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `simulation`         | `Any`               | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type "MODEL_SIMULATION_PTR", "ENSEMBLE_SIMULATION_PTR" or "ENSEMBLE_FORECAST_SIMULATION_PTR" | *required*                                                                              |
+| `var_ids`            | `VecStr`            | identifier(s) of the output variable recorded to a time series, e.g. 'Catchment                                                                                       | StreamflowRate' or 'subcatchment.Subarea.runoff'. Defaults to CATCHMENT_FLOWRATE_VARID. |
+| `recording_provider` | `TimeSeriesLibrary` | description. Defaults to None.                                                                                                                                        | `None`                                                                                  |
+| `data_ids`           | `VecStr`            | description. Defaults to None.                                                                                                                                        | `None`                                                                                  |
 
 Raises:
 
-| Type | Description | | --- | --- | | `ValueError` | description |
+| Type         | Description |
+| ------------ | ----------- |
+| `ValueError` | description |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/play_record.py`
+Source code in `swift2/play_record.py`
 
 ```
 def record_state(

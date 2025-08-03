@@ -4,7 +4,7 @@
 
 Data log from metaheuristic calibration processes
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 class MhData:
@@ -126,13 +126,17 @@ Return a copy of the log data with the fitness measure bound by min/max limits
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `obj_lims` | `Sequence[float]` | min/max limits, length 2. Defaults to None. | `None` |
+| Name       | Type              | Description                                 | Default |
+| ---------- | ----------------- | ------------------------------------------- | ------- |
+| `obj_lims` | `Sequence[float]` | min/max limits, length 2. Defaults to None. | `None`  |
 
 Returns:
 
-| Type | Description | | --- | --- | | `DataFrame` | pd.DataFrame: log data with bound fitness |
+| Type        | Description                               |
+| ----------- | ----------------------------------------- |
+| `DataFrame` | pd.DataFrame: log data with bound fitness |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def bound_fitness(self, obj_lims: Sequence[float] = None) -> pd.DataFrame:
@@ -160,13 +164,22 @@ This method requires the package `seaborn` to be installed.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `y` | `str` | variable name (model parameter) to use for the y-axis, e.g. "x4" for GR4J | *required* | | `facet_category` | `str` | Data attribute to use to facet. Defaults to "Message". | `'Message'` | | `col_wrap` | `int` | Max number of columns in the plot. Defaults to 3. | `3` | | `x` | `str` | variable name (calibration iteration, or model parameter) to use for the x-axis. Defaults to "PointNumber". | `'PointNumber'` | | `fig_width_in` | `int` | figure width in inches. Defaults to 15. | `15` | | `fig_heigth_in` | `int` | figure height in inches. Defaults to 10. | `10` |
+| Name             | Type  | Description                                                                                                 | Default         |
+| ---------------- | ----- | ----------------------------------------------------------------------------------------------------------- | --------------- |
+| `y`              | `str` | variable name (model parameter) to use for the y-axis, e.g. "x4" for GR4J                                   | *required*      |
+| `facet_category` | `str` | Data attribute to use to facet. Defaults to "Message".                                                      | `'Message'`     |
+| `col_wrap`       | `int` | Max number of columns in the plot. Defaults to 3.                                                           | `3`             |
+| `x`              | `str` | variable name (calibration iteration, or model parameter) to use for the x-axis. Defaults to "PointNumber". | `'PointNumber'` |
+| `fig_width_in`   | `int` | figure width in inches. Defaults to 15.                                                                     | `15`            |
+| `fig_heigth_in`  | `int` | figure height in inches. Defaults to 10.                                                                    | `10`            |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `FacetGrid` | | The plot to display |
+| Name        | Type | Description         |
+| ----------- | ---- | ------------------- |
+| `FacetGrid` |      | The plot to display |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def facet_plot(
@@ -211,9 +224,11 @@ This is handy for instance to change fully qualified parameter names such as 'su
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `colnames_map` | `Dict[str, str]` | mapping | *required* |
+| Name           | Type             | Description | Default    |
+| -------------- | ---------------- | ----------- | ---------- |
+| `colnames_map` | `Dict[str, str]` | mapping     | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def rename_columns(self, colnames_map: Dict[str, str]) -> None:
@@ -236,13 +251,17 @@ Subset the log by filtering the 'Message' column by a regexp pattern
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `pattern` | `str` | regexp pattern, filter definition | `'Initial.*|Reflec.*|Contrac.*|Add.*'` |
+| Name      | Type  | Description                       | Default       |
+| --------- | ----- | --------------------------------- | ------------- |
+| `pattern` | `str` | regexp pattern, filter definition | \`'Initial.\* |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `Any` | `MhData` | New MhData object with subset data |
+| Name  | Type     | Description                        |
+| ----- | -------- | ---------------------------------- |
+| `Any` | `MhData` | New MhData object with subset data |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def subset_by_message(
@@ -266,13 +285,18 @@ Subset the log by filtering an attribute by a regexp pattern
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `colname` | `str` | column name to filter on | *required* | | `pattern` | `str` | regexp pattern, filter definition | *required* |
+| Name      | Type  | Description                       | Default    |
+| --------- | ----- | --------------------------------- | ---------- |
+| `colname` | `str` | column name to filter on          | *required* |
+| `pattern` | `str` | regexp pattern, filter definition | *required* |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `Any` | `MhData` | New MhData object with subset data |
+| Name  | Type     | Description                        |
+| ----- | -------- | ---------------------------------- |
+| `Any` | `MhData` | New MhData object with subset data |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def subset_by_pattern(self, colname: str, pattern: str) -> "MhData":
@@ -298,9 +322,12 @@ Add entries to a hypercube
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
+| Name            | Type                     | Description                                                                                           | Default    |
+| --------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it                                        | *required* |
+| `specs`         | `DataFrame`              | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def add_to_hypercube(parameteriser, specs):
@@ -325,9 +352,16 @@ This allows to define e.g. a virtual parameter log_X instead of calibrating on t
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `TransformParameteriser` | A TransformParameteriser wrapper, or a type inheriting from it | *required* | | `param_name` | `str` | the name of the meta-parameter. Note that it can be the same value as inner_param_name, but this is NOT recommended. | *required* | | `inner_param_name` | `str` | the name of the parameter being transformed | *required* | | `transform_id` | `str` | identifier for a known bijective univariate function | *required* | | `a` | `float` | parameter in Y = F(ax+b). Defaults to 1.0. | `1.0` | | `b` | `float` | parameter in Y = F(ax+b). Defaults to 0.0. | `0.0` |
+| Name               | Type                     | Description                                                                                                          | Default    |
+| ------------------ | ------------------------ | -------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `parameteriser`    | `TransformParameteriser` | A TransformParameteriser wrapper, or a type inheriting from it                                                       | *required* |
+| `param_name`       | `str`                    | the name of the meta-parameter. Note that it can be the same value as inner_param_name, but this is NOT recommended. | *required* |
+| `inner_param_name` | `str`                    | the name of the parameter being transformed                                                                          | *required* |
+| `transform_id`     | `str`                    | identifier for a known bijective univariate function                                                                 | *required* |
+| `a`                | `float`                  | parameter in Y = F(ax+b). Defaults to 1.0.                                                                           | `1.0`      |
+| `b`                | `float`                  | parameter in Y = F(ax+b). Defaults to 0.0.                                                                           | `0.0`      |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def add_transform(
@@ -362,9 +396,12 @@ Apply a model configuration to a simulation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `simulation` | `Simulation` | simulation | *required* |
+| Name            | Type                     | Description                                                    | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| `simulation`    | `Simulation`             | simulation                                                     | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def apply_sys_config(parameteriser, simulation):
@@ -387,13 +424,17 @@ Try to convert an external pointer to a native python representation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `x` | `Any` | object, presumably wrapper around an Xptr, to convert to a 'pure' python representation | *required* |
+| Name | Type  | Description                                                                             | Default    |
+| ---- | ----- | --------------------------------------------------------------------------------------- | ---------- |
+| `x`  | `Any` | object, presumably wrapper around an Xptr, to convert to a 'pure' python representation | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def as_py_structure(x: Any):
@@ -424,13 +465,17 @@ Get the parameteriser values in the untransformed space, i.e. remove any transfo
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| Name            | Type                     | Description                                                    | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | \[HypercubeParameteriser\]: The parameters definitions without the transforms (if there are any) |
+| Type | Description                                                                                      |
+| ---- | ------------------------------------------------------------------------------------------------ |
+|      | \[HypercubeParameteriser\]: The parameters definitions without the transforms (if there are any) |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def backtransform(parameteriser):
@@ -455,13 +500,19 @@ min/max bound a column in a data frame
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `x` | `[type]` | a data frame | *required* | | `colname` | `[type]` | a character vector, name of the column to bound | *required* | | `lim` | `[type]` | a num vector of the min/max limits to apply, for instance c(0, 1). Defaults to None. | `None` |
+| Name      | Type     | Description                                                                          | Default    |
+| --------- | -------- | ------------------------------------------------------------------------------------ | ---------- |
+| `x`       | `[type]` | a data frame                                                                         | *required* |
+| `colname` | `[type]` | a character vector, name of the column to bound                                      | *required* |
+| `lim`     | `[type]` | a num vector of the min/max limits to apply, for instance c(0, 1). Defaults to None. | `None`     |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def bound_values_df(x, colname, lim=None):
@@ -487,13 +538,17 @@ Concatenate hypercubes to a single parameteriser
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `strategy` | `str` | The strategy to contatenate. Defaults to "", equivalent to "composite", the only available. May have other options in the future. | `''` |
+| Name       | Type  | Description                                                                                                                       | Default |
+| ---------- | ----- | --------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `strategy` | `str` | The strategy to contatenate. Defaults to "", equivalent to "composite", the only available. May have other options in the future. | `''`    |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `CompositeParameteriser` | `CompositeParameteriser` | A concatenated parameteriser |
+| Name                     | Type                     | Description                  |
+| ------------------------ | ------------------------ | ---------------------------- |
+| `CompositeParameteriser` | `CompositeParameteriser` | A concatenated parameteriser |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def concatenate_parameterisers(
@@ -516,15 +571,25 @@ def concatenate_parameterisers(
 
 Builds a parameteriser usable with a multisite multiobjective calculator.
 
+This is an advanced topic; users may refer to [this sample workflow](https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/)
+
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `func_parameterisers` | `[type]` | list of external pointers, parameterisers for each function of a multiobjective calculation. | *required* | | `func_identifiers` | `[type]` | character, identifiers for each of the objectives defined in an multisite objective definition. | *required* | | `prefixes` | `[type]` | Optional prefixes to use to disambiguate short parameter names used in each function of a multiobjective calculator.. Defaults to None. | `None` | | `mix_func_parameteriser` | `[type]` | parameteriser, default None. (FUTURE) Optional parameteriser used in mixing the multiple objectives.. Defaults to None. | `None` | | `hydro_parameteriser` | `[type]` | parameteriser, default None. Optional parameteriser applied to the simulation model.. Defaults to None. | `None` |
+| Name                     | Type     | Description                                                                                                                             | Default    |
+| ------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `func_parameterisers`    | `[type]` | list of external pointers, parameterisers for each function of a multiobjective calculation.                                            | *required* |
+| `func_identifiers`       | `[type]` | character, identifiers for each of the objectives defined in an multisite objective definition.                                         | *required* |
+| `prefixes`               | `[type]` | Optional prefixes to use to disambiguate short parameter names used in each function of a multiobjective calculator.. Defaults to None. | `None`     |
+| `mix_func_parameteriser` | `[type]` | parameteriser, default None. (FUTURE) Optional parameteriser used in mixing the multiple objectives.. Defaults to None.                 | `None`     |
+| `hydro_parameteriser`    | `[type]` | parameteriser, default None. Optional parameteriser applied to the simulation model.. Defaults to None.                                 | `None`     |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def create_multisite_obj_parameteriser(
@@ -535,6 +600,8 @@ def create_multisite_obj_parameteriser(
     hydro_parameteriser=None,
 ):
     """Builds a parameteriser usable with a multisite multiobjective calculator.
+
+    This is an advanced topic; users may refer to [this sample workflow](https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/)
 
     Args:
         func_parameterisers ([type]): list of external pointers, parameterisers for each function of a multiobjective calculation.
@@ -581,17 +648,27 @@ Create a parameteriser with Muskingum-type constraints. Given an existing parame
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `inner_parameters` | `[HypercubeParameteriser]` | A SWIFT parameteriser object. | *required* | | `delta_t` | `int` | the simulation time step in HOURS. Defaults to 1. | `1` | | `param_name_k` | `str` | the variable identifier to use for the delay parameter of the Muskingum routing. Defaults to "K". | `'K'` | | `param_name_x` | `str` | the variable identifier to use for the attenuation parameter of the Muskingum routing. Defaults to "X". | `'X'` | | `simulation` | `[Simulation]` | the model simulation from which link properties are inspected to define constraints. The links' parameters must already be set.. Defaults to None. | `None` |
+| Name               | Type                       | Description                                                                                                                                        | Default    |
+| ------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `inner_parameters` | `[HypercubeParameteriser]` | A SWIFT parameteriser object.                                                                                                                      | *required* |
+| `delta_t`          | `int`                      | the simulation time step in HOURS. Defaults to 1.                                                                                                  | `1`        |
+| `param_name_k`     | `str`                      | the variable identifier to use for the delay parameter of the Muskingum routing. Defaults to "K".                                                  | `'K'`      |
+| `param_name_x`     | `str`                      | the variable identifier to use for the attenuation parameter of the Muskingum routing. Defaults to "X".                                            | `'X'`      |
+| `simulation`       | `[Simulation]`             | the model simulation from which link properties are inspected to define constraints. The links' parameters must already be set.. Defaults to None. | `None`     |
 
 Raises:
 
-| Type | Description | | --- | --- | | `ValueError` | [description] |
+| Type         | Description   |
+| ------------ | ------------- |
+| `ValueError` | [description] |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def create_muskingum_param_constraints(
@@ -625,13 +702,19 @@ def create_muskingum_param_constraints(
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `seed` | `[type]` | seed integer, the seed to use for the sampler | *required* | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `type` | `str` | identifying a method such as 'urs' for uniform random sampling. | *required* |
+| Name            | Type                     | Description                                                     | Default    |
+| --------------- | ------------------------ | --------------------------------------------------------------- | ---------- |
+| `seed`          | `[type]`                 | seed integer, the seed to use for the sampler                   | *required* |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it  | *required* |
+| `type`          | `str`                    | identifying a method such as 'urs' for uniform random sampling. | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def create_parameter_sampler(seed, parameteriser, type: str):
@@ -655,13 +738,18 @@ Create a SWIFT parameteriser
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `type` | `str` | A string identifying the (likely SWIFT-specific) type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas". | `'Generic subareas'` | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None. | `None` |
+| Name    | Type        | Description                                                                                                                                                                                                                       | Default              |
+| ------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `type`  | `str`       | A string identifying the (likely SWIFT-specific) type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas". | `'Generic subareas'` |
+| `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.                                                                                                           | `None`               |
 
 Returns:
 
-| Type | Description | | --- | --- | | | \[HypercubeParameteriser\]: new parameteriser |
+| Type | Description                                   |
+| ---- | --------------------------------------------- |
+|      | \[HypercubeParameteriser\]: new parameteriser |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def create_parameteriser(type="Generic subareas", specs: pd.DataFrame = None):
@@ -689,13 +777,20 @@ Build an SCE optimiser for a SWIFT model
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `objective` | `ObjectiveEvaluator` | an objective calculator | *required* | | `termination_criterion` | `SceTerminationCondition` | An object that can be passed to SCE for testing the completion of the algorithm. | *required* | | `sce_params` | `dict` | optional; parameters controlling the behavior of the SCE optimisers. | *required* | | `population_initialiser` | `CandidateFactorySeed` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type HYPERCUBE_PTR or coercible to it, or a type of object that can seed a sampler i.e. coercible to a type CANDIDATE_FACTORY_SEED_WILA_PTR. If the argument is a hypercube, a uniform random sampler is created. | *required* |
+| Name                     | Type                      | Description                                                                                                                                                                                                                                                                                | Default    |
+| ------------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| `objective`              | `ObjectiveEvaluator`      | an objective calculator                                                                                                                                                                                                                                                                    | *required* |
+| `termination_criterion`  | `SceTerminationCondition` | An object that can be passed to SCE for testing the completion of the algorithm.                                                                                                                                                                                                           | *required* |
+| `sce_params`             | `dict`                    | optional; parameters controlling the behavior of the SCE optimisers.                                                                                                                                                                                                                       | *required* |
+| `population_initialiser` | `CandidateFactorySeed`    | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type HYPERCUBE_PTR or coercible to it, or a type of object that can seed a sampler i.e. coercible to a type CANDIDATE_FACTORY_SEED_WILA_PTR. If the argument is a hypercube, a uniform random sampler is created. | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def create_sce_optim_swift(
@@ -745,13 +840,18 @@ Create a type of termination criteria suitable for the SCE algorithm.
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `type` | `str` | A type of termination criterion; currently at least "relative standard deviation" and "maximum evaluations" are valid options | *required* | | `arguments` | `Sequence[str]` | Arguments, in string forms even for numeric values, options for the selected type. | *required* |
+| Name        | Type            | Description                                                                                                                   | Default    |
+| ----------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `type`      | `str`           | A type of termination criterion; currently at least "relative standard deviation" and "maximum evaluations" are valid options | *required* |
+| `arguments` | `Sequence[str]` | Arguments, in string forms even for numeric values, options for the selected type.                                            | *required* |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `SceTerminationCondition` | `SceTerminationCondition` | [description] |
+| Name                      | Type                      | Description   |
+| ------------------------- | ------------------------- | ------------- |
+| `SceTerminationCondition` | `SceTerminationCondition` | [description] |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def create_sce_termination_wila(
@@ -776,13 +876,18 @@ Computes the value of an objective for a given set of parameters
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `objective` | `[type]` | an objective calculator | *required* | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| Name            | Type                     | Description                                                    | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------- | ---------- |
+| `objective`     | `[type]`                 | an objective calculator                                        | *required* |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def evaluate_score_for_parameters(objective, parameteriser):
@@ -805,13 +910,18 @@ Get examples of typical parameterisers
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `type` | `str` | identifier for a type of parameteriser including 'log-likelihood' | *required* | | `strict` | `bool` | If True an error is raised if the type is not found, otherwise a dummy empty parameteriser is returned.. Defaults to False. | `False` |
+| Name     | Type   | Description                                                                                                                 | Default    |
+| -------- | ------ | --------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `type`   | `str`  | identifier for a type of parameteriser including 'log-likelihood'                                                           | *required* |
+| `strict` | `bool` | If True an error is raised if the type is not found, otherwise a dummy empty parameteriser is returned.. Defaults to False. | `False`    |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def example_parameteriser(type: str, strict=False):
@@ -852,13 +962,17 @@ Launch an optimization task, as defined by the object passed as an argument
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `optimiser` | `Optimiser` | the instance of the optimiser that has been created for the optimisation task about to be launched. | *required* |
+| Name        | Type        | Description                                                                                         | Default    |
+| ----------- | ----------- | --------------------------------------------------------------------------------------------------- | ---------- |
+| `optimiser` | `Optimiser` | the instance of the optimiser that has been created for the optimisation task about to be launched. | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def execute_optimisation(optimiser):
@@ -880,13 +994,18 @@ Extract the logger from a parameter extimator (optimiser or related)
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `estimator` | `Optimiser` | the optimiser instance | *required* | | `fitness_name` | `str` | name of the fitness function to extract. Defaults to "log.likelihood". | `'log.likelihood'` |
+| Name           | Type        | Description                                                            | Default            |
+| -------------- | ----------- | ---------------------------------------------------------------------- | ------------------ |
+| `estimator`    | `Optimiser` | the optimiser instance                                                 | *required*         |
+| `fitness_name` | `str`       | name of the fitness function to extract. Defaults to "log.likelihood". | `'log.likelihood'` |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `MhData` | `MhData` | an object with methods to analyse the optimisation log |
+| Name     | Type     | Description                                            |
+| -------- | -------- | ------------------------------------------------------ |
+| `MhData` | `MhData` | an object with methods to analyse the optimisation log |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def extract_optimisation_log(estimator, fitness_name="log.likelihood") -> 'MhData':
@@ -915,13 +1034,18 @@ def extract_optimisation_log(estimator, fitness_name="log.likelihood") -> 'MhDat
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `simulation` | `Simulation` | [description] | *required* | | `delta_t_hours` | `int` | [description]. Defaults to 1. | `1` |
+| Name            | Type         | Description                   | Default    |
+| --------------- | ------------ | ----------------------------- | ---------- |
+| `simulation`    | `Simulation` | [description]                 | *required* |
+| `delta_t_hours` | `int`        | [description]. Defaults to 1. | `1`        |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def feasible_muskingum_bounds(simulation: "Simulation", delta_t_hours=1):
@@ -944,13 +1068,17 @@ Wrap a parameteriser in a filter that can hide some parameters
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it. A deep copy of the input is taken. | *required* |
+| Name            | Type                     | Description                                                                                        | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it. A deep copy of the input is taken. | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def filtered_parameters(parameteriser):
@@ -972,13 +1100,19 @@ Gets the best score in a population for a given objective
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `scores_population` | `[type]` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR | *required* | | `score_name` | `str` | name of the objective to use for sorting. Defaults to "NSE". | `'NSE'` | | `convert_to_py` | `bool` | should the returned score be converted to an R representation. Default False. Defaults to False. | `False` |
+| Name                | Type     | Description                                                                                            | Default    |
+| ------------------- | -------- | ------------------------------------------------------------------------------------------------------ | ---------- |
+| `scores_population` | `[type]` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR | *required* |
+| `score_name`        | `str`    | name of the objective to use for sorting. Defaults to "NSE".                                           | `'NSE'`    |
+| `convert_to_py`     | `bool`   | should the returned score be converted to an R representation. Default False. Defaults to False.       | `False`    |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_best_score(scores_population, score_name="NSE", convert_to_py=False):
@@ -1007,9 +1141,11 @@ def get_best_score(scores_population, score_name="NSE", convert_to_py=False):
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_default_sce_parameters():
@@ -1030,13 +1166,18 @@ Gets logger content on an optimiser, recorded detail of the optimisation process
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `optimiser` | `[type]` | the instance of the optimiser that has been created for the optimisation task about to be launched. | *required* | | `add_numbering` | `bool` | Add an explicit column for numbering the lines of the log. Defaults to False. | `False` |
+| Name            | Type     | Description                                                                                         | Default    |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------- | ---------- |
+| `optimiser`     | `[type]` | the instance of the optimiser that has been created for the optimisation task about to be launched. | *required* |
+| `add_numbering` | `bool`   | Add an explicit column for numbering the lines of the log. Defaults to False.                       | `False`    |
 
 Returns:
 
-| Type | Description | | --- | --- | | `DataFrame` | pd.DataFrame: The data log of the optimiser |
+| Type        | Description                                 |
+| ----------- | ------------------------------------------- |
+| `DataFrame` | pd.DataFrame: The data log of the optimiser |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_logger_content(optimiser:DeletableCffiNativeHandle, add_numbering:bool=False) -> pd.DataFrame:
@@ -1064,13 +1205,19 @@ Create an termination criterion based on the rate of marginal fitness improvemen
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `tolerance` | `[type]` | the increment in the objective below which the improvement is considered negligible. Defaults to 1e-06. | `1e-06` | | `cutoff_no_improvement` | `int` | the maximum number of successive times the algorithm fails to improve the objective function.. Defaults to 10. | `10` | | `max_hours` | `float` | the maximum wall time runtime for the optimisation. Defaults to 0.05. | `0.05` |
+| Name                    | Type     | Description                                                                                                    | Default |
+| ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------- | ------- |
+| `tolerance`             | `[type]` | the increment in the objective below which the improvement is considered negligible. Defaults to 1e-06.        | `1e-06` |
+| `cutoff_no_improvement` | `int`    | the maximum number of successive times the algorithm fails to improve the objective function.. Defaults to 10. | `10`    |
+| `max_hours`             | `float`  | the maximum wall time runtime for the optimisation. Defaults to 0.05.                                          | `0.05`  |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_marginal_termination(tolerance=1e-06, cutoff_no_improvement=10, max_hours=0.05):
@@ -1098,13 +1245,17 @@ Create an termination criterion based on the number of objective evaluations
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `max_iterations` | `int` | number of iterations, which, if less than total count of optim objective evaluations, defines optim termination.. Defaults to 1000. | `1000` |
+| Name             | Type  | Description                                                                                                                         | Default |
+| ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `max_iterations` | `int` | number of iterations, which, if less than total count of optim objective evaluations, defines optim termination.. Defaults to 1000. | `1000`  |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_max_iteration_termination(max_iterations=1000):
@@ -1126,13 +1277,17 @@ Create an termination criterion based on the wall clock runtime
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `max_hours` | `float` | the maximum wall time runtime in hours for the optimisation. Defaults to 0.05. | `0.05` |
+| Name        | Type    | Description                                                                    | Default |
+| ----------- | ------- | ------------------------------------------------------------------------------ | ------- |
+| `max_hours` | `float` | the maximum wall time runtime in hours for the optimisation. Defaults to 0.05. | `0.05`  |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_max_runtime_termination(max_hours=0.05):
@@ -1154,13 +1309,18 @@ Get an objective scores in a vector thereof
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `scores_population` | `[type]` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR | *required* | | `index` | `int` | one-based index in the population | *required* |
+| Name                | Type     | Description                                                                                            | Default    |
+| ------------------- | -------- | ------------------------------------------------------------------------------------------------------ | ---------- |
+| `scores_population` | `[type]` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR | *required* |
+| `index`             | `int`    | one-based index in the population                                                                      | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def get_score_at_index(scores_population, index: int):
@@ -1183,9 +1343,15 @@ Hide some parameters (from the outside e.g. optimisers) in a filter parameterise
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `patterns` | `[type]` | character, one or more pattern to match and hide matching parameters. Match according to other parameters. | *required* | | `regex` | `bool` | logical, defaults False, should the patterns be used as regular expressions.. Defaults to False. | `False` | | `starts_with` | `bool` | logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False. | `False` | | `strict` | `bool` | logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False. | `False` |
+| Name            | Type                     | Description                                                                                                                                                                       | Default    |
+| --------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it                                                                                                                    | *required* |
+| `patterns`      | `[type]`                 | character, one or more pattern to match and hide matching parameters. Match according to other parameters.                                                                        | *required* |
+| `regex`         | `bool`                   | logical, defaults False, should the patterns be used as regular expressions.. Defaults to False.                                                                                  | `False`    |
+| `starts_with`   | `bool`                   | logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False.                                    | `False`    |
+| `strict`        | `bool`                   | logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False. | `False`    |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def hide_parameters(
@@ -1210,13 +1376,17 @@ Is the object a native parameteriser that can be cast as a hypercube?
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `p_set` | `CffiNativeHandle` | [description] | *required* |
+| Name    | Type               | Description   | Default    |
+| ------- | ------------------ | ------------- | ---------- |
+| `p_set` | `CffiNativeHandle` | [description] | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def is_hypercube(p_set: CffiNativeHandle):
@@ -1254,13 +1424,17 @@ Is the argument a native object that is a seeded candidate parameteriser factory
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `obj` | `CffiNativeHandle` | [description] | *required* |
+| Name  | Type               | Description   | Default    |
+| ----- | ------------------ | ------------- | ---------- |
+| `obj` | `CffiNativeHandle` | [description] | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def is_sampler_seeding(obj: CffiNativeHandle):
@@ -1285,13 +1459,17 @@ OBJECTIVE_SCORES_WILA_PTR
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `x` | `[type]` | [description] | *required* |
+| Name | Type     | Description   | Default    |
+| ---- | -------- | ------------- | ---------- |
+| `x`  | `[type]` | [description] | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def is_score(x):
@@ -1315,13 +1493,17 @@ VEC_OBJECTIVE_SCORES_PTR
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `x` | `[type]` | [description] | *required* |
+| Name | Type     | Description   | Default    |
+| ---- | -------- | ------------- | ---------- |
+| `x`  | `[type]` | [description] | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def is_set_of_scores(x):
@@ -1359,9 +1541,11 @@ intercept (VecNum, optional): intercepts in the linear relationship(s). Defaults
 
 Returns:
 
-| Type | Description | | --- | --- | | | \[ScalingParameteriser\]: new ScalingParameteriser |
+| Type | Description                                        |
+| ---- | -------------------------------------------------- |
+|      | \[ScalingParameteriser\]: new ScalingParameteriser |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def linear_parameteriser(
@@ -1435,9 +1619,11 @@ This allows to define tied parameters where pval = a * modelStateVal + intercept
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def linear_parameteriser_from(
@@ -1473,13 +1659,17 @@ def linear_parameteriser_from(
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| Name            | Type                     | Description                                                    | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | \[StateInitParameteriser\]: new state initialisation parameteriser |
+| Type | Description                                                        |
+| ---- | ------------------------------------------------------------------ |
+|      | \[StateInitParameteriser\]: new state initialisation parameteriser |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def make_state_init_parameteriser(parameteriser):
@@ -1501,13 +1691,17 @@ Convert an external object hypercube parameteriser to a pandas data frame
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| Name            | Type                     | Description                                                    | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | \[type\]: [a data frame] |
+| Type | Description              |
+| ---- | ------------------------ |
+|      | \[type\]: [a data frame] |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def parameteriser_as_dataframe(parameteriser):
@@ -1529,13 +1723,17 @@ Gets the parameteriser for a score
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `score` | `[type]` | [description] | *required* |
+| Name    | Type     | Description   | Default    |
+| ------- | -------- | ------------- | ---------- |
+| `score` | `[type]` | [description] | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def parameteriser_for_score(score:'ObjectiveScores'):
@@ -1557,13 +1755,17 @@ Convert objective scores to a pandas data frame representation
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `scores_population` | `[type]` | [description] | *required* |
+| Name                | Type     | Description   | Default    |
+| ------------------- | -------- | ------------- | ---------- |
+| `scores_population` | `[type]` | [description] | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def scores_as_dataframe(scores_population):
@@ -1585,13 +1787,18 @@ Sets logging on an optimiser, so as to record a detail of the optimisation proce
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `optimiser` | `[type]` | [description] | *required* | | `type` | `str` | [description]. Defaults to "". | `''` |
+| Name        | Type     | Description                    | Default    |
+| ----------- | -------- | ------------------------------ | ---------- |
+| `optimiser` | `[type]` | [description]                  | *required* |
+| `type`      | `str`    | [description]. Defaults to "". | `''`       |
 
 Returns:
 
-| Type | Description | | --- | --- | | | |
+| Type | Description |
+| ---- | ----------- |
+|      |             |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def set_calibration_logger(optimiser, type=""):
@@ -1614,9 +1821,12 @@ Set the properties of a hypercube parameteriser
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `specs` | `DataFrame` | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
+| Name            | Type                     | Description                                                                                           | Default    |
+| --------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it                                        | *required* |
+| `specs`         | `DataFrame`              | An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def set_hypercube(parameteriser: "HypercubeParameteriser", specs: pd.DataFrame):
@@ -1636,9 +1846,13 @@ Sets the maximum value of a model parameter value
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `variable_name` | `str or iterable of str` | model variable state identifier(s) | *required* | | `value` | `numeric or iterable of numeric` | value(s) | *required* |
+| Name            | Type                             | Description                                                    | Default    |
+| --------------- | -------------------------------- | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser`         | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| `variable_name` | `str or iterable of str`         | model variable state identifier(s)                             | *required* |
+| `value`         | `numeric or iterable of numeric` | value(s)                                                       | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def set_max_parameter_value(parameteriser, variable_name, value):
@@ -1661,9 +1875,13 @@ Sets the minimum value of a model parameter value
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `variable_name` | `str or iterable of str` | model variable state identifier(s) | *required* | | `value` | `numeric or iterable of numeric` | value(s) | *required* |
+| Name            | Type                             | Description                                                    | Default    |
+| --------------- | -------------------------------- | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser`         | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| `variable_name` | `str or iterable of str`         | model variable state identifier(s)                             | *required* |
+| `value`         | `numeric or iterable of numeric` | value(s)                                                       | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def set_min_parameter_value(parameteriser, variable_name, value):
@@ -1686,9 +1904,13 @@ Sets the value of a model parameter value
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `variable_name` | `str or iterable of str` | model variable state identifier(s) | *required* | | `value` | `numeric or iterable of numeric` | value(s) | *required* |
+| Name            | Type                             | Description                                                    | Default    |
+| --------------- | -------------------------------- | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser`         | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| `variable_name` | `str or iterable of str`         | model variable state identifier(s)                             | *required* |
+| `value`         | `numeric or iterable of numeric` | value(s)                                                       | *required* |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def set_parameter_value(parameteriser, variable_name, value):
@@ -1709,9 +1931,14 @@ Show some parameters (from the outside e.g. optimisers) in a filter parameterise
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `patterns` | `[type]` | character, one or more pattern to match and show matching parameters. Match according to other parameters | *required* | | `regex` | `bool` | should the patterns be used as regular expressions. Defaults to False. | `False` | | `starts_with` | `bool` | should the patterns be used as starting strings in the parameter names. Defaults to False. | `False` |
+| Name            | Type                     | Description                                                                                               | Default    |
+| --------------- | ------------------------ | --------------------------------------------------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it                                            | *required* |
+| `patterns`      | `[type]`                 | character, one or more pattern to match and show matching parameters. Match according to other parameters | *required* |
+| `regex`         | `bool`                   | should the patterns be used as regular expressions. Defaults to False.                                    | `False`    |
+| `starts_with`   | `bool`                   | should the patterns be used as starting strings in the parameter names. Defaults to False.                | `False`    |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def show_parameters(parameteriser, patterns, regex=False, starts_with=False):
@@ -1733,13 +1960,18 @@ Sort objective scores according to one of the objective values
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `scores_population` | `[type]` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR | *required* | | `score_name` | `str` | name of the objective to use for sorting. Defaults to "NSE". | `'NSE'` |
+| Name                | Type     | Description                                                                                            | Default    |
+| ------------------- | -------- | ------------------------------------------------------------------------------------------------------ | ---------- |
+| `scores_population` | `[type]` | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR | *required* |
+| `score_name`        | `str`    | name of the objective to use for sorting. Defaults to "NSE".                                           | `'NSE'`    |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `VectorObjectiveScores` | | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR |
+| Name                    | Type | Description                                                                                            |
+| ----------------------- | ---- | ------------------------------------------------------------------------------------------------------ |
+| `VectorObjectiveScores` |      | an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def sort_by_score(scores_population, score_name="NSE"):
@@ -1762,11 +1994,16 @@ Create a parameteriser that gets applied to a subset of a whole catchment
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* | | `subcatchment` | `Simulation` | the subcatchment, subset of a whole catchment, identifying which elements (subareas, nodes, links) will be parameterised by the new parameteriser. Other catchment elements are untouched. | *required* |
+| Name            | Type                     | Description                                                                                                                                                                                | Default    |
+| --------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it                                                                                                                             | *required* |
+| `subcatchment`  | `Simulation`             | the subcatchment, subset of a whole catchment, identifying which elements (subareas, nodes, links) will be parameterised by the new parameteriser. Other catchment elements are untouched. | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | | \[HypercubeParameteriser\]: New parameteriser whose application is limited to the subcatchment. |
+| Type | Description                                                                                     |
+| ---- | ----------------------------------------------------------------------------------------------- |
+|      | \[HypercubeParameteriser\]: New parameteriser whose application is limited to the subcatchment. |
 
 Examples:
 
@@ -1780,7 +2017,7 @@ Examples:
 
 ```
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def subcatchment_parameteriser(parameteriser, subcatchment):
@@ -1815,13 +2052,17 @@ This allows to define e.g. a virtual parameter log_X instead of calibrating on t
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
+| Name            | Type                     | Description                                                    | Default    |
+| --------------- | ------------------------ | -------------------------------------------------------------- | ---------- |
+| `parameteriser` | `HypercubeParameteriser` | A HypercubeParameteriser wrapper, or a type inheriting from it | *required* |
 
 Returns:
 
-| Name | Type | Description | | --- | --- | --- | | `TransformParameteriser` | | A new parameteriser (TransformParameteriser) which has methods to define parameter transforms |
+| Name                     | Type | Description                                                                                   |
+| ------------------------ | ---- | --------------------------------------------------------------------------------------------- |
+| `TransformParameteriser` |      | A new parameteriser (TransformParameteriser) which has methods to define parameter transforms |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/parameteriser.py`
+Source code in `swift2/parameteriser.py`
 
 ```
 def wrap_transform(parameteriser):

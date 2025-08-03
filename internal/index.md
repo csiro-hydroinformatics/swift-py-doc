@@ -6,13 +6,17 @@ simplify a 1D time series object to a representation suitable for portable seria
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `input_ts` | `TimeSeriesLike` | time series | *required* |
+| Name       | Type             | Description | Default    |
+| ---------- | ---------------- | ----------- | ---------- |
+| `input_ts` | `TimeSeriesLike` | time series | *required* |
 
 Returns:
 
-| Type | Description | | --- | --- | | `Dict[str, Any]` | Dict\[str,Any\]: dictionary with keys "tsgeom" for the time series geometry, and "tsvalues" for its values. |
+| Type             | Description                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| `Dict[str, Any]` | Dict\[str,Any\]: dictionary with keys "tsgeom" for the time series geometry, and "tsvalues" for its values. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/internal.py`
+Source code in `swift2/internal.py`
 
 ```
 def simplify_time_series(input_ts: TimeSeriesLike) -> Dict[str, Any]:
@@ -42,13 +46,19 @@ Convert an univariate python time series to a representation suitable for intero
 
 Parameters:
 
-| Name | Type | Description | Default | | --- | --- | --- | --- | | `ts` | `TimeSeriesLike` | Python native time series | *required* | | `from_date` | `ConvertibleToTimestamp` | start timestamp of the time series to subset to. Defaults to None. | `None` | | `to_date` | `ConvertibleToTimestamp` | end timestamp of the time series to subset to. Defaults to None. | `None` |
+| Name        | Type                     | Description                                                        | Default    |
+| ----------- | ------------------------ | ------------------------------------------------------------------ | ---------- |
+| `ts`        | `TimeSeriesLike`         | Python native time series                                          | *required* |
+| `from_date` | `ConvertibleToTimestamp` | start timestamp of the time series to subset to. Defaults to None. | `None`     |
+| `to_date`   | `ConvertibleToTimestamp` | end timestamp of the time series to subset to. Defaults to None.   | `None`     |
 
 Returns:
 
-| Type | Description | | --- | --- | | `Tuple[ndarray, TimeSeriesGeometryNative]` | Tuple\[np.ndarray, TimeSeriesGeometryNative\]: univeriate data and time series geometry for interop. |
+| Type                                       | Description                                                                                          |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `Tuple[ndarray, TimeSeriesGeometryNative]` | Tuple\[np.ndarray, TimeSeriesGeometryNative\]: univeriate data and time series geometry for interop. |
 
-Source code in `.venv/lib/python3.13/site-packages/swift2/internal.py`
+Source code in `swift2/internal.py`
 
 ```
 def to_interop_univariate_series(
