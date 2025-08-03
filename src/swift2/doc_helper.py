@@ -1,11 +1,10 @@
-from typing import List, Optional, Dict
-from cinterop.timeseries import start_ts, end_ts
-import numpy as np
-
-import os
 import json
-import jsonpickle
+import os
+from typing import Dict, Iterable, List, Optional
 
+import jsonpickle
+import numpy as np
+from cinterop.timeseries import end_ts, start_ts
 
 from swift2.parameteriser import (
     add_to_hypercube,
@@ -20,15 +19,20 @@ from swift2.parameteriser import (
     set_hypercube,
     wrap_transform,
 )
-
 from swift2.simulation import *
 from swift2.utils import c, mk_full_data_id
-
 
 _test_data_dir = os.path.join(os.path.dirname(__file__), "data", "samples")
 
 _sample_data_obj = None
 
+def pkg_versions_info(preamble:str):
+    from datetime import datetime
+
+    from uchronia.utils import pkg_version
+    timeinfo= f"on {datetime.now()}"
+    pkgversions = "\n".join([f"    {pkg_version(pkg_name)}" for pkg_name in ["swift2", "uchronia"]])
+    return f"{preamble} {timeinfo}\n{pkgversions}"
 
 def set_sample_data(
     model_sim,
@@ -142,7 +146,17 @@ def _sample_data():
     if _sample_data_obj is None:
         with open(os.path.join(testdata_dir(), "swift_sample_data.json.dat"), "r") as f:
             dat = json.load(f)
-        _sample_data_obj = jsonpickle.loads(dat[0])
+        if isinstance(dat, list):
+            dat = dat[0]
+        for t in [str, bytes, bytearray]:
+            if isinstance(dat, t):
+                # legacy from previous sample data file
+                # I do not know why it was requiring jsonpickle
+                # it was a bit convoluted for probably no good reasons
+                _sample_data_obj = jsonpickle.loads(dat)
+                return _sample_data_obj
+        assert isinstance(dat, dict)
+        _sample_data_obj = dat
     return _sample_data_obj
 
 
@@ -162,16 +176,20 @@ def sample_series(site_id="MMH", var_name="rain"):
     """
     s = _sample_data()
     siteData = s[site_id]
+    if var_name not in siteData.keys():
+        keys = list(siteData.keys())
+        kstring = ', '.join(keys)
+        raise KeyError(f"key {var_name} not found. Valid keys are {kstring}")
     varData = siteData[var_name]
     # if (varData)) stop(paste('Sample data for site', site_id, 'and variable name', var_name, 'not found'))
     return deserialise_sample_series(varData)
 
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 
-def deserialise_sample_series(serialised: Dict):
+def deserialise_sample_series(serialised: Dict[str,Iterable]):
     dt = [pd.Timestamp(i, unit="s") for i in serialised["utcInt"]]
     assert isinstance(serialised["x"], list)
     assert len(serialised["x"]) > 0
@@ -348,26 +366,30 @@ def get_catchment_dot_graph(simulation):
     return swg.GetCatchmentDOTGraph_py(simulation)
 
 
-def create_gr4jh_parameters():
+def create_gr4jh_parameters(hourly:bool = True):
     """
-    Get a parameter set that configures GR4J for hourly operations
+    Get a parameter set that configures GR4J for hourly or daily operations
 
-    Get a parameter set that configures GR4J for hourly operations
+    Derived from the initial Fortran implementation in SWIFTv1
+    * UHExponent = 2.5 is the default value for daily time step. Set to 1.25 for hourly time step
+    * PercFactor = 9.0 / 4.0 for daily, 4.0  for hourly time step.
 
     Returns:
         HyperCubeParameteriser: a parameter set that can be applied to SWIFT systems with GR4J
 
     """
-    # Configure for GR4J but with changed parameters, supposed to be OK for hourly operations.
+    # Configure for GR4J but with changed parameters, supposed to be OK for hourly operations according to SWIFTv1
+    uhexponent = 1.25 if hourly else 2.5
+    percfactor = 4.0 if hourly else 9.0 / 4.0
     return create_parameteriser(
+        type = "Generic subareas",
         specs=_df_from_dict(
             Name=["PercFactor", "UHExponent"],
-            Value=_npf([4, 5 / 4]),
-            Min=_npf([4, 5 / 4]),
-            Max=_npf([4, 5 / 4]),
+            Value=_npf([percfactor, uhexponent]),
+            Min=_npf([percfactor, uhexponent]),
+            Max=_npf([percfactor, uhexponent]),
         )
     )
-
 
 def configure_hourly_gr4j(simulation):
     """
@@ -379,7 +401,20 @@ def configure_hourly_gr4j(simulation):
         simulation (Simulation): A swift simulation object
 
     """
-    pGr4jHourly = create_gr4jh_parameters()
+    pGr4jHourly = create_gr4jh_parameters(hourly=True)
+    apply_sys_config(pGr4jHourly, simulation)
+
+def configure_daily_gr4j(simulation):
+    """
+    Configure a simulation with GR4J models for daily time step modelling
+
+    Configure a simulation with GR4J models for daily time step modelling
+
+    Args:
+        simulation (Simulation): A swift simulation object
+
+    """
+    pGr4jHourly = create_gr4jh_parameters(hourly=False)
     apply_sys_config(pGr4jHourly, simulation)
 
 

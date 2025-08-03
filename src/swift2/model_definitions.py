@@ -2,6 +2,8 @@ from typing import TYPE_CHECKING, Any, Dict, OrderedDict
 
 if TYPE_CHECKING:
     from swift2.classes import Simulation
+    from swift2.const import VecStr
+
 import swift2.wrap.swift_wrap_custom as swc
 import swift2.wrap.swift_wrap_generated as swg
 from swift2.simulation import get_link_ids, get_node_ids, sort_by_execution_order
@@ -36,8 +38,9 @@ def model_to_json_file(simulation: "Simulation", file_path:str) -> None:
     """
     swg.SaveModelSimulationToJson_py(simulation, file_path)
 
+
 def cookie_cut_dendritic_catchment(
-    simulation: "Simulation", bottom_element_id: str, top_element_ids: str
+    simulation: "Simulation", bottom_element_id: str, top_element_ids: "VecStr"
 ) -> "Simulation":
     """cookie cut a dendritic catchment (without confluences)
 
@@ -49,6 +52,8 @@ def cookie_cut_dendritic_catchment(
     Returns:
         Simulation: a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
     """
+    top_element_ids = top_element_ids or []
+    top_element_ids = [top_element_ids] if isinstance(top_element_ids, str) else top_element_ids
     # stopifnot(element_id %in% as.character(swift_cal_element_ids))
     select_network_above_element = True
     include_element_in_selection = True

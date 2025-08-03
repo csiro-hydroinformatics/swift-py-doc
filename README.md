@@ -73,7 +73,7 @@ uv venv .venv
 ```sh
 cd $HOME/src/swift-py-doc
 . .venv/bin/activate
-uv pip install \
+uv pip install -U \
   mkdocs \
   mkdocs-material \
   mkdocstrings  \
@@ -83,6 +83,15 @@ uv pip install \
   markdown-callouts \
   mkdocs-llmstxt
 # May 2025 I am trying to produce llms.txt files
+```
+
+dont forget to update the package(s) instaled in the venvs, this is what is used to get the doc, not the mamba env. Caught every time.
+
+```sh
+# NOTE: some changes in the API doc were just not picked up unless you do:
+uv pip freeze | grep swift
+uv pip uninstall swift2
+uv pip install -e ~/src/swift/bindings/python/swift2/
 ```
 
 To test locally with `mkdocs serve`:

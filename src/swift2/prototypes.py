@@ -1,8 +1,11 @@
 from datetime import datetime
 from typing import TYPE_CHECKING
+
 from cinterop.cffi.marshal import CffiMarshal
-from cinterop.timeseries import  as_timestamp
+from cinterop.timeseries import as_timestamp
 from refcount.interop import OwningCffiNativeHandle
+
+import swift2.wrap.swift_wrap_generated as swg
 from swift2.internal import (
     TS_INTEROP_GEOM_KEY,
     TS_INTEROP_VALUES_KEY,
@@ -11,10 +14,12 @@ from swift2.internal import (
 )
 from swift2.parameteriser import get_max_runtime_termination, is_hypercube
 
-import swift2.wrap.swift_wrap_generated as swg
-
 if TYPE_CHECKING:
-    from swift2.classes import SceTerminationCondition, HypercubeParameteriser
+    from swift2.classes import (
+        HypercubeParameteriser,
+        SceTerminationCondition,
+        Simulation,
+    )
 
 from cinterop.cffi.marshal import (
     TimeSeriesLike,
@@ -133,6 +138,7 @@ def create_erris_parameter_estimator(
 
 from swift2.wrap.ffi_interop import marshal
 
+
 #' Estimates ERRIS model parameters
 #'
 #' Estimates ERRIS parameters
@@ -204,7 +210,6 @@ def estimate_erris_parameters(
         restrictionOn=restriction_on,
         weightedLeastSquare=weighted_least_square,
     )
-
 
 # #' Estimates Dual Pass Error correction model parameters
 # #'

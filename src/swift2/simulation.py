@@ -1,16 +1,17 @@
 from multiprocessing.sharedctypes import Value
-from typing import Any, Callable, Dict, List, Sequence, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Sequence, Union
+
 from cinterop.timeseries import as_timestamp
 
 if TYPE_CHECKING:
-    from swift2.classes import Simulation, MemoryStates
+    from swift2.classes import MemoryStates, Simulation
     from swift2.const import VecStr
-from swift2.utils import is_common_iterable, paste0, rep
-import swift2.wrap.swift_wrap_generated as swg
-import swift2.wrap.swift_wrap_custom as swc
 import numpy as np
 
+import swift2.wrap.swift_wrap_custom as swc
+import swift2.wrap.swift_wrap_generated as swg
 from swift2.play_record import _mkid, play_subarea_input
+from swift2.utils import is_common_iterable, paste0, rep
 
 
 def set_simulation_span(simulation: "Simulation", start, end):
@@ -38,7 +39,7 @@ def set_simulation_time_step(simulation: "Simulation", name: str):
 
     Args:
         simulation (Simulation): A swift simulation object
-        name (Any): a time step identifier, currently 'daily' or 'hourly' are supported. The identifier is made lower case in the function.
+        name (Any): a time step identifier, The identifier is made lower case in the function. Supported time steps include "hourly", "daily", "monthly_qpp", "monthly", and time deltas such as "24:00:00", "01:00:00", "03:00:00". An exception is raised if the string could not be parsed.
 
     """
     name = name.lower()
@@ -544,13 +545,13 @@ def create_subarea_simulation(
     Creates a one sub-catchment simulation. This function is intended for creating sample simulations, not for use in production.
 
     Args:
-        dataId (Any): data identifier in swift_sample_data
-        simulStart (Any): ISO string for the simulation start date time
-        simulEnd (Any): ISO string for the simulation end date time
-        modelId (Any): model identifier
+        data_id (Any): data identifier in swift_sample_data
+        simul_start (Any): ISO string for the simulation start date time
+        simul_end (Any): ISO string for the simulation end date time
+        model_id (Any): model identifier
         tstep (Any): character, 'daily' or 'hourly'
-        varNameRain (Any): variable name to assign rainfall to
-        varNamePet (Any): variable name to assign PET to
+        varname_rain (Any): variable name to assign rainfall to
+        varname_pet (Any): variable name to assign PET to
 
     Returns:
         A SWIFT simulation object, clone of the simulation but with a new model type in use.

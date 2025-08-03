@@ -1,22 +1,27 @@
+from typing import TYPE_CHECKING, Any, Dict, List, Sequence
+
 import numpy as np
 import pandas as pd
-from typing import Any, Dict, List, Sequence, TYPE_CHECKING
-from refcount.interop import CffiNativeHandle, DeletableCffiNativeHandle, is_cffi_native_handle
+from refcount.interop import (
+    CffiNativeHandle,
+    DeletableCffiNativeHandle,
+    is_cffi_native_handle,
+)
 
 if TYPE_CHECKING:
     from swift2.classes import (
-        HypercubeParameteriser,
-        Simulation,
-        SceTerminationCondition,
-        TransformParameteriser,
         CompositeParameteriser,
-        ObjectiveScores
+        HypercubeParameteriser,
+        ObjectiveScores,
+        SceTerminationCondition,
+        Simulation,
+        TransformParameteriser,
     )
+import swift2.wrap.swift_wrap_custom as swc
+import swift2.wrap.swift_wrap_generated as swg
 from swift2.common import _df_from_dict, _npf
 from swift2.const import VecNum, VecStr
 from swift2.utils import is_common_iterable
-import swift2.wrap.swift_wrap_generated as swg
-import swift2.wrap.swift_wrap_custom as swc
 
 
 def _sapply_parameter_set(parameteriser, variable_name, value, api_func):
@@ -944,12 +949,6 @@ def get_best_score(scores_population, score_name="NSE", convert_to_py=False):
         return s
 
 
-#' Try to convert an external pointer to an R representation
-#'
-#' Try to convert an external pointer to an R representation
-#'
-#' @param x object, presumably wrapper around an Xptr, to convert to a 'pure' R representation
-#' @export
 def as_py_structure(x: Any):
     """Try to convert an external pointer to a native python representation
 
@@ -1049,6 +1048,7 @@ def set_calibration_logger(optimiser, type=""):
 
 
 from swift2.wrap.swift_wrap_custom import convert_optimisation_logger
+
 
 #' Gets logger content
 #'
@@ -1175,6 +1175,8 @@ def create_multisite_obj_parameteriser(
     hydro_parameteriser=None,
 ):
     """Builds a parameteriser usable with a multisite multiobjective calculator.
+
+    This is an advanced topic; users may refer to [this sample workflow](https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/)
 
     Args:
         func_parameterisers ([type]): list of external pointers, parameterisers for each function of a multiobjective calculation.
@@ -1334,7 +1336,7 @@ class MhData:
         self._data: pd.DataFrame = data
 
     @property
-    def data(self):
+    def data(self) -> pd.DataFrame:
         """The inner data of this data log"""
         return self._data
 
@@ -1380,14 +1382,6 @@ class MhData:
         d = bound_values_df(d, self._fitness, obj_lims)
         return d
 
-    #' Subset an mhData object based on string pattern matching
-    #'
-    #' Subset an mhData object based on string pattern matching on the column for 'messages'
-    #'
-    #' @param log_mh an mhData object
-    #' @param pattern a pattern suitable for use by \code{\link{str_detect}}, for instance 'Initial.*|Reflec.*|Contrac.*|Add.*'
-    #' @return an mhData object
-    #' @export
     def subset_by_message(
         self, pattern: str = "Initial.*|Reflec.*|Contrac.*|Add.*"
     ) -> "MhData":
@@ -1400,6 +1394,38 @@ class MhData:
             Any: New MhData object with subset data
         """
         return self.subset_by_pattern(self._messages, pattern)
+
+    def facet_plot(
+        self,
+        y: str,
+        facet_category: str = "Message",
+        col_wrap: int = 3,
+        x: str = "PointNumber",
+        fig_width_in=15,
+        fig_heigth_in=10,
+    ):
+        """Facet plot of parameter value evolution, facetted by a category.
+
+        This method requires the package `seaborn` to be installed.
+
+        Args:
+            y (str): variable name (model parameter) to use for the y-axis, e.g. "x4" for GR4J
+            facet_category (str, optional): Data attribute to use to facet. Defaults to "Message".
+            col_wrap (int, optional): Max number of columns in the plot. Defaults to 3.
+            x (str, optional): variable name (calibration iteration, or model parameter) to use for the x-axis. Defaults to "PointNumber".
+            fig_width_in (int, optional): figure width in inches. Defaults to 15.
+            fig_heigth_in (int, optional): figure height in inches. Defaults to 10.
+
+        Returns:
+            FacetGrid: The plot to display
+        """
+        import seaborn as sns
+        df = self.data
+        grid = sns.FacetGrid(df, col = facet_category, col_wrap=col_wrap)
+        grid.map(sns.scatterplot, x, y)
+        grid.figure.set_size_inches(fig_width_in, fig_heigth_in)
+        grid.add_legend()
+        return grid
 
 
 def mk_optim_log(
@@ -1429,17 +1455,16 @@ def mk_optim_log(
     )
 
 
-#' Extract the logger from a parameter extimator (optimiser or related)
-#'
-#' Extract the logger from a parameter extimator (optimiser or related)
-#'
-#' @param estimator an optimiser or estimator (e.g. erris)
-#' @param fitness_name Name of the score to use to extract the objective
-#' @return a list with a data frame and geom_ops (see mhplot)
-#' @importFrom mhplot mkOptimLog
-#' @importFrom mhplot subset_by_message
-#' @export
 def extract_optimisation_log(estimator, fitness_name="log.likelihood") -> 'MhData':
+    """Extract the logger from a parameter extimator (optimiser or related)
+
+    Args:
+        estimator (Optimiser): the optimiser instance
+        fitness_name (str, optional): name of the fitness function to extract. Defaults to "log.likelihood".
+
+    Returns:
+        MhData: an object with methods to analyse the optimisation log
+    """
     optim_log = get_logger_content(estimator, add_numbering=True)
     log_mh = mk_optim_log(
         optim_log, fitness=fitness_name, messages="Message", categories="Category"

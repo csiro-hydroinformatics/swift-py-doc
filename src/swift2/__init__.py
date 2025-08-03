@@ -1,5 +1,4 @@
-"""Tools for manipulating LakeOneD models and data and for running
-   SWIFT from Python."""
+"""Python interface to the SWIFT2 streamflow simulation and forecasting libraries."""
 
 # IMPORTANT
 # it is critical to trigger the import of the uchronia (datatypes) native library BEFORE
@@ -10,10 +9,10 @@
 # Candidate fix for https://jira.csiro.au/projects/WIRADA/issues/WIRADA-640 is thus:
 import uchronia
 
-# Trigger the loading of the native library.
-import swift2.wrap.ffi_interop as _interop
-
 # Trigger the initialisation of the custom wrapper generation function.
 import swift2.classes as _s
+
+# Trigger the loading of the native library.
+import swift2.wrap.ffi_interop as _interop
 
 from ._version import __version__

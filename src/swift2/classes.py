@@ -142,7 +142,7 @@ class Simulation(DeletableCffiNativeHandle, SimulationMixin):
         """Gets the simulation span of this simulation
 
         Returns:
-            Dict[str,Any]: information on start, end, time step
+            Dict[str,Any]: information on the start and end of the simulation, and the time step
         """
         return swc.get_simulation_span_pkg(self)
 
@@ -392,8 +392,15 @@ class Simulation(DeletableCffiNativeHandle, SimulationMixin):
         """Reset the model states of a simulation, and apply one or more state initialers if the simulation is configured with any."""
         ss.reset_model_states(self)
 
-    def describe(self, verbosity=None) -> Dict:
-        """Describe the catchment model structure using simple python representations"""
+    def describe(self, verbosity:Optional[int]=None) -> Dict:
+        """Describe the catchment model structure using simple python representations
+
+        Args:
+            verbosity (Optional[int], optional): Future option, unused for now. Defaults to None.
+
+        Returns:
+            Dict: A dictionary representation of the catchment structure
+        """
         return ss.describe(self, verbosity)
 
     def create_ensemble_forecast_simulation(
@@ -568,7 +575,7 @@ class Simulation(DeletableCffiNativeHandle, SimulationMixin):
         return spr.get_all_recorded(self)
 
     def get_all_played(self) -> xr.DataArray:
-        """Gets all the time series of models variables into which input time sereis is/are played"""
+        """Gets all the time series of models variables into which input time series is/are played"""
         return spr.get_all_played(self)
 
     def apply_recording_function(
@@ -601,16 +608,28 @@ class Simulation(DeletableCffiNativeHandle, SimulationMixin):
         spr.record_singular_state(self, var_ids, recording_provider, data_ids)
 
     def cookie_cut_dendritic_catchment(
-        self, bottom_element_id: str, top_element_ids: "VecStr"
+        self, bottom_element_id: str, top_element_ids: Optional["VecStr"]
     ):
         """cookie cut a dendritic catchment (without confluences)
 
         Args:
             bottom_element_id (str): identifier of the most downstream element to keep
-            top_element_ids (str): identifier(s) of the most upstream element(s) to keep
+            top_element_ids (Optional[VecStr]): identifier(s) of the most upstream element(s) to keep. Empty list or None means no upstream cuts.
 
         Returns:
             Simulation: a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
+
+        Example:
+            >>> # sdh  swift2.doc_helper
+            >>> _, simulation = sdh.create_test_catchment_structure()
+            >>> e_ids = ['node.n2', 'node.n4']
+            >>> above_n2 = simulation.cookie_cut_dendritic_catchment(e_ids[0], [])
+            >>> above_n2.describe()
+            {'subareas': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name', 'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}, 'nodes': {'n2': 'n2_name', 'n5': 'n5_name', 'n4': 'n4_name', 'n3': 'n3_name', 'n1': 'n1_name'}, 'links': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name', 'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}}
+            >>> above_n2_below_n4 = simulation.cookie_cut_dendritic_catchment(e_ids[0], [e_ids[1]])
+            >>> above_n2_below_n4.describe()
+            {'subareas': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name'}, 'nodes': {'n2': 'n2_name', 'n5': 'n5_name'}, 'links': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name'}}
+            >>> 
         """
         return smd.cookie_cut_dendritic_catchment(
             self, bottom_element_id, top_element_ids
@@ -621,10 +640,34 @@ class Simulation(DeletableCffiNativeHandle, SimulationMixin):
 
         Args:
             element_id (str): id of the element to cut at.
-            action (str): how to cut; currently limited to 'keep_above'
+            action (str): how to cut. combinations of 'keep', implied but better explicit, and 'above' or 'below'. 
+              You can also have 'exclusive' to exclude the cut point from the result, but this is rarely useful. Examples:
+              'keep_above', 'keep above', 'keep below exclusive'. See examples.
 
         Returns:
             Simulation: a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
+
+        Examples:
+            >>> # sdh  swift2.doc_helper
+            >>> _, simulation = sdh.create_test_catchment_structure()
+            >>> n2_id, n4_id = 'node.n2', 'node.n4'
+            >>> simulation.subset_catchment(n2_id, 'keep below').describe()
+            {'subareas': {'lnk1': 'lnk1_name'}, 'nodes': {'n2': 'n2_name', 'n6': 'n6_name'}, 'links': {'lnk1': 'lnk1_name'}}
+            >>> simulation.subset_catchment(n4_id, 'keep above').describe()
+            {'subareas': {'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}, 'nodes': {'n4': 'n4_name', 'n3': 'n3_name', 'n1': 'n1_name'}, 'links': {'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}}
+            >>> # Keep all above node 4, but exclude node 4
+            >>> simulation.subset_catchment(n4_id, 'keep above exclusive').describe()
+            {'subareas': {'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}, 'nodes': {'n3': 'n3_name', 'n1': 'n1_name'}, 'links': {'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}}
+            >>> # to keep only a headwter catchment with its link:
+            >>> simulation.subset_catchment("link.lnk5", 'keep above').describe()
+            {'subareas': {'lnk5': 'lnk5_name'}, 'nodes': {'n1': 'n1_name'}, 'links': {'lnk5': 'lnk5_name'}}
+            >>> # to keep only a headwter catchment with its link:
+            >>> simulation.subset_catchment("node.n5", 'keep above exclusive').describe()
+            {'subareas': {}, 'nodes': {}, 'links': {}}
+            >>> # below will not work at the time of writing, but maybe should:
+            >>> simulation.subset_catchment("subarea.lnk5", 'keep above').describe()
+            Traceback (most recent call last):
+
         """
         return smd.subset_catchment(self, element_id, action)
 
@@ -1035,7 +1078,8 @@ class HypercubeParameteriser(Parameteriser):
 
         Args:
             seed (int, optional): a seed for the sampler. Defaults to 0.
-            type (str, optional): the type of sampler. Defaults to "urs". Only option supported as of 2023-01.
+            type (str, optional): the type of sampler. Defaults to "urs" for Uniform Random Sampling. 
+                This is the only option supported as of 2023-01.
 
         Returns:
             CandidateFactorySeed: a sampler, aka candidate factory
@@ -1057,34 +1101,31 @@ class HypercubeParameteriser(Parameteriser):
             StateInitParameteriser: state initialisation parameteriser
         
         Examples:
-            >>> todo()
+            >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+            >>> import swift2.parameteriser as sp
+            >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
+            >>> p_states = sp.linear_parameteriser(
+                            param_name=c("S0","R0"), # new virtual parameters to optimise
+                            state_name=c("S","R"), 
+                            scaling_var_name=c("x1","x3"),
+                            min_p_val=c(0.0,0.0), 
+                            max_p_val=c(1.0,1.0), 
+                            value=c(0.9,0.9), 
+                            selector_type='each subarea')
+            >>> init_parameteriser = p_states.make_state_init_parameteriser()
+
         """
         return sp.make_state_init_parameteriser(self)
 
     def filtered_parameters(self) -> "FilteringParameteriser":
-        """Wrap a parameteriser in a filter that can hide some parameters"""
+        """Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
+        
+        Used for instance in calibration with log-likelihood contexts.
+
+        Returns: 
+            an parameteriser designed to only show a subset to an optimiser, while applying more to a simulation. 
+        """
         return sp.filtered_parameters(self)
-
-    def hide_parameters(self, patterns, regex=False, starts_with=False, strict=False):
-        """Hide some parameters (from the outside e.g. optimisers) in a filter parameteriser
-
-        Args:
-            patterns ([type]):  character, one or more pattern to match and hide matching parameters. Match according to other parameters.
-            regex (bool, optional): logical, defaults False, should the patterns be used as regular expressions.. Defaults to False.
-            starts_with (bool, optional): logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False.
-            strict (bool, optional): logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False.
-        """
-        sp.hide_parameters(self, patterns, regex, starts_with, strict)
-
-    def show_parameters(self, patterns, regex=False, starts_with=False):
-        """Show some parameters (from the outside e.g. optimisers) in a filter parameteriser
-
-        Args:
-            patterns ([type]):  character, one or more pattern to match and show matching parameters. Match according to other parameters
-            regex (bool, optional): should the patterns be used as regular expressions. Defaults to False.
-            starts_with (bool, optional): should the patterns be used as starting strings in the parameter names. Defaults to False.
-        """
-        sp.show_parameters(self, patterns, regex, starts_with)
 
     def wrap_transform(self) -> "TransformParameteriser":
         """Create a parameteriser for which parameter transformations can be defined.
@@ -1159,6 +1200,19 @@ class HypercubeParameteriser(Parameteriser):
 
         Args:
             specs (pd.DataFrame): An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+
+        Examples:
+        >>> from swift2.parameteriser import create_parameteriser
+        >>> loglik = create_parameteriser(type='no apply')
+        >>> loglik.add_to_hypercube( 
+          pd.DataFrame({ 
+          "Name": c('b','m','s','a','maxobs','ct', 'censopt'),
+          "Min": c(-30, 0, -10,    -20, maxobs, censor_threshold, censopt),
+          "Max":  c(5,   0, 10, 0, maxobs, censor_threshold, censopt),
+          "Value": c(-7,  0, 0,  -10, maxobs, censor_threshold, censopt),
+          }
+          ) )
+
         """
         sp.add_to_hypercube(self, specs)
 
@@ -1170,10 +1224,21 @@ class HypercubeParameteriser(Parameteriser):
         sp.add_to_hypercube(self, specs)
 
     def set_hypercube(self, specs: pd.DataFrame):
-        """Set the properties of a hypercube parameteriser
+        """Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
 
         Args:
             specs (pd.DataFrame): An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+
+        Examples:
+            >>> # e.g. if `p` is a typical parameteriser for GR4J with 
+            >>> # set x4 bounds to be in "days", not hours
+            >>> p_x4 = pd.DataFrame.from_dict({
+                "Name": ["x4"],
+                "Value": [1.0],
+                "Min": [0.25],
+                "Max": [10.0],
+            })
+            >>> p.set_hypercube(p_x4)
         """
         sp.set_hypercube(self, specs)
 
@@ -1182,7 +1247,7 @@ class HypercubeParameteriser(Parameteriser):
 
 
 class CompositeParameteriser(HypercubeParameteriser):
-    """A parameteriser defined as the concatenation of several parameterisers"""
+    """A parameteriser defined as the concatenation of several parameterisers."""
     def __init__(
         self,
         handle: CffiData,
@@ -1362,6 +1427,10 @@ class EnsembleSimulation(DeletableCffiNativeHandle):
 
 
 class FunctionsParameteriser(HypercubeParameteriser):
+    """A parameteriser usable with a multisite multiobjective calculator.
+
+    This is an advanced topic, see function `create_multisite_obj_parameteriser`. Users may refer to [this sample workflow](https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/)
+    """
     def __init__(
         self,
         handle: CffiData,
@@ -1375,6 +1444,7 @@ class FunctionsParameteriser(HypercubeParameteriser):
 
 
 class FilteringParameteriser(HypercubeParameteriser):
+    """A parameteriser designed to only show a subset to an optimiser, while applying more to a simulation. Used in log-likelihood contexts."""
     def __init__(
         self,
         handle: CffiData,
@@ -1386,8 +1456,29 @@ class FilteringParameteriser(HypercubeParameteriser):
             handle, release_native, type_id, prior_ref_count
         )
 
+    def hide_parameters(self, patterns, regex=False, starts_with=False, strict=False):
+        """Hide some parameters (from the outside e.g. optimisers) in a filter parameteriser
+
+        Args:
+            patterns ([type]):  character, one or more pattern to match and hide matching parameters. Match according to other parameters.
+            regex (bool, optional): logical, defaults False, should the patterns be used as regular expressions.. Defaults to False.
+            starts_with (bool, optional): logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False.
+            strict (bool, optional): logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False.
+        """
+        sp.hide_parameters(self, patterns, regex, starts_with, strict)
+
+    def show_parameters(self, patterns, regex=False, starts_with=False):
+        """Show some parameters (from the outside e.g. optimisers) in a filter parameteriser
+
+        Args:
+            patterns ([type]):  character, one or more pattern to match and show matching parameters. Match according to other parameters
+            regex (bool, optional): should the patterns be used as regular expressions. Defaults to False.
+            starts_with (bool, optional): should the patterns be used as starting strings in the parameter names. Defaults to False.
+        """
+        sp.show_parameters(self, patterns, regex, starts_with)
 
 class StateInitParameteriser(HypercubeParameteriser):
+    """Parameteriser designed to apply to simulations by setting initial states."""
     def __init__(
         self,
         handle: CffiData,
@@ -1401,6 +1492,7 @@ class StateInitParameteriser(HypercubeParameteriser):
 
 
 class TransformParameteriser(HypercubeParameteriser):
+    """Parameteriser projecting parameters in a transformed space for optimisation."""
     def __init__(
         self,
         handle: CffiData,
@@ -1430,6 +1522,32 @@ class TransformParameteriser(HypercubeParameteriser):
             transform_id (str): identifier for a known bijective univariate function
             a (float, optional): parameter in Y = F(ax+b). Defaults to 1.0.
             b (float, optional): parameter in Y = F(ax+b). Defaults to 0.0.
+
+        Examples:
+            >>> from swift2.doc_helper import get_free_params
+            >>> pspec_gr4j = get_free_params('GR4J')
+            >>> p = HypercubeParameteriser.from_dataframe("generic subarea", pspec_gr4j)
+            >>> p
+            Name       Value   Min     Max
+            0   x1  650.488000   1.0  3000.0
+            1   x2   -0.280648 -27.0    27.0
+            2   x3    7.891230   1.0   660.0
+            3   x4   18.917200   1.0   240.0
+            >>> p = p.wrap_transform()
+            >>> p.add_transform("log_x4", "x4", "log10")
+            >>> p
+                Name       Value   Min          Max
+            0  log_x4    1.276857   0.0     2.380211
+            1      x1  650.488000   1.0  3000.000000
+            2      x2   -0.280648 -27.0    27.000000
+            3      x3    7.891230   1.0   660.000000
+            >>> p.backtransform()
+            Name       Value   Min     Max
+            0   x1  650.488000   1.0  3000.0
+            1   x2   -0.280648 -27.0    27.0
+            2   x3    7.891230   1.0   660.0
+            3   x4   18.917200   1.0   240.0
+            >>> 
         """
         sp.add_transform(self, param_name, inner_param_name, transform_id, a, b)
 
@@ -1550,17 +1668,36 @@ class Optimiser(DeletableCffiNativeHandle):
             handle, release_native, type_id, prior_ref_count
         )
 
-    def set_calibration_logger(self, type:str=""):
+    def set_calibration_logger(self, type:str="") -> None:
+        """Set the type of calibration logger to use
+
+        Args:
+            type (str, optional): The type of logger. Unused for now, future option e.g. 'text', 'database'. Defaults to "".
+        """
         return sp.set_calibration_logger(self, type)
 
     def execute_optimisation(self):
         return sp.execute_optimisation(self)
 
-    def extract_optimisation_log(self, fitness_name:str="log.likelihood") -> Dict[str,Any]:
+    def extract_optimisation_log(self, fitness_name:str="log.likelihood") -> 'sp.MhData':
+        """Extract the logger from a parameter extimator (optimiser or related)
+
+        Args:
+            fitness_name (str, optional): name of the fitness function to extract. Defaults to "log.likelihood".
+
+        Returns:
+            MhData: an object with methods to analyse the optimisation log
+        """
         return sp.extract_optimisation_log(self, fitness_name)
 
     def set_maximum_threads(self, n_threads: int = -1):
+        """Set the maximum number of threads (compute cores) to use in the optimisation, if possible. -1 means "as many as available". """
         swg.SetMaxThreadsOptimizerWila_py(self, n_threads)
+
+    def set_maximum_threads_free_cores(self, n_free_cores: int = 1):
+        """Set the maximum number of threads (compute cores) to use in the optimisation, such that at least `n_free_cores` are left for other tasks, if feasible given hardware constraints.
+        """
+        swg.SetMaxDegreeOfParallelismHardwareMinusWila_py(self, n_free_cores)
 
     @staticmethod
     def set_default_maximum_threads(n_threads: int):
@@ -1612,11 +1749,17 @@ class ObjectiveScores(DeletableCffiNativeHandle):
     def as_py_structure(self):
         return sp.as_py_structure(self)
 
-    def apply_sys_config(self, simulation):
+    def apply_sys_config(self, simulation: 'Simulation') -> None:
+        """Apply the model configuration (parameteriser) associated with this object to a simulation
+
+        Args:
+            simulation (Simulation): simulation
+        """
         sp.apply_sys_config(self, simulation)
 
     @property
     def parameteriser(self) -> "HypercubeParameteriser":
+        """The parameteriser associated with this object"""
         return sp.parameteriser_for_score(self)
 
     @property
@@ -1626,6 +1769,11 @@ class ObjectiveScores(DeletableCffiNativeHandle):
     @property
     def num_scores(self) -> int:
         return swg.GetNumScoresWila_py(self)
+
+    def __str__(self):
+        """string representation"""
+        return f"{super().__str__()}\n\nScores:\n\n{str(self.scores)}\n\nParameters:\n\n{str(self.parameteriser)}"
+
 
 
 class VectorObjectiveScores(DeletableCffiNativeHandle):
@@ -1654,6 +1802,15 @@ class VectorObjectiveScores(DeletableCffiNativeHandle):
 
     def as_dataframe(self):
         return sp.scores_as_dataframe(self)
+    
+    def __str__(self):
+        """string representation"""
+        return f"{super().__str__()} \n {str(self.as_dataframe())}"
+
+    def __repr__(self):
+        """representation"""
+        return f"{super().__repr__()} \n {repr(self.as_dataframe())}"
+
 
     @property
     def size(self) -> int:
