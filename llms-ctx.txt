@@ -4,6 +4,17 @@
 
 Python package for ensemble streamflow forecasting. It can equally be used in non-ensemble simulation mode for other, “traditional” semi-distributed hydrologic modelling.
 
+# Overview
+
+# Package overview
+
+**swift2** is a Python package for ensemble streamflow forecasting and semi-distributed hydrologic modeling. It enables water resource managers and researchers to simulate catchment hydrology, calibrate model parameters against observed data, and generate probabilistic forecasts. The package supports both traditional deterministic simulations and ensemble-based approaches that account for uncertainty in meteorological inputs and model structure.
+
+At its core, **swift2** provides lumped and semi-distributed rainfall-runoff models (such as GR4J, GR5H) that can be configured as individual subcatchments or connected into dendritic networks representing entire river systems. The framework handles the spatial routing of water through channel networks, allows for reservoir operations, and supports error correction models like ERRIS to improve forecast accuracy. Users can work with various time steps (hourly, daily, monthly) and easily swap between different model structures.
+
+A typical workflow involves creating a `Simulation` object that represents your catchment model, then using `Parameteriser` objects to define the parameter space you want to explore. For calibration, you create an `ObjectiveEvaluator` that compares simulated outputs against observations using statistics like NSE or RMSE, then pass this to an `Optimiser` (typically SCE-UA) to find optimal parameter values. Once calibrated, you can run deterministic simulations or set up `EnsembleSimulation` objects for probabilistic forecasting with multiple input scenarios.
+
+The package is designed around a small set of core classes that work together: `Simulation` manages model execution and state, `HypercubeParameteriser` and its subclasses handle parameter definitions and transformations, `ObjectiveEvaluator` calculates goodness-of-fit metrics, and `Optimiser` performs parameter estimation. Time series data flows in and out through methods like `play_input()` and `get_recorded()`, with support for both simple NumPy/xarray structures and more complex ensemble forecast formats. Most operations return standard Python types (DataFrames, dictionaries, xarray DataArrays) making it straightforward to integrate swift2 into existing analysis pipelines.
 # API documentation
 
 # Module classes
@@ -12,29 +23,29 @@ Python package for ensemble streamflow forecasting. It can equally be used in no
 
 Classes:
 
-- **`CandidateFactorySeed`** –
-- **`CompositeParameteriser`** – A parameteriser defined as the concatenation of several parameterisers.
-- **`ConstraintParameteriser`** –
-- **`EnsembleForecastSimulation`** –
-- **`EnsembleSimulation`** – A simulation designed to facilitate model runs over ensemble of inputs
-- **`ErrisStagedCalibration`** –
-- **`FilteringParameteriser`** – A parameteriser designed to only show a subset to an optimiser, while applying more to a simulation. Used in log-likelihood contexts.
-- **`FunctionsParameteriser`** – A parameteriser usable with a multisite multiobjective calculator.
-- **`HypercubeParameteriser`** –
-- **`MaerrisStagedCalibration`** –
-- **`MemoryStates`** –
-- **`ObjectiveEvaluator`** – Objective Evaluator
-- **`ObjectiveScores`** –
-- **`Optimiser`** –
-- **`Parameteriser`** – Wrapper around a native parameteriser.
-- **`ScalingParameteriser`** –
-- **`SceTerminationCondition`** –
-- **`Simulation`** – Wrapper around single dimension simulation objects
-- **`SimulationMixin`** – A parent class for simulation objects. Most users are unlikely to explicitly use it.
-- **`StateInitParameteriser`** – Parameteriser designed to apply to simulations by setting initial states.
-- **`StateInitialiser`** –
-- **`TransformParameteriser`** – Parameteriser projecting parameters in a transformed space for optimisation.
-- **`VectorObjectiveScores`** –
+- **`CandidateFactorySeed`** – Generates initial parameter sets for optimisation algorithms using specified sampling strategies (e.g., uniform random sampling).
+- **`CompositeParameteriser`** – Combines multiple parameterisers into a single unit, useful for calibrating different model components with distinct parameter sets.
+- **`ConstraintParameteriser`** – Enforces feasibility constraints on parameter combinations (e.g., Muskingum routing stability conditions).
+- **`EnsembleForecastSimulation`** – Manages sequential ensemble forecast runs with regular forecast initialisation times and specified lead times.
+- **`EnsembleSimulation`** – UNDER CONSTRUCTION - Manages ensemble simulations over replicate inputs series, allowing for setup, state recording, and retrieval of simulation spans.
+- **`ErrisStagedCalibration`** – Orchestrates multi-stage calibration where hydrologic parameters and ERRIS error model parameters are estimated sequentially.
+- **`FilteringParameteriser`** – Shows only a subset of parameters to optimizers while applying all parameters to simulations, used in log-likelihood calibration.
+- **`FunctionsParameteriser`** – Manages parameters for multisite multi-objective calibration where different statistics are computed at multiple locations.
+- **`HypercubeParameteriser`** – Defines parameter bounds, values, and names as a hypercube for optimisation and sensitivity analysis.
+- **`MaerrisStagedCalibration`** – Performs staged calibration using the MAERRIS error correction approach with separate hydrologic and error model phases.
+- **`MemoryStates`** – Captures a snapshot of all model states at a point in time for later restoration or analysis.
+- **`ObjectiveEvaluator`** – Calculates goodness-of-fit statistics by comparing simulated outputs to observations over a specified period.
+- **`ObjectiveScores`** – Holds the results of an objective evaluation including score values and the associated parameter set.
+- **`Optimiser`** – Executes parameter estimation algorithms (typically SCE-UA) to find optimal parameter values for a given objective.
+- **`Parameteriser`** – Base class for objects that define and apply parameter configurations to simulations.
+- **`ScalingParameteriser`** – Defines linear relationships between virtual parameters and model states (e.g., initial storage as fraction of capacity).
+- **`SceTerminationCondition`** – Specifies when the SCE-UA optimizer should stop (e.g., max iterations, convergence tolerance, wall time).
+- **`Simulation`** – Represents a catchment model with its structure, states, and configuration; executes time-stepping simulations.
+- **`SimulationMixin`** – Provides common simulation methods shared by Simulation, EnsembleSimulation, and EnsembleForecastSimulation classes.
+- **`StateInitParameteriser`** – Defines how to initialize model states based on parameter values at the start of each simulation run.
+- **`StateInitialiser`** – Sets initial conditions for model states before simulation execution begins.
+- **`TransformParameteriser`** – Applies mathematical transformations (e.g., log, arcsinh) to parameters optimisation in transformed space.
+- **`VectorObjectiveScores`** – Collection of multiple ObjectiveScores, typically from a population-based optimizer's iteration.
 
 Functions:
 
@@ -48,6 +59,8 @@ CandidateFactorySeed(handle: CffiData, release_native: Callable[[CffiData], None
 
 Bases: `DeletableCffiNativeHandle`
 
+Generates initial parameter sets for optimisation algorithms using specified sampling strategies (e.g., uniform random sampling).
+
 ## CompositeParameteriser
 
 ```
@@ -56,13 +69,13 @@ CompositeParameteriser(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `HypercubeParameteriser`
 
-A parameteriser defined as the concatenation of several parameterisers.
+Combines multiple parameterisers into a single unit, useful for calibrating different model components with distinct parameter sets.
 
 Methods:
 
 - **`add_parameter_to_hypercube`** – Add a parameter to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception
 - **`add_to_hypercube`** – Add entries to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception.
-- **`append`** – Append a parameteriser to this composite parameteriser
+- **`append`** – Appends a parameteriser to this composite parameteriser.
 - **`apply_sys_config`** – Apply a model configuration to a simulation
 - **`as_dataframe`** – Convert this hypercube parameteriser to a pandas data frame representation
 - **`backtransform`** – Get the parameteriser values in the untransformed space
@@ -71,11 +84,11 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`empty_composite`** – Creates an empty parameteriser to be populated with other parameterisers
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -112,11 +125,39 @@ Parameters:
 append(p: HypercubeParameteriser)
 ```
 
-Append a parameteriser to this composite parameteriser
+Appends a parameteriser to this composite parameteriser.
+
+Adds another parameteriser to the end of this composite. The order matters: when applied to a simulation, parameterisers are processed in the order they were appended. Later parameterisers can override values set by earlier ones if they affect the same model elements.
 
 Parameters:
 
-- **`p`** (`HypercubeParameteriser`) – hypercube to append to this
+- **`p`** (`HypercubeParameteriser`) – Parameteriser to append. Can be any HypercubeParameteriser subclass including another CompositeParameteriser.
+
+Note
+
+The appended parameteriser is deep-copied before being added, so subsequent changes to `p` do not affect this composite.
+
+Examples:
+
+```
+>>> # Combine runoff and routing parameters
+>>> p_runoff = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_spec)
+>>> p_routing = HypercubeParameteriser.from_dataframe('generic links', routing_spec)
+>>> 
+>>> p_composite = CompositeParameteriser.empty_composite()
+>>> p_composite.append(p_runoff)
+>>> p_composite.append(p_routing)
+>>> p_composite.apply_sys_config(simulation)
+```
+
+```
+>>> # Combine parameters for different subcatchments
+>>> p_upper = create_parameteriser_for_upper_catchment()
+>>> p_lower = create_parameteriser_for_lower_catchment()
+>>> p_all = CompositeParameteriser.empty_composite()
+>>> p_all.append(p_upper)
+>>> p_all.append(p_lower)
+```
 
 ### apply_sys_config
 
@@ -245,33 +286,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### make_state_init_parameteriser
@@ -280,22 +349,39 @@ Examples:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -307,6 +393,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -335,24 +423,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -466,6 +581,8 @@ ConstraintParameteriser(handle: CffiData, release_native: Callable[[CffiData], N
 
 Bases: `HypercubeParameteriser`
 
+Enforces feasibility constraints on parameter combinations (e.g., Muskingum routing stability conditions).
+
 Methods:
 
 - **`add_parameter_to_hypercube`** – Add a parameter to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception
@@ -476,11 +593,11 @@ Methods:
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -610,33 +727,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### make_state_init_parameteriser
@@ -645,22 +790,39 @@ Examples:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -672,6 +834,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -700,24 +864,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -831,15 +1022,17 @@ EnsembleForecastSimulation(handle: CffiData, release_native: Callable[[CffiData]
 
 Bases: `DeletableCffiNativeHandle`, `SimulationMixin`
 
+Manages sequential ensemble forecast runs with regular forecast initialisation times and specified lead times.
+
 Methods:
 
-- **`exec_simulation`** – Execute a simulation
+- **`exec_simulation`** – Executes the simulation over its configured time span.
 - **`get_played_varnames`** – Gets all the names of states fed an input time series
 - **`get_recorded_ensemble_forecast`** –
 - **`get_recorded_varnames`** – Gets all the names of the recorded states
 - **`get_simulation_span`** –
 - **`record_ensemble_forecast_state`** –
-- **`record_state`** – Record a time series of one of the state of the model
+- **`record_state`** – Records a time series of model state variable(s) during simulation execution.
 
 ### exec_simulation
 
@@ -847,11 +1040,38 @@ Methods:
 exec_simulation(reset_initial_states: bool = True) -> None
 ```
 
-Execute a simulation
+Executes the simulation over its configured time span.
+
+Runs the model forward in time from the simulation start to end date, using the configured time step. Input time series (set via play_input) are read and applied at each step, and any recorded state variables (set via record_state) are stored for later retrieval.
 
 Parameters:
 
-- **`reset_initial_states`** (`bool`, default: `True` ) – logical, should the states of the model be reinitialized before the first time step.
+- **`reset_initial_states`** (`bool`, default: `True` ) – Whether to reset all model states to their initial values before starting the simulation. If True (default), any state initialisers configured on the simulation are also applied. Set to False to continue from current model states (useful for sequential simulation periods). Defaults to True.
+
+Note
+
+Before calling this method, ensure you have:
+
+- Set the simulation span via set_simulation_span()
+- Configured input time series via play_input() or play_inputs()
+- Set up recording via record_state() for any outputs you need
+
+Examples:
+
+```
+>>> # Standard simulation run
+>>> simulation.set_simulation_span('2000-01-01', '2005-12-31')
+>>> simulation.play_input(rainfall_ts, 'subarea.Subarea.P')
+>>> simulation.record_state('Catchment.StreamflowRate')
+>>> simulation.exec_simulation()
+>>> flow = simulation.get_recorded()
+```
+
+```
+>>> # Continue simulation without resetting states
+>>> simulation.set_simulation_span('2006-01-01', '2010-12-31')
+>>> simulation.exec_simulation(reset_initial_states=False)
+```
 
 ### get_played_varnames
 
@@ -901,17 +1121,38 @@ record_ensemble_forecast_state(var_ids: VecStr = CATCHMENT_FLOWRATE_VARID, recor
 record_state(var_ids: VecStr = CATCHMENT_FLOWRATE_VARID, recording_provider: Optional[TimeSeriesLibrary] = None, data_ids: Optional[VecStr] = None) -> None
 ```
 
-Record a time series of one of the state of the model
+Records a time series of model state variable(s) during simulation execution.
+
+This method instructs the simulation to store values of specified state variables at each time step. Recorded data can be retrieved after execution using get_recorded(). By default, values are stored in memory, but can optionally be written to an external time series library.
 
 Parameters:
 
-- **`var_ids`** (`VecStr`, default: `CATCHMENT_FLOWRATE_VARID` ) – identifier(s) of the output variable recorded to a time series, e.g. 'Catchment|StreamflowRate' or 'subcatchment.Subarea.runoff'. Defaults to CATCHMENT_FLOWRATE_VARID.
-- **`recording_provider`** (`TimeSeriesLibrary`, default: `None` ) – description. Defaults to None.
-- **`data_ids`** (`VecStr`, default: `None` ) – description. Defaults to None.
+- **`var_ids`** (`VecStr`, default: `CATCHMENT_FLOWRATE_VARID` ) – State variable identifier(s) to record. Common examples include 'Catchment.StreamflowRate' for outlet flow, 'subarea.{name}.runoff' for subarea runoff, or 'node.{name}.OutflowRate' for node outflows. Defaults to CATCHMENT_FLOWRATE_VARID (the main outlet streamflow).
+- **`recording_provider`** (`TimeSeriesLibrary`, default: `None` ) – External time series library for storage. If None (default), values are stored in memory and retrieved via get_recorded().
+- **`data_ids`** (`VecStr`, default: `None` ) – Identifier(s) for data in the recording_provider. Only used when recording_provider is specified. Must match the length of var_ids.
 
 Raises:
 
-- `ValueError` – description
+- `ValueError` – If data_ids length doesn't match var_ids when recording_provider is specified.
+
+Examples:
+
+```
+>>> # Record outlet streamflow (default)
+>>> simulation.record_state()
+```
+
+```
+>>> # Record multiple state variables
+>>> simulation.record_state(['node.n1.OutflowRate', 'node.n2.OutflowRate'])
+```
+
+```
+>>> # Record after simulation and retrieve
+>>> simulation.record_state('subarea.Subarea.runoff')
+>>> simulation.exec_simulation()
+>>> runoff = simulation.get_recorded('subarea.Subarea.runoff')
+```
 
 ## EnsembleSimulation
 
@@ -921,7 +1162,7 @@ EnsembleSimulation(handle: CffiData, release_native: Callable[[CffiData], None],
 
 Bases: `DeletableCffiNativeHandle`
 
-A simulation designed to facilitate model runs over ensemble of inputs
+UNDER CONSTRUCTION - Manages ensemble simulations over replicate inputs series, allowing for setup, state recording, and retrieval of simulation spans.
 
 Methods:
 
@@ -990,6 +1231,8 @@ ErrisStagedCalibration(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `DeletableCffiNativeHandle`
 
+Orchestrates multi-stage calibration where hydrologic parameters and ERRIS error model parameters are estimated sequentially.
+
 Methods:
 
 - **`extract_optimisation_log`** –
@@ -1008,7 +1251,7 @@ FilteringParameteriser(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `HypercubeParameteriser`
 
-A parameteriser designed to only show a subset to an optimiser, while applying more to a simulation. Used in log-likelihood contexts.
+Shows only a subset of parameters to optimizers while applying all parameters to simulations, used in log-likelihood calibration.
 
 Methods:
 
@@ -1020,12 +1263,12 @@ Methods:
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`hide_parameters`** – Hide some parameters (from the outside e.g. optimisers) in a filter parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`hide_parameters`** – Hides parameters from optimisers while still applying them to simulations.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -1156,33 +1399,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### hide_parameters
@@ -1191,14 +1462,40 @@ Examples:
 hide_parameters(patterns, regex=False, starts_with=False, strict=False)
 ```
 
-Hide some parameters (from the outside e.g. optimisers) in a filter parameteriser
+Hides parameters from optimisers while still applying them to simulations.
+
+This creates a filter where certain parameters are invisible to the optimisation algorithm but are still applied when the parameteriser configures a simulation. Useful in log-likelihood calibration where transformation parameters (b, m, s, a) should be fixed while hydrologic parameters are optimised.
 
 Parameters:
 
-- **`patterns`** (`[type]`) – character, one or more pattern to match and hide matching parameters. Match according to other parameters.
-- **`regex`** (`bool`, default: `False` ) – logical, defaults False, should the patterns be used as regular expressions.. Defaults to False.
-- **`starts_with`** (`bool`, default: `False` ) – logical, defaults False. Ignored if regex is True. Should the patterns be used as starting strings in the parameter names.. Defaults to False.
-- **`strict`** (`bool`, default: `False` ) – logical, default False. Used only if regex and starts_with are False. If True, raises an error if one of the "patterns" has no exact match in the parameters.. Defaults to False.
+- **`patterns`** (`str or sequence of str`) – One or more patterns to match parameter names for hiding. Matching behaviour depends on regex and starts_with flags.
+- **`regex`** (`bool`, default: `False` ) – If True, patterns are treated as regular expressions. Defaults to False.
+- **`starts_with`** (`bool`, default: `False` ) – If True (and regex is False), patterns match parameter names that start with the pattern string. Defaults to False.
+- **`strict`** (`bool`, default: `False` ) – Only used when regex=False and starts_with=False. If True, raises an error if any pattern has no exact match in the parameters. Useful for catching typos. Defaults to False.
+
+Note
+
+Hidden parameters retain their current values when applied to simulations. To change hidden parameter values, use set_parameter_value() on the underlying parameteriser before wrapping it in the filter.
+
+Examples:
+
+```
+>>> # Hide transformation parameters in log-likelihood calibration
+>>> p = HypercubeParameteriser.from_dataframe('generic', all_params)
+>>> p_filtered = p.filtered_parameters()
+>>> p_filtered.hide_parameters(['b', 'm', 's', 'a'], strict=True)
+>>> # Now optimiser only sees hydrologic parameters, but all are applied
+```
+
+```
+>>> # Hide all parameters starting with 'log_'
+>>> p_filtered.hide_parameters(['log_'], starts_with=True)
+```
+
+```
+>>> # Hide using regex pattern
+>>> p_filtered.hide_parameters([r'x[1-3]'], regex=True)  # Hides x1, x2, x3
+```
 
 ### make_state_init_parameteriser
 
@@ -1206,22 +1503,39 @@ Parameters:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -1233,6 +1547,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -1261,24 +1577,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -1406,7 +1749,7 @@ FunctionsParameteriser(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `HypercubeParameteriser`
 
-A parameteriser usable with a multisite multiobjective calculator.
+Manages parameters for multisite multi-objective calibration where different statistics are computed at multiple locations.
 
 This is an advanced topic, see function `create_multisite_obj_parameteriser`. Users may refer to [this sample workflow](https://csiro-hydroinformatics.github.io/swift-py-doc/notebooks/calibrate_multisite/)
 
@@ -1420,11 +1763,11 @@ Methods:
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -1554,33 +1897,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### make_state_init_parameteriser
@@ -1589,22 +1960,39 @@ Examples:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -1616,6 +2004,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -1644,24 +2034,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -1775,6 +2192,8 @@ HypercubeParameteriser(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `Parameteriser`
 
+Defines parameter bounds, values, and names as a hypercube for optimisation and sensitivity analysis.
+
 Methods:
 
 - **`add_parameter_to_hypercube`** – Add a parameter to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception
@@ -1785,11 +2204,11 @@ Methods:
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -1919,33 +2338,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### make_state_init_parameteriser
@@ -1954,22 +2401,39 @@ Examples:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -1981,6 +2445,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -2009,24 +2475,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -2140,6 +2633,8 @@ MaerrisStagedCalibration(handle: CffiData, release_native: Callable[[CffiData], 
 
 Bases: `DeletableCffiNativeHandle`
 
+Performs staged calibration using the MAERRIS error correction approach with separate hydrologic and error model phases.
+
 Methods:
 
 - **`extract_optimisation_log`** –
@@ -2158,6 +2653,8 @@ MemoryStates(handle: CffiData, release_native: Callable[[CffiData], None], type_
 
 Bases: `DeletableCffiNativeHandle`
 
+Captures a snapshot of all model states at a point in time for later restoration or analysis.
+
 ## ObjectiveEvaluator
 
 ```
@@ -2166,12 +2663,12 @@ ObjectiveEvaluator(handle: CffiData, release_native: Callable[[CffiData], None],
 
 Bases: `DeletableCffiNativeHandle`
 
-Objective Evaluator
+Calculates goodness-of-fit statistics by comparing simulated outputs to observations over a specified period.
 
 Methods:
 
 - **`create_composite_objective`** – Creates a composite objective, weighted average of several objectives
-- **`create_sce_optim_swift`** – Creates a shuffled complex optimiser for this objective
+- **`create_sce_optim_swift`** – Creates an SCE-UA optimiser for this objective.
 - **`get_score`** – Evaluate this objective for a given parameterisation
 - **`get_scores`** – Evaluate this objective for a given parameterisation
 
@@ -2199,17 +2696,64 @@ Returns:
 create_sce_optim_swift(termination_criterion: Optional[SceTerminationCondition] = None, sce_params: Optional[Dict[str, float]] = None, population_initialiser: Optional[Union[CandidateFactorySeed, HypercubeParameteriser]] = None) -> Optimiser
 ```
 
-Creates a shuffled complex optimiser for this objective
+Creates an SCE-UA optimiser for this objective.
+
+Builds a Shuffled Complex Evolution optimiser configured to minimise (or maximise) this objective. The optimiser will search the parameter space defined by the parameteriser to find optimal values.
 
 Parameters:
 
-- **`termination_criterion`** (`Optional[&quot;SceTerminationCondition&quot;]`, default: `None` ) – A termination criterion for the optimiser. Defaults to None, in which case an arbitrary "relative standard deviation" is set up.
-- **`sce_params`** (`Optional[Dict[str, float]]`, default: `None` ) – hyperparameters controlling SCE. Defaults to None, in which case swift2.parameteriser.get_default_sce_parameters is used.
-- **`population_initialiser`** (`Optional[&quot;CandidateFactorySeed&quot;]`, default: `None` ) – A candidate factory to initialise the population of parameters the optimiser starts from, or a hypercube. In the latter case, uniform random sampling is used. Defaults to None, which leads to an error (for legacy reasons).
+- **`termination_criterion`** (`Optional[SceTerminationCondition]`, default: `None` ) – Stopping condition for the optimiser. If None, creates a default criterion based on relative standard deviation of the objective across complexes. See get_marginal_termination() or get_max_runtime_termination() for alternatives. Defaults to None.
+- **`sce_params`** (`Optional[Dict[str, float]]`, default: `None` ) – SCE algorithm hyperparameters controlling complex size, evolution strategy, etc. If None, uses get_default_sce_parameters(). Keys typically include 'NumShuffle', 'NumComplexes', etc. Defaults to None.
+- **`population_initialiser`** (`Optional[Union[CandidateFactorySeed, HypercubeParameteriser]]`, default: `None` ) – Defines how to generate the initial parameter population. Can be:
+  - A CandidateFactorySeed for custom sampling (e.g., Latin hypercube)
+  - A HypercubeParameteriser, in which case uniform random sampling is used
+  - None raises an error (required argument for historical reasons) Defaults to None.
 
 Returns:
 
-- **`Optimiser`** ( `Optimiser` ) – SCE optimiser
+- **`Optimiser`** ( `Optimiser` ) – Configured SCE-UA optimiser ready to run via execute_optimisation().
+
+Note
+
+The interaction between these parameters matters:
+
+- termination_criterion controls when to stop
+- sce_params controls how the algorithm explores parameter space
+- population_initialiser controls where the algorithm starts
+
+For most users, providing just the population_initialiser (the parameter space) is sufficient.
+
+Examples:
+
+```
+>>> # Basic calibration with default settings
+>>> objective = simulation.create_objective('Catchment.StreamflowRate', 
+...                                         observed, 'NSE', start, end)
+>>> parameteriser = HypercubeParameteriser.from_dataframe('generic', param_spec)
+>>> optimiser = objective.create_sce_optim_swift(
+...     population_initialiser=parameteriser
+... )
+>>> optimiser.execute_optimisation()
+```
+
+```
+>>> # Calibration with wall-time limit
+>>> from swift2.parameteriser import get_max_runtime_termination
+>>> term_crit = get_max_runtime_termination(max_hours=2.0)
+>>> optimiser = objective.create_sce_optim_swift(
+...     termination_criterion=term_crit,
+...     population_initialiser=parameteriser
+... )
+```
+
+```
+>>> # Calibration with custom SCE parameters
+>>> sce_config = {'NumShuffle': 20, 'NumComplexes': 5}
+>>> optimiser = objective.create_sce_optim_swift(
+...     sce_params=sce_config,
+...     population_initialiser=parameteriser
+... )
+```
 
 ### get_score
 
@@ -2250,6 +2794,8 @@ ObjectiveScores(handle: CffiData, release_native: Callable[[CffiData], None], ty
 ```
 
 Bases: `DeletableCffiNativeHandle`
+
+Holds the results of an objective evaluation including score values and the associated parameter set.
 
 Methods:
 
@@ -2308,9 +2854,11 @@ Optimiser(handle: CffiData, release_native: Callable[[CffiData], None], type_id:
 
 Bases: `DeletableCffiNativeHandle`
 
+Executes parameter estimation algorithms (typically SCE-UA) to find optimal parameter values for a given objective.
+
 Methods:
 
-- **`execute_optimisation`** –
+- **`execute_optimisation`** – Executes the parameter optimisation process.
 - **`extract_optimisation_log`** – Extract the logger from a parameter extimator (optimiser or related)
 - **`get_default_maximum_threads`** –
 - **`set_calibration_logger`** – Set the type of calibration logger to use
@@ -2322,6 +2870,56 @@ Methods:
 
 ```
 execute_optimisation()
+```
+
+Executes the parameter optimisation process.
+
+Runs the configured optimisation algorithm (typically SCE-UA) to find optimal parameter values for the associated objective. The optimiser iteratively evaluates the objective function, evolving the parameter population towards better solutions until the termination criterion is met.
+
+Returns:
+
+- **`ObjectiveScores`** – The best parameter set found and its associated objective score(s). Access the optimal parameters via result.parameteriser and scores via result.scores.
+
+Note
+
+- This method can take significant time depending on the termination criterion and number of parameters.
+- Progress is logged if set_calibration_logger() was called beforehand.
+- The optimisation log can be extracted after completion using extract_optimisation_log() for detailed analysis of the search process.
+- For multi-core systems, you can set thread count via set_maximum_threads() before calling this. By default, n_core-1 is used at most, to leave one free for user interactions.
+
+Side Effects
+
+- Runs the simulation many times (typically hundreds to thousands of evaluations)
+- Modifies the simulation's parameter values during search
+- Records detailed optimisation history if logging is enabled
+
+Examples:
+
+```
+>>> # Basic optimisation
+>>> objective = simulation.create_objective('Catchment.StreamflowRate',
+...                                         observed, 'NSE', start, end)
+>>> parameteriser = HypercubeParameteriser.from_dataframe('generic', param_spec)
+>>> optimiser = objective.create_sce_optim_swift(population_initialiser=parameteriser)
+>>> best_params = optimiser.execute_optimisation()
+>>> print(f"Best NSE: {best_params.scores['NSE']}")
+>>> print(f"Optimal parameters:\n{best_params.parameteriser}")
+```
+
+```
+>>> # With logging for post-analysis
+>>> optimiser.set_calibration_logger()
+>>> best_params = optimiser.execute_optimisation()
+>>> log = optimiser.extract_optimisation_log()
+>>> log.facet_plot('x1', facet_category='Message')  # Visualise parameter evolution
+```
+
+```
+>>> # Apply best parameters and run validation
+>>> best_params.apply_sys_config(simulation)
+>>> simulation.set_simulation_span(valid_start, valid_end)
+>>> simulation.exec_simulation()
+>>> validation_flow = simulation.get_recorded()
 ```
 
 ### extract_optimisation_log
@@ -2388,7 +2986,7 @@ Parameteriser(handle: CffiData, release_native: Callable[[CffiData], None], type
 
 Bases: `DeletableCffiNativeHandle`
 
-Wrapper around a native parameteriser.
+Base class for objects that define and apply parameter configurations to simulations.
 
 Note
 
@@ -2464,25 +3062,27 @@ ScalingParameteriser(handle: CffiData, release_native: Callable[[CffiData], None
 
 Bases: `TransformParameteriser`
 
+Defines linear relationships between virtual parameters and model states (e.g., initial storage as fraction of capacity).
+
 Methods:
 
-- **`add_linear_scaled_parameter`** –
+- **`add_linear_scaled_parameter`** – Adds a single linearly scaled parameter relationship.
 - **`add_parameter_to_hypercube`** – Add a parameter to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception
 - **`add_to_hypercube`** – Add entries to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception.
-- **`add_transform`** – Create a parameteriser for which parameter transformations can be defined
+- **`add_transform`** – Adds a mathematical transformation to a parameter for optimisation in transformed space.
 - **`apply_sys_config`** – Apply a model configuration to a simulation
 - **`as_dataframe`** – Convert this hypercube parameteriser to a pandas data frame representation
 - **`backtransform`** – Get the parameteriser values in the untransformed space
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
 - **`linear_parameteriser`** – Create a scaled linear parameteriser, tying by a linear transformation a (resp several) model state to a (resp several) parameter values
 - **`linear_parameteriser_from`** – Create a scaled linear parameteriser, tying by a linear transformation a (resp several) model state to a (resp several) parameter values
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -2495,6 +3095,42 @@ Methods:
 
 ```
 add_linear_scaled_parameter(param_name: str, state_name: str, scaling_var_name: str, min_p_val: float, max_p_val: float, value: float, intercept: float = 0.0)
+```
+
+Adds a single linearly scaled parameter relationship.
+
+Defines a virtual parameter whose value determines a model state through a linear relationship: model_state = virtual_param * scaling_var + intercept. This is typically used for state initialisation, such as setting initial soil moisture as a fraction of maximum capacity.
+
+Parameters:
+
+- **`param_name`** (`str`) – Name of the virtual parameter to create (e.g., 'S0').
+- **`state_name`** (`str`) – Name of the model state to initialise (e.g., 'S' for soil moisture store).
+- **`scaling_var_name`** (`str`) – Name of the model parameter that scales the relationship (e.g., 'x1' for GR4J maximum soil capacity). The model state will be set to: state = param_name_value * scaling_var_name_value + intercept.
+- **`min_p_val`** (`float`) – Minimum feasible value for the virtual parameter.
+- **`max_p_val`** (`float`) – Maximum feasible value for the virtual parameter.
+- **`value`** (`float`) – Initial value for the virtual parameter (scaling factor).
+- **`intercept`** (`float`, default: `0.0` ) – Constant offset in the linear relationship. Typically 0.0, meaning the state is purely a scaled fraction of the scaling variable. Defaults to 0.0.
+
+Note
+
+After adding scaled parameters, call make_state_init_parameteriser() to create a state initialiser that can be applied to simulations. The `scaling_var_name` parameter must already exist in the simulation's model.
+
+Examples:
+
+```
+>>> # Set GR4J initial soil moisture as 90% of capacity (x1)
+>>> p_states = ScalingParameteriser.linear_parameteriser(
+...     param_name=['S0'],
+...     state_name=['S'],
+...     scaling_var_name=['x1'],
+...     min_p_val=[0.0],
+...     max_p_val=[1.0],
+...     value=[0.9],
+...     selector_type='each subarea'
+... )
+>>> p_states.add_linear_scaled_parameter('R0', 'R', 'x3', 0.0, 1.0, 0.5)
+>>> init = p_states.make_state_init_parameteriser()
+>>> simulation.use_state_initialises(init)
 ```
 
 ### add_parameter_to_hypercube
@@ -2525,19 +3161,32 @@ Parameters:
 add_transform(param_name: str, inner_param_name: str, transform_id: str, a: float = 1.0, b: float = 0.0)
 ```
 
-Create a parameteriser for which parameter transformations can be defined
+Adds a mathematical transformation to a parameter for optimisation in transformed space.
 
-```
-This allows to define e.g. a virtual parameter log_X instead of calibrating on the parameter X.
-```
+This allows you to define a virtual parameter (e.g., log_X) that gets optimised instead of the original parameter X. The transformation is automatically inverted when applying parameters to the simulation. Common use cases include log transforms for strictly positive parameters or arcsinh for parameters that can be negative.
 
 Parameters:
 
-- **`param_name`** (`str`) – the name of the meta-parameter. Note that it can be the same value as inner_param_name, but this is NOT recommended.
-- **`inner_param_name`** (`str`) – the name of the parameter being transformed
-- **`transform_id`** (`str`) – identifier for a known bijective univariate function
-- **`a`** (`float`, default: `1.0` ) – parameter in Y = F(ax+b). Defaults to 1.0.
-- **`b`** (`float`, default: `0.0` ) – parameter in Y = F(ax+b). Defaults to 0.0.
+- **`param_name`** (`str`) – Name of the new transformed parameter (e.g., 'log_x4'). This is what the optimiser will see and adjust. Should differ from inner_param_name to avoid confusion.
+- **`inner_param_name`** (`str`) – Name of the underlying parameter being transformed (e.g., 'x4'). Must already exist in the parameteriser.
+- **`transform_id`** (`str`) – Identifier for the transformation function. Available options as of 2025-11:
+  - 'log10': Base-10 logarithm (for positive parameters, or made positive via a and b)
+  - '10\*\*x': Base-10 exponentiation (inverse of log10)
+  - '1/x': Reciprocal
+  - 'x': Identity (no transformation). Structurally useful in edge cases but normally not needed.
+  - 'asinh': Inverse hyperbolic sine
+  - 'sinh': Hyperbolic sine
+  - 'atanh': Inverse hyperbolic tangent
+  - 'tanh': Hyperbolic tangent
+  - 'sqrt': Square root (for non-negative parameters or made non-negative via a and b)
+  - 'square': square function
+  - 'logit': Logit function (for parameters in (0,1))
+- **`a`** (`float`, default: `1.0` ) – Scaling factor applied before transformation: Y = F(a\*x + b). Defaults to 1.0.
+- **`b`** (`float`, default: `0.0` ) – Offset applied before transformation: Y = F(a\*x + b). Defaults to 0.0.
+
+Note
+
+After transformation, the optimiser works with param_name, but the simulation receives the back-transformed values for inner_param_name. Use backtransform() to retrieve parameters in the original space.
 
 Examples:
 
@@ -2667,33 +3316,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### linear_parameteriser
@@ -2746,22 +3423,39 @@ Returns:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -2773,6 +3467,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -2801,24 +3497,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -2932,6 +3655,8 @@ SceTerminationCondition(handle: CffiData, release_native: Callable[[CffiData], N
 
 Bases: `DeletableCffiNativeHandle`
 
+Specifies when the SCE-UA optimizer should stop (e.g., max iterations, convergence tolerance, wall time).
+
 ## Simulation
 
 ```
@@ -2940,7 +3665,7 @@ Simulation(handle: CffiData, release_native: Callable[[CffiData], None], type_id
 
 Bases: `DeletableCffiNativeHandle`, `SimulationMixin`
 
-Wrapper around single dimension simulation objects
+Represents a catchment model with its structure, states, and configuration; executes time-stepping simulations.
 
 Methods:
 
@@ -2955,7 +3680,7 @@ Methods:
 - **`describe`** – Describe the catchment model structure using simple python representations
 - **`ensemble_simulation`** – Create an ensemble simulation templated from this simulation
 - **`erris_ensemble_simulation`** – Creates an ensemble simulation templated on this simulation, with an ERRIS model on one of the network element
-- **`exec_simulation`** – Execute a simulation
+- **`exec_simulation`** – Executes the simulation over its configured time span.
 - **`from_json_file`** – Create a model simulation from a file with a JSON serialisation.
 - **`get_all_played`** – Gets all the time series of models variables into which input time series is/are played
 - **`get_all_recorded`** – Gets all the time series of models variables recorded from
@@ -2966,7 +3691,7 @@ Methods:
 - **`get_node_names`** – Gets all the names of the nodes in the catchment
 - **`get_played`** – Retrieves one or more played (input) time series from a simulation
 - **`get_played_varnames`** – Gets all the names of model states fed an input time series
-- **`get_recorded`** – Retrieves a recorded time series from a simulation
+- **`get_recorded`** – Retrieves recorded time series from the simulation.
 - **`get_recorded_varnames`** – Gets all the names of the recorded states
 - **`get_simulation_span`** – Gets the simulation span of this simulation
 - **`get_state_value`** – Gets the value(s) of a model state(s)
@@ -2975,13 +3700,13 @@ Methods:
 - **`get_variable_ids`** – Gets all the names of the variables of an element (link, node, subarea) within a catchment
 - **`is_variable_id`** – Are one or more model state identifier(s) valid
 - **`muskingum_param_constraints`** – Create a parameteriser with Muskingum-type constraints.
-- **`play_input`** – Sets one or more time series as input(s) to a simulation
+- **`play_input`** – Sets one or more time series as input(s) to a simulation.
 - **`play_inputs`** – Assign input time series from a time series library to a model simulation
 - **`play_subarea_input`** – Sets time series as input to a simulation
 - **`prepare_dual_pass_forecasting`** – Create an ensemble simulation for forecasting with the Dual Pass error correction method
 - **`prepare_erris_forecasting`** – Create an ensemble simulation for forecasting with ERRIS
 - **`record_singular_state`** – DRAFT Advanced/technical. Record states to a record provider.
-- **`record_state`** – Record a time series of one of the state of the model
+- **`record_state`** – Records a time series of model state variable(s) during simulation execution.
 - **`remove_state_initialisers`** – Forces the removal of any state initialiser.
 - **`reset_model_states`** – Reset the model states of a simulation, and apply one or more state initialers if the simulation is configured with any.
 - **`set_error_correction_model`** – Add an error correction model to an element in a catchment
@@ -2992,14 +3717,14 @@ Methods:
 - **`set_simulation_span`** – Sets the simulation span
 - **`set_simulation_time_step`** – Sets the time step of this simulation
 - **`set_state_value`** – Sets the value of a model state
-- **`set_states`** – Apply memory states to a simulation
-- **`snapshot_state`** – Take a snapshot of the memory states of a simulation
+- **`set_states`** – Restores model states from a previously captured snapshot.
+- **`snapshot_state`** – Captures a snapshot of all current model states for later restoration.
 - **`sort_by_execution_order`** – Sort the specified element ids according to the execution order of the simulation
-- **`split_to_subcatchments`** – Split a catchment in subcatchments, given a list of node/link element identifiers
-- **`subset_catchment`** – Subsets a catchment, keeping only a portion above or below a node, link or subarea.
+- **`split_to_subcatchments`** – Splits a catchment into subcatchments at specified network elements.
+- **`subset_catchment`** – Subsets a catchment, keeping only elements above or below a specified element.
 - **`swap_model`** – Clone and change a simulation, using another model
 - **`to_json_file`** – Save a model simulation from a file with a JSON serialisation.
-- **`use_state_initialises`** – Sets the state initialiser to use for a simulation. This forces the removal of any prior state initialiser.
+- **`use_state_initialiser`** – Sets the state initialiser to use for a simulation. This forces the removal of any prior state initialiser.
 
 ### add_state_initialiser
 
@@ -3252,11 +3977,38 @@ Returns:
 exec_simulation(reset_initial_states: bool = True) -> None
 ```
 
-Execute a simulation
+Executes the simulation over its configured time span.
+
+Runs the model forward in time from the simulation start to end date, using the configured time step. Input time series (set via play_input) are read and applied at each step, and any recorded state variables (set via record_state) are stored for later retrieval.
 
 Parameters:
 
-- **`reset_initial_states`** (`bool`, default: `True` ) – logical, should the states of the model be reinitialized before the first time step.
+- **`reset_initial_states`** (`bool`, default: `True` ) – Whether to reset all model states to their initial values before starting the simulation. If True (default), any state initialisers configured on the simulation are also applied. Set to False to continue from current model states (useful for sequential simulation periods). Defaults to True.
+
+Note
+
+Before calling this method, ensure you have:
+
+- Set the simulation span via set_simulation_span()
+- Configured input time series via play_input() or play_inputs()
+- Set up recording via record_state() for any outputs you need
+
+Examples:
+
+```
+>>> # Standard simulation run
+>>> simulation.set_simulation_span('2000-01-01', '2005-12-31')
+>>> simulation.play_input(rainfall_ts, 'subarea.Subarea.P')
+>>> simulation.record_state('Catchment.StreamflowRate')
+>>> simulation.exec_simulation()
+>>> flow = simulation.get_recorded()
+```
+
+```
+>>> # Continue simulation without resetting states
+>>> simulation.set_simulation_span('2006-01-01', '2010-12-31')
+>>> simulation.exec_simulation(reset_initial_states=False)
+```
 
 ### from_json_file
 
@@ -3403,17 +4155,42 @@ Gets all the names of model states fed an input time series
 get_recorded(var_ids: Optional[VecStr] = None, start_time: Optional[ConvertibleToTimestamp] = None, end_time: Optional[ConvertibleToTimestamp] = None) -> DataArray
 ```
 
-Retrieves a recorded time series from a simulation
+Retrieves recorded time series from the simulation.
+
+Returns time series data for state variables that were configured for recording via record_state(). If no var_ids are specified, returns all recorded variables as a multivariate time series.
 
 Parameters:
 
-- **`var_ids`** (`optional str or sequence of str`, default: `None` ) – name(s) of the model variable(s) recorded to a time series. e.g. 'Catchment.StreamflowRate'. If missing, a multivariate time series of all played states is returned; this may be a large amount of data.
-- **`start_time`** (`datetime like`, default: `None` ) – An optional parameter, the start of a period to subset the time series
-- **`end_time`** (`datetime like`, default: `None` ) – An optional parameter, the end of a period to subset the time series
+- **`var_ids`** (`optional str or sequence of str`, default: `None` ) – State variable identifier(s) to retrieve. If None, returns all recorded variables (may be a large multivariate dataset). Examples: 'Catchment.StreamflowRate', 'node.n1.OutflowRate', 'subarea.Subarea.runoff'.
+- **`start_time`** (`datetime like`, default: `None` ) – Start of period to subset the time series. If None, returns from the beginning of the simulation.
+- **`end_time`** (`datetime like`, default: `None` ) – End of period to subset the time series. If None, returns to the end of the simulation.
 
 Returns:
 
-- `DataArray` – xr.DataArray: a time series, possibly multivariate.
+- `DataArray` – xr.DataArray: Time series with 'time' dimension and 'variable_identifiers' coordinate. For single variables, use .sel(variable_identifiers='var_name') to extract. For multiple variables, the result is already multivariate.
+
+Examples:
+
+```
+>>> # Get single recorded variable
+>>> simulation.record_state('Catchment.StreamflowRate')
+>>> simulation.exec_simulation()
+>>> flow = simulation.get_recorded('Catchment.StreamflowRate')
+```
+
+```
+>>> # Get all recorded variables
+>>> simulation.record_state(['node.n1.OutflowRate', 'node.n2.OutflowRate'])
+>>> simulation.exec_simulation()
+>>> all_flows = simulation.get_recorded()  # Returns both series
+```
+
+```
+>>> # Get subset of time period
+>>> flow_subset = simulation.get_recorded('Catchment.StreamflowRate', 
+...                                       start_time='2001-01-01',
+...                                       end_time='2002-12-31')
+```
 
 ### get_recorded_varnames
 
@@ -3533,12 +4310,28 @@ Examples:
 play_input(input_ts: TimeSeriesLike, var_ids: Optional[VecStr] = None) -> None
 ```
 
-Sets one or more time series as input(s) to a simulation
+Sets one or more time series as input(s) to a simulation.
+
+This method assigns time series data to model state variables (such as rainfall to 'P' or evaporation to 'E' for runoff models). The time series will be played into the simulation during execution.
 
 Parameters:
 
-- **`input_ts`** (`TimeSeriesLike`) – univariate time series. If an xts time series column names must be valid model variable identifiers, unless explicitely provided via varIds
-- **`var_ids`** (`optional str or sequence of str`, default: `None` ) – optional character, the variable identifiers to use, overriding the column names of the inputTs. If not NULL, must be of length equal to the number of columns in inputTs
+- **`input_ts`** (`TimeSeriesLike`) – Time series data to play into the simulation. Can be univariate or multivariate. If multivariate (e.g., xarray DataArray), column names must be valid model variable identifiers unless explicitly overridden via var_ids.
+- **`var_ids`** (`optional str or sequence of str`, default: `None` ) – Model variable identifier(s) to receive the input data, overriding any column names in input_ts. If provided, must match the number of columns/variables in input_ts. Common examples: 'subarea.{name}.P' for rainfall, 'subarea.{name}.E' for evaporation.
+
+Examples:
+
+```
+>>> # Play rainfall into a single subarea model
+>>> rain_ts = ... # xarray DataArray with rainfall data
+>>> simulation.play_input(rain_ts, 'subarea.Subarea.P')
+```
+
+```
+>>> # Play multiple inputs using column names
+>>> inputs = xr.DataArray(...)  # with columns 'subarea.Subarea.P' and 'subarea.Subarea.E'
+>>> simulation.play_input(inputs)
+```
 
 ### play_inputs
 
@@ -3624,17 +4417,38 @@ Likely not for end users.
 record_state(var_ids: VecStr = CATCHMENT_FLOWRATE_VARID, recording_provider: Optional[TimeSeriesLibrary] = None, data_ids: Optional[VecStr] = None) -> None
 ```
 
-Record a time series of one of the state of the model
+Records a time series of model state variable(s) during simulation execution.
+
+This method instructs the simulation to store values of specified state variables at each time step. Recorded data can be retrieved after execution using get_recorded(). By default, values are stored in memory, but can optionally be written to an external time series library.
 
 Parameters:
 
-- **`var_ids`** (`VecStr`, default: `CATCHMENT_FLOWRATE_VARID` ) – identifier(s) of the output variable recorded to a time series, e.g. 'Catchment|StreamflowRate' or 'subcatchment.Subarea.runoff'. Defaults to CATCHMENT_FLOWRATE_VARID.
-- **`recording_provider`** (`TimeSeriesLibrary`, default: `None` ) – description. Defaults to None.
-- **`data_ids`** (`VecStr`, default: `None` ) – description. Defaults to None.
+- **`var_ids`** (`VecStr`, default: `CATCHMENT_FLOWRATE_VARID` ) – State variable identifier(s) to record. Common examples include 'Catchment.StreamflowRate' for outlet flow, 'subarea.{name}.runoff' for subarea runoff, or 'node.{name}.OutflowRate' for node outflows. Defaults to CATCHMENT_FLOWRATE_VARID (the main outlet streamflow).
+- **`recording_provider`** (`TimeSeriesLibrary`, default: `None` ) – External time series library for storage. If None (default), values are stored in memory and retrieved via get_recorded().
+- **`data_ids`** (`VecStr`, default: `None` ) – Identifier(s) for data in the recording_provider. Only used when recording_provider is specified. Must match the length of var_ids.
 
 Raises:
 
-- `ValueError` – description
+- `ValueError` – If data_ids length doesn't match var_ids when recording_provider is specified.
+
+Examples:
+
+```
+>>> # Record outlet streamflow (default)
+>>> simulation.record_state()
+```
+
+```
+>>> # Record multiple state variables
+>>> simulation.record_state(['node.n1.OutflowRate', 'node.n2.OutflowRate'])
+```
+
+```
+>>> # Record after simulation and retrieve
+>>> simulation.record_state('subarea.Subarea.runoff')
+>>> simulation.exec_simulation()
+>>> runoff = simulation.get_recorded('subarea.Subarea.runoff')
+```
 
 ### remove_state_initialisers
 
@@ -3767,11 +4581,50 @@ Parameters:
 set_states(states: MemoryStates) -> None
 ```
 
-Apply memory states to a simulation
+Restores model states from a previously captured snapshot.
+
+Applies a complete state snapshot (created via snapshot_state()) to this simulation, overwriting all current model states. This allows continuing simulation from a saved point without re-running previous time steps.
 
 Parameters:
 
-- **`states`** (`MemoryStates`) – memory states
+- **`states`** (`MemoryStates`) – State snapshot to restore, obtained from snapshot_state(). Must come from a simulation with the same catchment structure.
+
+Note
+
+- This method does NOT affect state initialisers configured on the simulation
+- After restoring states, typically call exec_simulation(reset_initial_states=False) to continue from the restored point rather than re-initialising
+- The states object must match the simulation's structure (same elements and model types)
+
+Relationship to State Initialisers
+
+State initialisers (set via use_state_initialises()) define how to initialise states at the start of a simulation when reset_initial_states=True. They are applied during exec_simulation(), not by set_states(). If you restore states with set_states() and then call exec_simulation(reset_initial_states=True), the initialisers will overwrite your restored states.
+
+Examples:
+
+```
+>>> # Save and restore states for ensemble forecasting
+>>> simulation.exec_simulation()  # Warmup period
+>>> initial_state = simulation.snapshot_state()
+>>> 
+>>> # Run ensemble members
+>>> for member in range(ensemble_size):
+...     simulation.set_states(initial_state)  # Start from same point
+...     simulation.play_input(ensemble_inputs[member], 'subarea.Subarea.P')
+...     simulation.exec_simulation(reset_initial_states=False)  # Continue from restored state
+...     forecasts[member] = simulation.get_recorded()
+```
+
+```
+>>> # Incorrect usage - states will be overwritten
+>>> simulation.set_states(saved_state)
+>>> simulation.exec_simulation(reset_initial_states=True)  # BAD: ignores saved_state
+```
+
+```
+>>> # Correct usage - continue from restored state
+>>> simulation.set_states(saved_state)
+>>> simulation.exec_simulation(reset_initial_states=False)  # GOOD: uses saved_state
+```
 
 ### snapshot_state
 
@@ -3779,11 +4632,41 @@ Parameters:
 snapshot_state() -> MemoryStates
 ```
 
-Take a snapshot of the memory states of a simulation
+Captures a snapshot of all current model states for later restoration.
+
+Takes a complete copy of the simulation's internal state at the current point in time, including all storages, fluxes, and memory variables across all model elements (subareas, links, nodes). The snapshot can be restored later using set_states() to continue simulation from this exact point.
 
 Returns:
 
-- **`MemoryStates`** ( `MemoryStates` ) – memory states, that can be stored and reapplied
+- **`MemoryStates`** ( `MemoryStates` ) – Object containing the complete model state. Can be stored and reapplied to this or a cloned simulation.
+
+Use Cases
+
+- Saving state after a warmup period to run multiple scenarios from the same starting point
+- Implementing custom ensemble forecasting workflows
+- Debugging by comparing states at different points in a simulation
+- Avoiding re-running expensive warmup periods for multiple forecast runs
+
+Note
+
+The snapshot is specific to the simulation's structure (number and type of model elements). It cannot be applied to a simulation with a different catchment configuration with different element names and/or models.
+
+Examples:
+
+```
+>>> # Run warmup and save state
+>>> simulation.set_simulation_span('2000-01-01', '2005-12-31')
+>>> simulation.exec_simulation()
+>>> warmup_state = simulation.snapshot_state()
+>>> 
+>>> # Run multiple scenarios from the same starting point
+>>> for scenario in scenarios:
+...     simulation.set_states(warmup_state)  # Restore warmup state
+...     simulation.play_input(scenario.inputs, 'subarea.Subarea.P')
+...     simulation.set_simulation_span('2006-01-01', '2010-12-31')
+...     simulation.exec_simulation(reset_initial_states=False)
+...     results[scenario.name] = simulation.get_recorded()
+```
 
 ### sort_by_execution_order
 
@@ -3808,16 +4691,22 @@ Returns:
 split_to_subcatchments(split_element_ids: Sequence[str], include_upstream: Sequence[bool] = None) -> OrderedDict[str, Simulation]
 ```
 
-Split a catchment in subcatchments, given a list of node/link element identifiers
+Splits a catchment into subcatchments at specified network elements.
+
+Creates independent subcatchment simulations by recursively cutting the network at specified nodes or links. Each resulting subcatchment includes all upstream elements, minus further upstream subcatchments already cut. A 'remainder' subcatchment contains any final, downstream elements not included in the upstream portions.
 
 Parameters:
 
-- **`split_element_ids`** (`str`) – element identifiers such as 'node.n1', 'link.linkId_2'
-- **`include_upstream`** (`bool`, default: `None` ) – indicates whether for each element in split_element_ids it should be including in the upstream portion of the subcatchment. Defaults to None.
+- **`split_element_ids`** (`Sequence[str]`) – Element identifiers where to split the catchment, such as 'node.n1', 'link.linkId_2'. Elements are processed in execution order (upstream to downstream), not in the order provided by the user.
+- **`include_upstream`** (`Sequence[bool]`, default: `None` ) – For each element in split_element_ids, whether to include that element in the upstream subcatchment (True) or the downstream remainder (False). If None, defaults to True for all elements. Must match the length of split_element_ids if provided. Defaults to None.
 
 Returns:
 
-- **`OrderedDict`** ( `OrderedDict[str, Simulation]` ) – list of subcatchments resulting from the split
+- `OrderedDict[str, Simulation]` – OrderedDict\[str, Simulation\]: Dictionary mapping element IDs to their upstream subcatchment simulations, plus a 'remainder' key for downstream elements. Each simulation is a deep copy with independent state.
+
+Note
+
+The split creates deep copies, so modifications to subcatchments don't affect the original simulation. All subcatchments inherit the model configuration and time settings from the original but have independent parameter values and states.
 
 Examples:
 
@@ -3825,10 +4714,11 @@ Examples:
 >>> _, simulation = sdh.create_test_catchment_structure()
 >>> e_ids = ['node.n2', 'node.n4']
 >>> sub_sims = simulation.split_to_subcatchments(e_ids)
+>>> 
 >>> for k in sub_sims:
->>>     print(k)
->>>     print(sub_sims[k].get_node_ids())
->>>     print(sub_sims[k].get_node_names())
+...     print(k)
+...     print(sub_sims[k].get_node_ids())
+...     print(sub_sims[k].get_node_names())
 node.n4
 ['n4', 'n3', 'n1']
 ['n4_name', 'n3_name', 'n1_name']
@@ -3846,16 +4736,28 @@ remainder
 subset_catchment(element_id: str, action: str = 'keep_above')
 ```
 
-Subsets a catchment, keeping only a portion above or below a node, link or subarea.
+Subsets a catchment, keeping only elements above or below a specified element.
+
+Creates a new simulation containing only the portion of the catchment upstream or downstream of a cut point. Useful for focusing calibration on specific subcatchments or analysing contributions from different parts of a river network.
 
 Parameters:
 
-- **`element_id`** (`str`) – id of the element to cut at.
-- **`action`** (`str`, default: `'keep_above'` ) – how to cut. combinations of 'keep', implied but better explicit, and 'above' or 'below'. You can also have 'exclusive' to exclude the cut point from the result, but this is rarely useful. Examples: 'keep_above', 'keep above', 'keep below exclusive'. See examples.
+- **`element_id`** (`str`) – Identifier of the element to cut at (e.g., 'node.n1', 'link.lnk5', 'subarea.sub1'). The action parameter determines what is kept relative to this point.
+- **`action`** (`str`, default: `'keep_above'` ) – How to subset the catchment. Combinations of keywords:
+  - 'above' or 'below': Direction to keep relative to element_id
+  - 'keep': Explicit (implied if omitted) - keep the specified direction
+  - 'exclusive': Exclude the cut element itself from the result Examples: 'keep_above', 'keep above', 'below', 'keep above exclusive'. Defaults to "keep_above".
 
 Returns:
 
-- **`Simulation`** – a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
+- **`Simulation`** – A new subcatchment simulation containing only the specified portion. Deep copy with independent state from the original.
+
+Note
+
+- 'above' means upstream (towards headwaters)
+- 'below' means downstream (towards outlet)
+- The cut element is included by default unless 'exclusive' is specified
+- For headwater catchments, 'keep above exclusive' may return an empty catchment
 
 Examples:
 
@@ -3870,10 +4772,10 @@ Examples:
 >>> # Keep all above node 4, but exclude node 4
 >>> simulation.subset_catchment(n4_id, 'keep above exclusive').describe()
 {'subareas': {'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}, 'nodes': {'n3': 'n3_name', 'n1': 'n1_name'}, 'links': {'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}}
->>> # to keep only a headwter catchment with its link:
+>>> # to keep only a headwater catchment with its link:
 >>> simulation.subset_catchment("link.lnk5", 'keep above').describe()
 {'subareas': {'lnk5': 'lnk5_name'}, 'nodes': {'n1': 'n1_name'}, 'links': {'lnk5': 'lnk5_name'}}
->>> # to keep only a headwter catchment with its link:
+>>> # to keep only a headwater catchment with its link:
 >>> simulation.subset_catchment("node.n5", 'keep above exclusive').describe()
 {'subareas': {}, 'nodes': {}, 'links': {}}
 >>> # below will not work at the time of writing, but maybe should:
@@ -3910,10 +4812,10 @@ Parameters:
 
 - **`file_path`** (`str`) – file path to save to
 
-### use_state_initialises
+### use_state_initialiser
 
 ```
-use_state_initialises(state_initialiser: StateInitialiser)
+use_state_initialiser(state_initialiser: StateInitialiser)
 ```
 
 Sets the state initialiser to use for a simulation. This forces the removal of any prior state initialiser.
@@ -3928,14 +4830,14 @@ Parameters:
 SimulationMixin()
 ```
 
-A parent class for simulation objects. Most users are unlikely to explicitly use it.
+Provides common simulation methods shared by Simulation, EnsembleSimulation, and EnsembleForecastSimulation classes.
 
 Methods:
 
-- **`exec_simulation`** – Execute a simulation
+- **`exec_simulation`** – Executes the simulation over its configured time span.
 - **`get_played_varnames`** – Gets all the names of states fed an input time series
 - **`get_recorded_varnames`** – Gets all the names of the recorded states
-- **`record_state`** – Record a time series of one of the state of the model
+- **`record_state`** – Records a time series of model state variable(s) during simulation execution.
 
 ### exec_simulation
 
@@ -3943,11 +4845,38 @@ Methods:
 exec_simulation(reset_initial_states: bool = True) -> None
 ```
 
-Execute a simulation
+Executes the simulation over its configured time span.
+
+Runs the model forward in time from the simulation start to end date, using the configured time step. Input time series (set via play_input) are read and applied at each step, and any recorded state variables (set via record_state) are stored for later retrieval.
 
 Parameters:
 
-- **`reset_initial_states`** (`bool`, default: `True` ) – logical, should the states of the model be reinitialized before the first time step.
+- **`reset_initial_states`** (`bool`, default: `True` ) – Whether to reset all model states to their initial values before starting the simulation. If True (default), any state initialisers configured on the simulation are also applied. Set to False to continue from current model states (useful for sequential simulation periods). Defaults to True.
+
+Note
+
+Before calling this method, ensure you have:
+
+- Set the simulation span via set_simulation_span()
+- Configured input time series via play_input() or play_inputs()
+- Set up recording via record_state() for any outputs you need
+
+Examples:
+
+```
+>>> # Standard simulation run
+>>> simulation.set_simulation_span('2000-01-01', '2005-12-31')
+>>> simulation.play_input(rainfall_ts, 'subarea.Subarea.P')
+>>> simulation.record_state('Catchment.StreamflowRate')
+>>> simulation.exec_simulation()
+>>> flow = simulation.get_recorded()
+```
+
+```
+>>> # Continue simulation without resetting states
+>>> simulation.set_simulation_span('2006-01-01', '2010-12-31')
+>>> simulation.exec_simulation(reset_initial_states=False)
+```
 
 ### get_played_varnames
 
@@ -3979,17 +4908,38 @@ Returns:
 record_state(var_ids: VecStr = CATCHMENT_FLOWRATE_VARID, recording_provider: Optional[TimeSeriesLibrary] = None, data_ids: Optional[VecStr] = None) -> None
 ```
 
-Record a time series of one of the state of the model
+Records a time series of model state variable(s) during simulation execution.
+
+This method instructs the simulation to store values of specified state variables at each time step. Recorded data can be retrieved after execution using get_recorded(). By default, values are stored in memory, but can optionally be written to an external time series library.
 
 Parameters:
 
-- **`var_ids`** (`VecStr`, default: `CATCHMENT_FLOWRATE_VARID` ) – identifier(s) of the output variable recorded to a time series, e.g. 'Catchment|StreamflowRate' or 'subcatchment.Subarea.runoff'. Defaults to CATCHMENT_FLOWRATE_VARID.
-- **`recording_provider`** (`TimeSeriesLibrary`, default: `None` ) – description. Defaults to None.
-- **`data_ids`** (`VecStr`, default: `None` ) – description. Defaults to None.
+- **`var_ids`** (`VecStr`, default: `CATCHMENT_FLOWRATE_VARID` ) – State variable identifier(s) to record. Common examples include 'Catchment.StreamflowRate' for outlet flow, 'subarea.{name}.runoff' for subarea runoff, or 'node.{name}.OutflowRate' for node outflows. Defaults to CATCHMENT_FLOWRATE_VARID (the main outlet streamflow).
+- **`recording_provider`** (`TimeSeriesLibrary`, default: `None` ) – External time series library for storage. If None (default), values are stored in memory and retrieved via get_recorded().
+- **`data_ids`** (`VecStr`, default: `None` ) – Identifier(s) for data in the recording_provider. Only used when recording_provider is specified. Must match the length of var_ids.
 
 Raises:
 
-- `ValueError` – description
+- `ValueError` – If data_ids length doesn't match var_ids when recording_provider is specified.
+
+Examples:
+
+```
+>>> # Record outlet streamflow (default)
+>>> simulation.record_state()
+```
+
+```
+>>> # Record multiple state variables
+>>> simulation.record_state(['node.n1.OutflowRate', 'node.n2.OutflowRate'])
+```
+
+```
+>>> # Record after simulation and retrieve
+>>> simulation.record_state('subarea.Subarea.runoff')
+>>> simulation.exec_simulation()
+>>> runoff = simulation.get_recorded('subarea.Subarea.runoff')
+```
 
 ## StateInitParameteriser
 
@@ -3999,7 +4949,7 @@ StateInitParameteriser(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `HypercubeParameteriser`
 
-Parameteriser designed to apply to simulations by setting initial states.
+Defines how to initialize model states based on parameter values at the start of each simulation run.
 
 Methods:
 
@@ -4011,11 +4961,11 @@ Methods:
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -4145,33 +5095,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### make_state_init_parameteriser
@@ -4180,22 +5158,39 @@ Examples:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -4207,6 +5202,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -4235,24 +5232,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -4366,6 +5390,8 @@ StateInitialiser(handle: CffiData, release_native: Callable[[CffiData], None], t
 
 Bases: `DeletableCffiNativeHandle`
 
+Sets initial conditions for model states before simulation execution begins.
+
 Methods:
 
 - **`clone`** –
@@ -4391,24 +5417,24 @@ TransformParameteriser(handle: CffiData, release_native: Callable[[CffiData], No
 
 Bases: `HypercubeParameteriser`
 
-Parameteriser projecting parameters in a transformed space for optimisation.
+Applies mathematical transformations (e.g., log, arcsinh) to parameters optimisation in transformed space.
 
 Methods:
 
 - **`add_parameter_to_hypercube`** – Add a parameter to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception
 - **`add_to_hypercube`** – Add entries to a hypercube. Must be a type of object that is expandable, otherwise may raise an exception.
-- **`add_transform`** – Create a parameteriser for which parameter transformations can be defined
+- **`add_transform`** – Adds a mathematical transformation to a parameter for optimisation in transformed space.
 - **`apply_sys_config`** – Apply a model configuration to a simulation
 - **`as_dataframe`** – Convert this hypercube parameteriser to a pandas data frame representation
 - **`backtransform`** – Get the parameteriser values in the untransformed space
 - **`clone`** –
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
-- **`from_dataframe`** – Create a parameteriser
-- **`make_state_init_parameteriser`** – Create a parameteriser used for model state initialisation
+- **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
-- **`set_hypercube`** – Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+- **`set_hypercube`** – Updates parameter properties for an existing parameteriser.
 - **`set_max_parameter_value`** – Sets the value(s) of the upper bound of one or more parameter(s)
 - **`set_min_parameter_value`** – Sets the value(s) of the lower bound of one or more parameter(s)
 - **`set_parameter_definition`** – Sets the feasible range and value for a parameter
@@ -4445,19 +5471,32 @@ Parameters:
 add_transform(param_name: str, inner_param_name: str, transform_id: str, a: float = 1.0, b: float = 0.0)
 ```
 
-Create a parameteriser for which parameter transformations can be defined
+Adds a mathematical transformation to a parameter for optimisation in transformed space.
 
-```
-This allows to define e.g. a virtual parameter log_X instead of calibrating on the parameter X.
-```
+This allows you to define a virtual parameter (e.g., log_X) that gets optimised instead of the original parameter X. The transformation is automatically inverted when applying parameters to the simulation. Common use cases include log transforms for strictly positive parameters or arcsinh for parameters that can be negative.
 
 Parameters:
 
-- **`param_name`** (`str`) – the name of the meta-parameter. Note that it can be the same value as inner_param_name, but this is NOT recommended.
-- **`inner_param_name`** (`str`) – the name of the parameter being transformed
-- **`transform_id`** (`str`) – identifier for a known bijective univariate function
-- **`a`** (`float`, default: `1.0` ) – parameter in Y = F(ax+b). Defaults to 1.0.
-- **`b`** (`float`, default: `0.0` ) – parameter in Y = F(ax+b). Defaults to 0.0.
+- **`param_name`** (`str`) – Name of the new transformed parameter (e.g., 'log_x4'). This is what the optimiser will see and adjust. Should differ from inner_param_name to avoid confusion.
+- **`inner_param_name`** (`str`) – Name of the underlying parameter being transformed (e.g., 'x4'). Must already exist in the parameteriser.
+- **`transform_id`** (`str`) – Identifier for the transformation function. Available options as of 2025-11:
+  - 'log10': Base-10 logarithm (for positive parameters, or made positive via a and b)
+  - '10\*\*x': Base-10 exponentiation (inverse of log10)
+  - '1/x': Reciprocal
+  - 'x': Identity (no transformation). Structurally useful in edge cases but normally not needed.
+  - 'asinh': Inverse hyperbolic sine
+  - 'sinh': Hyperbolic sine
+  - 'atanh': Inverse hyperbolic tangent
+  - 'tanh': Hyperbolic tangent
+  - 'sqrt': Square root (for non-negative parameters or made non-negative via a and b)
+  - 'square': square function
+  - 'logit': Logit function (for parameters in (0,1))
+- **`a`** (`float`, default: `1.0` ) – Scaling factor applied before transformation: Y = F(a\*x + b). Defaults to 1.0.
+- **`b`** (`float`, default: `0.0` ) – Offset applied before transformation: Y = F(a\*x + b). Defaults to 0.0.
+
+Note
+
+After transformation, the optimiser works with param_name, but the simulation receives the back-transformed values for inner_param_name. Use backtransform() to retrieve parameters in the original space.
 
 Examples:
 
@@ -4587,33 +5626,61 @@ Returns:
 ### from_dataframe
 
 ```
-from_dataframe(type='Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
+from_dataframe(type: str = 'Generic subareas', definition: Optional[DataFrame] = None) -> HypercubeParameteriser
 ```
 
-Create a parameteriser
+Creates a parameteriser from a parameter specification.
+
+Factory method to create different types of parameterisers based on the 'type' string. The type determines which model elements (subareas, links, nodes) the parameters will be applied to.
 
 Parameters:
 
-- **`type`** (`str`, default: `'Generic subareas'` ) – A string identifying the type of parameteriser to use. Recognised types are (case insensitive) 'log-likelihood', 'generic', 'subareas', 'links', 'nodes' and 'muskingum'. Defaults to "Generic subareas".
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value. Defaults to None.
+- **`type`** (`str`, default: `'Generic subareas'` ) – Parameteriser type identifier (case-insensitive). Valid options:
+  - 'generic' or 'generic subareas': Apply to all subareas (default)
+  - 'links' or 'generic links': Apply to channel routing in links
+  - 'nodes' or 'generic nodes': Apply to nodes
+  - 'muskingum': Muskingum channel routing parameters
+  - 'log-likelihood': Parameters for log-likelihood transformation (advanced) Defaults to "Generic subareas".
+- **`definition`** (`DataFrame`, default: `None` ) – Parameter specifications with columns:
+  - 'Name': Parameter name (e.g., 'x1', 'x2', 'alpha')
+  - 'Min': Minimum feasible value
+  - 'Max': Maximum feasible value
+  - 'Value': Initial/current value If None, creates an empty parameteriser that can be populated later. Defaults to None.
 
 Returns:
 
-- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – new parameteriser
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser configured according to the type.
 
 Examples:
 
 ```
->>> d = pd.DataFrame(
-...     dict(
-...         Name=c("alpha", "inverse_velocity"),
-...         Value=c(1, 1),
-...         Min=c(1e-3, 1e-3),
-...         Max=c(1e2, 1e2),
-...     )
-... )
->>> p = HypercubeParameteriser.from_dataframe("Generic links", d)
->>> p
+>>> # Create GR4J parameters for subareas
+>>> import pandas as pd
+>>> from swift2.utils import c
+>>> pspec = pd.DataFrame({
+...     'Name': c('x1', 'x2', 'x3', 'x4'),
+...     'Value': c(350, -0.5, 50, 2),
+...     'Min': c(1, -27, 1, 1),
+...     'Max': c(3000, 27, 1000, 240)
+... })
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', pspec)
+```
+
+```
+>>> # Create link routing parameters
+>>> link_spec = pd.DataFrame({
+...     'Name': c('alpha', 'inverse_velocity'),
+...     'Value': c(1, 1),
+...     'Min': c(1e-3, 1e-3),
+...     'Max': c(1e2, 1e2)
+... })
+>>> p_links = HypercubeParameteriser.from_dataframe('generic links', link_spec)
+```
+
+```
+>>> # Create empty parameteriser to populate later
+>>> p_empty = HypercubeParameteriser.from_dataframe('generic')
+>>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
 ### make_state_init_parameteriser
@@ -4622,22 +5689,39 @@ Examples:
 make_state_init_parameteriser() -> StateInitParameteriser
 ```
 
-Create a parameteriser used for model state initialisation
+Converts this parameteriser into a StateInitParameteriser.
 
-This allows to define tied parameters where, for instance, pval = a * modelStateVal. A more concrete use case is to define an initial soil moisture store 'S0', as a fraction of the model store capacity 'Smax'. The model state to initialise is 'S'
-
-Note
-
-See also swift2.classes.ScalingParameteriser for typical joint usage.
+Creates a StateInitParameteriser object that can be applied to simulations to set initial model states based on parameter values, as part of an optimisation process i.e. optimising some initial states. This is typically the subsequent step after defining scaled parameter relationships using ScalingParameteriser methods, and before inclusion in an optimisation workflow.
 
 Returns:
 
-- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – state initialisation parameteriser
+- **`StateInitParameteriser`** ( `StateInitParameteriser` ) – Parameteriser with features to set model initial states via state initialisers,
+- `StateInitParameteriser` – overriding the default simulation for model reset of initial states.
+
+Typical Workflow
+
+1. Create a ScalingParameteriser with linear_parameteriser() or linear_parameteriser_from()
+1. Define relationships between virtual parameters and model states
+1. Call make_state_init_parameteriser() to create the StateInitParameteriser
+1. Use the StateInitParameteriser in an optimisation or sensitivity analysis workflow
+
+Use Cases
+
+- Setting initial soil moisture as a fraction of maximum capacity (S0 = 0.9 * x1 for GR4J)
+- Initialising routing stores as fractions of their capacities
+- Calibrating initial states alongside model parameters
+- Ensuring physically consistent initial conditions
+
+Note
+
+The scaling variables (e.g., x1, x3) must exist as parameters in the simulation's model. If they don't exist or have incompatible dimensions, an error will occur when the initialiser is applied during simulation execution.
 
 Examples:
 
 ```
 >>> # Use case: Set gr4j initial stores at simulation as a function of x1/x3 parameters.
+>>> # and calibrate both model parameters and the virtual initial state parameters S0 and R0.
+>>> # `some_other_parameteriser` may be a parameteriser for GR4J parameters x1 to x4.
 >>> import swift2.parameteriser as sp
 >>> # Let's define _S0_ and _R0_ parameters such that for each GR4J model instance, _S = S0 * x1_ and _R = R0 * x3_
 >>> p_states = sp.linear_parameteriser(
@@ -4649,6 +5733,8 @@ Examples:
                 value=c(0.9,0.9), 
                 selector_type='each subarea')
 >>> init_parameteriser = p_states.make_state_init_parameteriser()
+>>> parameteriser = sp.concatenate_parameterisers(some_other_parameteriser, init_parameteriser)
+>>> # Now use 'parameteriser' in an optimisation workflow to calibrate both model parameters and initial states.
 ```
 
 ### num_free_parameters
@@ -4677,24 +5763,51 @@ Computes the value of an objective for this given set of parameters
 set_hypercube(specs: DataFrame)
 ```
 
-Set the properties of a hypercube parameteriser. An exception will ve raised if any parameter name is unknown.
+Updates parameter properties for an existing parameteriser.
+
+Modifies the bounds and values of parameters already defined in this parameteriser. Unlike from_dataframe() which creates a new parameteriser, this method updates the current one. All parameter names in the specs must already exist in the parameteriser.
 
 Parameters:
 
-- **`specs`** (`DataFrame`) – An optional data frame description of the parameter set, with at least columns Name, Min, Max, Value.
+- **`specs`** (`DataFrame`) – Parameter specifications with columns:
+  - 'Name': Parameter name (must match existing parameters)
+  - 'Min': New minimum feasible value
+  - 'Max': New maximum feasible value
+  - 'Value': New initial/current value All columns are required for each parameter being updated.
+
+Raises:
+
+- `Exception` – If any parameter name in specs doesn't exist in this parameteriser.
+
+Note
+
+This is useful for adjusting parameter bounds after initial creation, such as converting time-step-dependent parameters (e.g., GR4J x4 from hours to days) or tightening bounds based on prior calibration results.
 
 Examples:
 
 ```
->>> # e.g. if `p` is a typical parameteriser for GR4J with 
->>> # set x4 bounds to be in "days", not hours
->>> p_x4 = pd.DataFrame.from_dict({
-    "Name": ["x4"],
-    "Value": [1.0],
-    "Min": [0.25],
-    "Max": [10.0],
-})
->>> p.set_hypercube(p_x4)
+>>> # Create GR4J parameteriser with default hourly time step
+>>> p = HypercubeParameteriser.from_dataframe('generic subareas', gr4j_hourly_spec)
+>>> 
+>>> # Convert x4 bounds from hours to days for daily time step
+>>> p_x4_daily = pd.DataFrame({
+...     'Name': ['x4'],
+...     'Value': [1.0],
+...     'Min': [0.25],
+...     'Max': [10.0]  # 10 days instead of 240 hours
+... })
+>>> p.set_hypercube(p_x4_daily)
+```
+
+```
+>>> # Update multiple parameters after preliminary calibration
+>>> tighter_bounds = pd.DataFrame({
+...     'Name': ['x1', 'x3'],
+...     'Value': [450, 75],
+...     'Min': [300, 50],
+...     'Max': [600, 100]
+... })
+>>> p.set_hypercube(tighter_bounds)
 ```
 
 ### set_max_parameter_value
@@ -4807,6 +5920,8 @@ VectorObjectiveScores(handle: CffiData, release_native: Callable[[CffiData], Non
 ```
 
 Bases: `DeletableCffiNativeHandle`
+
+Collection of multiple ObjectiveScores, typically from a population-based optimizer's iteration.
 
 Methods:
 

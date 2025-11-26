@@ -4,6 +4,10 @@
 
 Python package for ensemble streamflow forecasting. It can equally be used in non-ensemble simulation mode for other, “traditional” semi-distributed hydrologic modelling.
 
+## Overview
+
+- [Package overview](https://csiro-hydroinformatics.github.io/swift-py-doc/package_intro/index.md)
+
 ## API documentation
 
 - [classes](https://csiro-hydroinformatics.github.io/swift-py-doc/classes/index.md)
