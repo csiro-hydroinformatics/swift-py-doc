@@ -3635,7 +3635,7 @@ This allows to transform back e.g. from a virtual parameter log_X to the underly
 
 
 <a href="#swift2.parameteriser.get_best_score" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_best_score</span><span class="p">(</span><span class="n">scores_population</span><span class="p">,</span> <span class="n">score_name</span><span class="o">=</span><span class="s1">&#39;NSE&#39;</span><span class="p">,</span> <span class="n">convert_to_py</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_best_score</span><span class="p">(</span><span class="n">scores_population</span><span class="p">,</span> <span class="n">score_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">convert_to_py</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Dict">Dict</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="typing.Any">Any</span></span><span class="p">]</span> <span class="o">|</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.ObjectiveScores&lt;/code&gt;)" href="../classes/#swift2.classes.ObjectiveScores">ObjectiveScores</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3656,7 +3656,7 @@ This allows to transform back e.g. from a virtual parameter log_X to the underly
         <li class="doc-section-item field-body">
             <b><code>score_name</code></b>
               (<code><span title="str">str</span></code>, default:
-                  <code>&#39;NSE&#39;</code>
+                  <code>&#39;&#39;</code>
 )
           –
           <div class="doc-md-description">
@@ -3679,6 +3679,7 @@ This allows to transform back e.g. from a virtual parameter log_X to the underly
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
         <li class="doc-section-item field-body">
+              <code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>] | <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.ObjectiveScores&lt;/code&gt;)" href="../classes/#swift2.classes.ObjectiveScores">ObjectiveScores</a></code>
           –
           <div class="doc-md-description">
             
@@ -4900,7 +4901,7 @@ Args:
 
 
 <a href="#swift2.parameteriser.sort_by_score" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sort_by_score</span><span class="p">(</span><span class="n">scores_population</span><span class="p">,</span> <span class="n">score_name</span><span class="o">=</span><span class="s1">&#39;NSE&#39;</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sort_by_score</span><span class="p">(</span><span class="n">scores_population</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;VectorObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores&lt;/code&gt;)" href="../classes/#swift2.classes.VectorObjectiveScores">VectorObjectiveScores</a></span><span class="p">,</span> <span class="n">score_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -4912,7 +4913,7 @@ Args:
     <ul>
         <li class="doc-section-item field-body">
             <b><code>scores_population</code></b>
-              (<code>[<span title="type">type</span>]</code>)
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;VectorObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores&lt;/code&gt;)" href="../classes/#swift2.classes.VectorObjectiveScores">VectorObjectiveScores</a></code>)
           –
           <div class="doc-md-description">
             <p>an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR</p>
@@ -4921,11 +4922,11 @@ Args:
         <li class="doc-section-item field-body">
             <b><code>score_name</code></b>
               (<code><span title="str">str</span></code>, default:
-                  <code>&#39;NSE&#39;</code>
+                  <code>&#39;&#39;</code>
 )
           –
           <div class="doc-md-description">
-            <p>name of the objective to use for sorting. Defaults to "NSE".</p>
+            <p>name of the objective to use for sorting. Defaults to "", meaning assume single objective and sort by that.</p>
           </div>
         </li>
     </ul>

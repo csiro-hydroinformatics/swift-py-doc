@@ -1613,7 +1613,7 @@
           <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;VectorObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores">VectorObjectiveScores</a></code></b>
           –
           <div class="doc-md-description">
-            <p>Collection of multiple ObjectiveScores, typically from a population-based optimizer's iteration.</p>
+            <p>Collection of multiple ObjectiveScores, typically a capture of a from a population-based optimizer's iteration.</p>
           </div>
         </li>
     </ul>
@@ -17594,7 +17594,8 @@ based on prior calibration results.</p>
 
 
 
-        <p>Collection of multiple ObjectiveScores, typically from a population-based optimizer's iteration.</p>
+        <p>Collection of multiple ObjectiveScores, typically a capture of a from a population-based optimizer's iteration.</p>
+<p>IMPORTANT Note: ALWAYS use get_best_score() to retrieve the 'best' score, as the order of scores in this collection is NOT guaranteed.</p>
 
           
 
@@ -17621,28 +17622,28 @@ based on prior calibration results.</p>
             <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;get_best_score&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores.get_best_score&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores.get_best_score">get_best_score</a></code></b>
             –
             <div class="doc-md-description">
-              
+              <p>Get the best ObjectiveScores in the collection based on a specified score.</p>
             </div>
           </li>
           <li class="doc-section-item field-body">
             <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;get_parameters_at_index&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores.get_parameters_at_index&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores.get_parameters_at_index">get_parameters_at_index</a></code></b>
             –
             <div class="doc-md-description">
-              
+              <p>Get the parameteriser at a given index in the collection.</p>
             </div>
           </li>
           <li class="doc-section-item field-body">
             <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;get_score_at_index&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores.get_score_at_index&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores.get_score_at_index">get_score_at_index</a></code></b>
             –
             <div class="doc-md-description">
-              
+              <p>Get the ObjectiveScores at a given index in the collection.</p>
             </div>
           </li>
           <li class="doc-section-item field-body">
             <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;sort_by_score&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores.sort_by_score&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores.sort_by_score">sort_by_score</a></code></b>
             –
             <div class="doc-md-description">
-              
+              <p>Sort the collection of ObjectiveScores based on a specified score.</p>
             </div>
           </li>
     </ul>
@@ -17731,10 +17732,51 @@ based on prior calibration results.</p>
 
 
 <a href="#swift2.classes.VectorObjectiveScores.get_best_score" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_best_score</span><span class="p">(</span><span class="n">score_name</span><span class="o">=</span><span class="s1">&#39;NSE&#39;</span><span class="p">,</span> <span class="n">convert_to_py</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_best_score</span><span class="p">(</span><span class="n">score_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">convert_to_py</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Dict">Dict</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="typing.Any">Any</span></span><span class="p">]</span> <span class="o">|</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.ObjectiveScores&lt;/code&gt;)" href="#swift2.classes.ObjectiveScores">ObjectiveScores</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+
+        <p>Get the best ObjectiveScores in the collection based on a specified score.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>score_name</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>The name of the score to evaluate for best performance. Defaults to "",
+which expects a single score per item (single objective optimisation).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>convert_to_py</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>If True, returns a Python dictionary representation 
+instead of an ObjectiveScores object. Defaults to False.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>] | <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.ObjectiveScores&lt;/code&gt;)" href="#swift2.classes.ObjectiveScores">ObjectiveScores</a></code>
+          –
+          <div class="doc-md-description">
+            <p>Dict[str, Any] | ObjectiveScores: The best ObjectiveScores or its Python dictionary representation.</p>
+          </div>
+        </li>
+    </ul>
 
           
 
@@ -17750,10 +17792,39 @@ based on prior calibration results.</p>
 
 
 <a href="#swift2.classes.VectorObjectiveScores.get_parameters_at_index" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_parameters_at_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_parameters_at_index</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+
+        <p>Get the parameteriser at a given index in the collection.</p>
+<p>Note: Indexing is ONE-based. Also do NOT rely on the order of scores in this collection, 
+as terminated optimisers may not guarantee any specific ordering. use <code>get_best_score()</code> to get the best one instead and retrieve its parameteriser.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>index</code></b>
+              (<code><span title="int">int</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>one based index</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>HypercubeParameteriser</code></b> (              <code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></code>
+)          –
+          <div class="doc-md-description">
+            <p>the parameteriser at the given index</p>
+          </div>
+        </li>
+    </ul>
 
           
 
@@ -17769,10 +17840,39 @@ based on prior calibration results.</p>
 
 
 <a href="#swift2.classes.VectorObjectiveScores.get_score_at_index" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_score_at_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">get_score_at_index</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.ObjectiveScores&lt;/code&gt;)" href="#swift2.classes.ObjectiveScores">ObjectiveScores</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+
+        <p>Get the ObjectiveScores at a given index in the collection.</p>
+<p>Note: Indexing is ONE-based. Also do NOT rely on the order of scores in this collection, 
+as terminated optimisers may not guarantee any specific ordering. use <code>get_best_score()</code> to get the best one instead.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>index</code></b>
+              (<code><span title="int">int</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>one based index</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>ObjectiveScores</code></b> (              <code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.ObjectiveScores&lt;/code&gt;)" href="#swift2.classes.ObjectiveScores">ObjectiveScores</a></code>
+)          –
+          <div class="doc-md-description">
+            <p>the ObjectiveScores at the given index</p>
+          </div>
+        </li>
+    </ul>
 
           
 
@@ -17788,10 +17888,40 @@ based on prior calibration results.</p>
 
 
 <a href="#swift2.classes.VectorObjectiveScores.sort_by_score" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sort_by_score</span><span class="p">(</span><span class="n">score_name</span><span class="o">=</span><span class="s1">&#39;NSE&#39;</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sort_by_score</span><span class="p">(</span><span class="n">score_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;VectorObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores">VectorObjectiveScores</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+
+        <p>Sort the collection of ObjectiveScores based on a specified score.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>score_name</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>The name of the score to evaluate for best performance. Defaults to "",
+which expects a single score per item (single objective optimisation).</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>VectorObjectiveScores</code></b> (              <code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;VectorObjectiveScores&lt;/span&gt; (&lt;code&gt;swift2.classes.VectorObjectiveScores&lt;/code&gt;)" href="#swift2.classes.VectorObjectiveScores">VectorObjectiveScores</a></code>
+)          –
+          <div class="doc-md-description">
+            <p>A new VectorObjectiveScores instance sorted by the specified score.</p>
+          </div>
+        </li>
+    </ul>
 
           
 

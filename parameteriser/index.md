@@ -565,7 +565,7 @@ Returns:
 ## get_best_score
 
 ```
-get_best_score(scores_population, score_name='NSE', convert_to_py=False)
+get_best_score(scores_population, score_name: str = '', convert_to_py: bool = False) -> Dict[str, Any] | ObjectiveScores
 ```
 
 Gets the best score in a population for a given objective
@@ -573,12 +573,12 @@ Gets the best score in a population for a given objective
 Parameters:
 
 - **`scores_population`** (`[type]`) – an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR
-- **`score_name`** (`str`, default: `'NSE'` ) – name of the objective to use for sorting. Defaults to "NSE".
+- **`score_name`** (`str`, default: `''` ) – name of the objective to use for sorting. Defaults to "NSE".
 - **`convert_to_py`** (`bool`, default: `False` ) – should the returned score be converted to an R representation. Default False. Defaults to False.
 
 Returns:
 
-- –
+- `Dict[str, Any] | ObjectiveScores` –
 
 ## get_default_sce_parameters
 
@@ -975,15 +975,15 @@ Parameters:
 ## sort_by_score
 
 ```
-sort_by_score(scores_population, score_name='NSE')
+sort_by_score(scores_population: VectorObjectiveScores, score_name: str = '')
 ```
 
 Sort objective scores according to one of the objective values
 
 Parameters:
 
-- **`scores_population`** (`[type]`) – an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR
-- **`score_name`** (`str`, default: `'NSE'` ) – name of the objective to use for sorting. Defaults to "NSE".
+- **`scores_population`** (`VectorObjectiveScores`) – an S4 object 'ExternalObjRef' [package "cinterop"] with external pointer type VEC_OBJECTIVE_SCORES_PTR
+- **`score_name`** (`str`, default: `''` ) – name of the objective to use for sorting. Defaults to "", meaning assume single objective and sort by that.
 
 Returns:
 

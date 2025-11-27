@@ -26,7 +26,7 @@ Classes:
 - **`StateInitParameteriser`** – Defines how to initialize model states based on parameter values at the start of each simulation run.
 - **`StateInitialiser`** – Sets initial conditions for model states before simulation execution begins.
 - **`TransformParameteriser`** – Applies mathematical transformations (e.g., log, arcsinh) to parameters optimisation in transformed space.
-- **`VectorObjectiveScores`** – Collection of multiple ObjectiveScores, typically from a population-based optimizer's iteration.
+- **`VectorObjectiveScores`** – Collection of multiple ObjectiveScores, typically a capture of a from a population-based optimizer's iteration.
 
 Functions:
 
@@ -5902,15 +5902,17 @@ VectorObjectiveScores(handle: CffiData, release_native: Callable[[CffiData], Non
 
 Bases: `DeletableCffiNativeHandle`
 
-Collection of multiple ObjectiveScores, typically from a population-based optimizer's iteration.
+Collection of multiple ObjectiveScores, typically a capture of a from a population-based optimizer's iteration.
+
+IMPORTANT Note: ALWAYS use get_best_score() to retrieve the 'best' score, as the order of scores in this collection is NOT guaranteed.
 
 Methods:
 
 - **`as_dataframe`** –
-- **`get_best_score`** –
-- **`get_parameters_at_index`** –
-- **`get_score_at_index`** –
-- **`sort_by_score`** –
+- **`get_best_score`** – Get the best ObjectiveScores in the collection based on a specified score.
+- **`get_parameters_at_index`** – Get the parameteriser at a given index in the collection.
+- **`get_score_at_index`** – Get the ObjectiveScores at a given index in the collection.
+- **`sort_by_score`** – Sort the collection of ObjectiveScores based on a specified score.
 
 Attributes:
 
@@ -5931,26 +5933,71 @@ as_dataframe()
 ### get_best_score
 
 ```
-get_best_score(score_name='NSE', convert_to_py=False)
+get_best_score(score_name: str = '', convert_to_py: bool = False) -> Dict[str, Any] | ObjectiveScores
 ```
+
+Get the best ObjectiveScores in the collection based on a specified score.
+
+Parameters:
+
+- **`score_name`** (`str`, default: `''` ) – The name of the score to evaluate for best performance. Defaults to "", which expects a single score per item (single objective optimisation).
+- **`convert_to_py`** (`bool`, default: `False` ) – If True, returns a Python dictionary representation instead of an ObjectiveScores object. Defaults to False.
+
+Returns:
+
+- `Dict[str, Any] | ObjectiveScores` – Dict[str, Any] | ObjectiveScores: The best ObjectiveScores or its Python dictionary representation.
 
 ### get_parameters_at_index
 
 ```
-get_parameters_at_index(index)
+get_parameters_at_index(index: int) -> HypercubeParameteriser
 ```
+
+Get the parameteriser at a given index in the collection.
+
+Note: Indexing is ONE-based. Also do NOT rely on the order of scores in this collection, as terminated optimisers may not guarantee any specific ordering. use `get_best_score()` to get the best one instead and retrieve its parameteriser.
+
+Parameters:
+
+- **`index`** (`int`) – one based index
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – the parameteriser at the given index
 
 ### get_score_at_index
 
 ```
-get_score_at_index(index)
+get_score_at_index(index: int) -> ObjectiveScores
 ```
+
+Get the ObjectiveScores at a given index in the collection.
+
+Note: Indexing is ONE-based. Also do NOT rely on the order of scores in this collection, as terminated optimisers may not guarantee any specific ordering. use `get_best_score()` to get the best one instead.
+
+Parameters:
+
+- **`index`** (`int`) – one based index
+
+Returns:
+
+- **`ObjectiveScores`** ( `ObjectiveScores` ) – the ObjectiveScores at the given index
 
 ### sort_by_score
 
 ```
-sort_by_score(score_name='NSE')
+sort_by_score(score_name: str = '') -> VectorObjectiveScores
 ```
+
+Sort the collection of ObjectiveScores based on a specified score.
+
+Parameters:
+
+- **`score_name`** (`str`, default: `''` ) – The name of the score to evaluate for best performance. Defaults to "", which expects a single score per item (single objective optimisation).
+
+Returns:
+
+- **`VectorObjectiveScores`** ( `VectorObjectiveScores` ) – A new VectorObjectiveScores instance sorted by the specified score.
 
 ## wrap_cffi_native_handle
 
