@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1475,7 +1475,14 @@
             <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;estimate_erris_parameters&lt;/span&gt; (&lt;code&gt;swift2.prototypes.estimate_erris_parameters&lt;/code&gt;)" href="#swift2.prototypes.estimate_erris_parameters">estimate_erris_parameters</a></code></b>
             –
             <div class="doc-md-description">
-              
+              <p>Estimates parameters of the ERRIS error model.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;estimate_maerris_parameters&lt;/span&gt; (&lt;code&gt;swift2.prototypes.estimate_maerris_parameters&lt;/code&gt;)" href="#swift2.prototypes.estimate_maerris_parameters">estimate_maerris_parameters</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Estimates parameters of the MAERRIS error model.</p>
             </div>
           </li>
           <li class="doc-section-item field-body">
@@ -1491,7 +1498,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -1529,7 +1536,7 @@
 
 
 <a href="#swift2.prototypes.create_erris_parameter_estimator" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">create_erris_parameter_estimator</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">observed_ts</span><span class="p">,</span> <span class="n">error_model_element_id</span><span class="p">,</span> <span class="n">estimation_start</span><span class="p">,</span> <span class="n">estimation_end</span><span class="p">,</span> <span class="n">cens_thr</span><span class="p">,</span> <span class="n">cens_opt</span><span class="p">,</span> <span class="n">termination_condition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">restriction_on</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">weighted_least_square</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">create_erris_parameter_estimator</span><span class="p">(</span><span class="n">simulation</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;Simulation&lt;/span&gt; (&lt;code&gt;swift2.classes.Simulation&lt;/code&gt;)" href="../classes/#swift2.classes.Simulation">Simulation</a></span><span class="p">,</span> <span class="n">observed_ts</span><span class="p">:</span> <span class="n"><span title="cinterop.cffi.marshal.TimeSeriesLike">TimeSeriesLike</span></span><span class="p">,</span> <span class="n">error_model_element_id</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n">estimation_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">estimation_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">cens_thr</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">cens_opt</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">termination_condition</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;SceTerminationCondition&lt;/span&gt; (&lt;code&gt;swift2.classes.SceTerminationCondition&lt;/code&gt;)" href="../classes/#swift2.classes.SceTerminationCondition">SceTerminationCondition</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">restriction_on</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">weighted_least_square</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ErrisStagedCalibration&lt;/span&gt; (&lt;code&gt;swift2.classes.ErrisStagedCalibration&lt;/code&gt;)" href="../classes/#swift2.classes.ErrisStagedCalibration">ErrisStagedCalibration</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1548,10 +1555,329 @@
 
 
 <a href="#swift2.prototypes.estimate_erris_parameters" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">estimate_erris_parameters</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">observed_ts</span><span class="p">,</span> <span class="n">error_model_element_id</span><span class="p">,</span> <span class="n">warmup_start</span><span class="p">,</span> <span class="n">warmup_end</span><span class="p">,</span> <span class="n">warmup</span><span class="p">,</span> <span class="n">estimation_start</span><span class="p">,</span> <span class="n">estimation_end</span><span class="p">,</span> <span class="n">cens_thr</span><span class="p">,</span> <span class="n">cens_opt</span><span class="p">,</span> <span class="n">exclusion_start</span><span class="p">,</span> <span class="n">exclusion_end</span><span class="p">,</span> <span class="n">exclusion</span><span class="p">,</span> <span class="n">termination_condition</span><span class="p">,</span> <span class="n">hydro_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">erris_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">restriction_on</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">weighted_least_square</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">estimate_erris_parameters</span><span class="p">(</span><span class="n">simulation</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;Simulation&lt;/span&gt; (&lt;code&gt;swift2.classes.Simulation&lt;/code&gt;)" href="../classes/#swift2.classes.Simulation">Simulation</a></span><span class="p">,</span> <span class="n">observed_ts</span><span class="p">:</span> <span class="n"><span title="cinterop.cffi.marshal.TimeSeriesLike">TimeSeriesLike</span></span><span class="p">,</span> <span class="n">error_model_element_id</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n">warmup_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">warmup_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">warmup</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">estimation_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">estimation_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">cens_thr</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">cens_opt</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">exclusion_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">exclusion_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">exclusion</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span><span class="p">,</span> <span class="n">termination_condition</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;SceTerminationCondition&lt;/span&gt; (&lt;code&gt;swift2.classes.SceTerminationCondition&lt;/code&gt;)" href="../classes/#swift2.classes.SceTerminationCondition">SceTerminationCondition</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">hydro_params</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">erris_params</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">restriction_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">weighted_least_square</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+
+        <p>Estimates parameters of the ERRIS error model.</p>
+<p>This is using the pre-canned ERRIS parameter estimation routine in
+SWIFT that executes the four stages of the ERRIS estimation in one go.
+We may want to expose the individual stages in the future.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>simulation</code></b>
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;Simulation&lt;/span&gt; (&lt;code&gt;swift2.classes.Simulation&lt;/code&gt;)" href="../classes/#swift2.classes.Simulation">Simulation</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>The simulation object providing catchment structure.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>observed_ts</code></b>
+              (<code><span title="TimeSerieLike">TimeSerieLike</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Observed time series used for estimation.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>error_model_element_id</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Element ID for the error model (e.g., 'node.123').</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>warmup_start</code></b>
+              (<code><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Start time for warmup.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>warmup_end</code></b>
+              (<code><span title="typing.Optional">Optional</span>[<span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>End time for warmup</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>warmup</code></b>
+              (<code><span title="bool">bool</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Whether to perform warmup.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>estimation_start</code></b>
+              (<code><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Start time for estimation.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>estimation_end</code></b>
+              (<code><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>End time for estimation.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>s2_window</code></b>
+              (<code><span title="float">float</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>S2 window size for the estimation, in number of time steps. S2 window is a parameter that defines the size of the moving window used by the bias-correction.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>cens_thr</code></b>
+              (<code><span title="float">float</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Censoring threshold for the estimation</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>cens_opt</code></b>
+              (<code><span title="float">float</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Censoring option for the estimation</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>termination_condition</code></b>
+              (<code><span title="typing.Optional">Optional</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Termination condition for the estimation. If None, uses a default termination condition. Default is None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>hydro_params</code></b>
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a> or <span title="refcount.interop.OwningCffiNativeHandle">OwningCffiNativeHandle</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Not used. Default is None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>erris_params</code></b>
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a> or <span title="refcount.interop.OwningCffiNativeHandle">OwningCffiNativeHandle</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Can be used to change param bounds of error params if defaults not satsifactory. Proceed with caution - only to be used by those who know what they are doing. Default is None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>restriction_on</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether to apply the AR restriction. Default is False</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>HypercubeParameteriser</code></b> (              <code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></code>
+)          –
+          <div class="doc-md-description">
+            <p>A parameteriser for an ERRIS instance.</p>
+          </div>
+        </li>
+    </ul>
+
+          
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="swift2.prototypes.estimate_maerris_parameters" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">estimate_maerris_parameters</span>
+
+
+<a href="#swift2.prototypes.estimate_maerris_parameters" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">estimate_maerris_parameters</span><span class="p">(</span><span class="n">simulation</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;Simulation&lt;/span&gt; (&lt;code&gt;swift2.classes.Simulation&lt;/code&gt;)" href="../classes/#swift2.classes.Simulation">Simulation</a></span><span class="p">,</span> <span class="n">observed_ts</span><span class="p">:</span> <span class="n"><span title="cinterop.cffi.marshal.TimeSeriesLike">TimeSeriesLike</span></span><span class="p">,</span> <span class="n">error_model_element_id</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n">warmup_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">warmup_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">warmup</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span><span class="p">,</span> <span class="n">estimation_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">estimation_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">s2_window</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">cens_thr</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">cens_opt</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span> <span class="n">exclusion_start</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">exclusion_end</span><span class="p">:</span> <span class="n"><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></span><span class="p">,</span> <span class="n">exclusion</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span><span class="p">,</span> <span class="n">termination_condition</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;SceTerminationCondition&lt;/span&gt; (&lt;code&gt;swift2.classes.SceTerminationCondition&lt;/code&gt;)" href="../classes/#swift2.classes.SceTerminationCondition">SceTerminationCondition</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">hydro_params</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">maerris_params</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">restriction_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Estimates parameters of the MAERRIS error model.</p>
+<p>This is using the pre-canned MAERRIS parameter estimation routine in
+SWIFT that executes the four stages of the MAERRIS estimation in one go.
+We may want to expose the individual stages in the future.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>simulation</code></b>
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;Simulation&lt;/span&gt; (&lt;code&gt;swift2.classes.Simulation&lt;/code&gt;)" href="../classes/#swift2.classes.Simulation">Simulation</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>The simulation object providing catchment structure.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>observed_ts</code></b>
+              (<code><span title="TimeSerieLike">TimeSerieLike</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Observed time series used for estimation.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>error_model_element_id</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Element ID for the error model (e.g., 'node.123').</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>warmup_start</code></b>
+              (<code><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Start time for warmup.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>warmup_end</code></b>
+              (<code><span title="typing.Optional">Optional</span>[<span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>End time for warmup</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>warmup</code></b>
+              (<code><span title="bool">bool</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Whether to perform warmup.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>estimation_start</code></b>
+              (<code><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Start time for estimation.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>estimation_end</code></b>
+              (<code><span title="cinterop.timeseries.ConvertibleToTimestamp">ConvertibleToTimestamp</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>End time for estimation.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>s2_window</code></b>
+              (<code><span title="float">float</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>S2 window size for the estimation, in number of time steps. S2 window is a parameter that defines the size of the moving window used by the bias-correction.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>cens_thr</code></b>
+              (<code><span title="float">float</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Censoring threshold for the estimation</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>cens_opt</code></b>
+              (<code><span title="float">float</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Censoring option for the estimation</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>termination_condition</code></b>
+              (<code><span title="typing.Optional">Optional</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Termination condition for the estimation. If None, uses a default termination condition. Default is None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>hydro_params</code></b>
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a> or <span title="refcount.interop.OwningCffiNativeHandle">OwningCffiNativeHandle</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Not used. Default is None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>maerris_params</code></b>
+              (<code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a> or <span title="refcount.interop.OwningCffiNativeHandle">OwningCffiNativeHandle</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Can be used to change param bounds of error params if defaults not satsifactory. Proceed with caution - only to be used by those who know what they are doing. Default is None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>restriction_on</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether to apply the AR restriction. Default is False</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>HypercubeParameteriser</code></b> (              <code><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;HypercubeParameteriser&lt;/span&gt; (&lt;code&gt;swift2.classes.HypercubeParameteriser&lt;/code&gt;)" href="../classes/#swift2.classes.HypercubeParameteriser">HypercubeParameteriser</a></code>
+)          –
+          <div class="doc-md-description">
+            <p>A parameteriser for a MAERRIS instance.</p>
+          </div>
+        </li>
+    </ul>
 
           
 
@@ -1729,10 +2055,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

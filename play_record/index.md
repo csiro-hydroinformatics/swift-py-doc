@@ -21,6 +21,8 @@ Functions:
 - **`record_ensemble_state`** –
 - **`record_singular_state`** –
 - **`record_state`** – Record a time series of one of the state of the model
+- **`remove_recorded`** –
+- **`remove_singular_played_input`** –
 
 ## apply_recording_function
 
@@ -248,3 +250,15 @@ Parameters:
 Raises:
 
 - `ValueError` – description
+
+## remove_recorded
+
+```
+remove_recorded(self, var_ids: VecStr) -> None
+```
+
+## remove_singular_played_input
+
+```
+remove_singular_played_input(self, var_ids: VecStr) -> None
+```

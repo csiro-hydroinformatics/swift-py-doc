@@ -66,6 +66,7 @@ Methods:
 - **`empty_composite`** – Creates an empty parameteriser to be populated with other parameterisers
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
@@ -76,6 +77,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -324,6 +326,22 @@ Examples:
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
+
 ### make_state_init_parameteriser
 
 ```
@@ -508,7 +526,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -519,7 +537,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -539,6 +557,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -575,6 +605,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
@@ -585,6 +616,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -765,6 +797,22 @@ Examples:
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
+
 ### make_state_init_parameteriser
 
 ```
@@ -949,7 +997,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -960,7 +1008,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -980,6 +1028,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -1245,6 +1305,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`hide_parameters`** – Hides parameters from optimisers while still applying them to simulations.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
@@ -1257,6 +1318,7 @@ Methods:
 - **`show_parameters`** – Show some parameters (from the outside e.g. optimisers) in a filter parameteriser
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -1436,6 +1498,22 @@ Examples:
 >>> p_empty = HypercubeParameteriser.from_dataframe('generic')
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
+
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
 
 ### hide_parameters
 
@@ -1676,7 +1754,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -1687,7 +1765,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -1707,6 +1785,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -1745,6 +1835,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
@@ -1755,6 +1846,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -1934,6 +2026,22 @@ Examples:
 >>> p_empty = HypercubeParameteriser.from_dataframe('generic')
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
+
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
 
 ### make_state_init_parameteriser
 
@@ -2119,7 +2227,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -2130,7 +2238,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -2150,6 +2258,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -2186,6 +2306,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
@@ -2196,6 +2317,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -2375,6 +2497,22 @@ Examples:
 >>> p_empty = HypercubeParameteriser.from_dataframe('generic')
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
+
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
 
 ### make_state_init_parameteriser
 
@@ -2560,7 +2698,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -2571,7 +2709,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -2591,6 +2729,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -2850,7 +3000,7 @@ Methods:
 ### execute_optimisation
 
 ```
-execute_optimisation()
+execute_optimisation() -> ObjectiveScores
 ```
 
 Executes the parameter optimisation process.
@@ -2859,7 +3009,7 @@ Runs the configured optimisation algorithm (typically SCE-UA) to find optimal pa
 
 Returns:
 
-- **`ObjectiveScores`** – The best parameter set found and its associated objective score(s). Access the optimal parameters via result.parameteriser and scores via result.scores.
+- **`ObjectiveScores`** ( `ObjectiveScores` ) – The best parameter set found and its associated objective score(s). Access the optimal parameters via result.parameteriser and scores via result.scores.
 
 Note
 
@@ -3003,7 +3153,7 @@ Computes the value of an objective for this given set of parameters
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -3014,7 +3164,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -3058,6 +3208,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`linear_parameteriser`** – Create a scaled linear parameteriser, tying by a linear transformation a (resp several) model state to a (resp several) parameter values
 - **`linear_parameteriser_from`** – Create a scaled linear parameteriser, tying by a linear transformation a (resp several) model state to a (resp several) parameter values
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
@@ -3070,6 +3221,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_linear_scaled_parameter
@@ -3111,7 +3263,7 @@ Examples:
 ... )
 >>> p_states.add_linear_scaled_parameter('R0', 'R', 'x3', 0.0, 1.0, 0.5)
 >>> init = p_states.make_state_init_parameteriser()
->>> simulation.use_state_initialises(init)
+>>> simulation.use_state_initialiser(init)
 ```
 
 ### add_parameter_to_hypercube
@@ -3354,10 +3506,26 @@ Examples:
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
+
 ### linear_parameteriser
 
 ```
-linear_parameteriser(param_name: VecStr, state_name: VecStr, scaling_var_name: VecStr, min_p_val: VecNum, max_p_val: VecNum, value: VecNum, selector_type: str = 'subareas', intercept: VecNum = 0.0)
+linear_parameteriser(param_name: VecStr, state_name: VecStr, scaling_var_name: VecStr, min_p_val: VecNum, max_p_val: VecNum, value: VecNum, selector_type: str = 'subareas', intercept: VecNum = 0.0) -> ScalingParameteriser
 ```
 
 Create a scaled linear parameteriser, tying by a linear transformation a (resp several) model state to a (resp several) parameter values
@@ -3379,12 +3547,12 @@ intercept (VecNum, optional): [description]. Defaults to 0.0.
 
 Returns:
 
-- **`ScalingParameteriser`** – new ScalingParameteriser
+- **`ScalingParameteriser`** ( `ScalingParameteriser` ) – new ScalingParameteriser
 
 ### linear_parameteriser_from
 
 ```
-linear_parameteriser_from(data_frame: DataFrame, selector_type: str = 'subareas')
+linear_parameteriser_from(data_frame: DataFrame, selector_type: str = 'subareas') -> ScalingParameteriser
 ```
 
 Create a scaled linear parameteriser, tying by a linear transformation a (resp several) model state to a (resp several) parameter values This allows to define tied parameters where pval = a * modelStateVal + intercept. The intent in particular is to define virtual model parameters such as initial store value as a fraction of the maximum storage capacity.
@@ -3396,7 +3564,7 @@ Parameters:
 
 Returns:
 
-- **`ScalingParameteriser`** – ScalingParameteriser
+- **`ScalingParameteriser`** ( `ScalingParameteriser` ) – ScalingParameteriser
 
 ### make_state_init_parameteriser
 
@@ -3582,7 +3750,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -3593,7 +3761,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -3613,6 +3781,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -3676,6 +3856,8 @@ Methods:
 - **`get_recorded_varnames`** – Gets all the names of the recorded states
 - **`get_simulation_span`** – Gets the simulation span of this simulation
 - **`get_state_value`** – Gets the value(s) of a model state(s)
+- **`get_state_value_bool`** –
+- **`get_state_value_int`** –
 - **`get_subarea_ids`** – Gets all the identifiers of the subareas in the catchment
 - **`get_subarea_names`** – Gets all the names of the subareas in the catchment
 - **`get_variable_ids`** – Gets all the names of the variables of an element (link, node, subarea) within a catchment
@@ -3688,16 +3870,23 @@ Methods:
 - **`prepare_erris_forecasting`** – Create an ensemble simulation for forecasting with ERRIS
 - **`record_singular_state`** – DRAFT Advanced/technical. Record states to a record provider.
 - **`record_state`** – Records a time series of model state variable(s) during simulation execution.
+- **`remove_played_input`** –
+- **`remove_recorded`** –
 - **`remove_state_initialisers`** – Forces the removal of any state initialiser.
 - **`reset_model_states`** – Reset the model states of a simulation, and apply one or more state initialers if the simulation is configured with any.
 - **`set_error_correction_model`** – Add an error correction model to an element in a catchment
+- **`set_reservoir_fill_curve`** – Sets a reservoir fill curve
 - **`set_reservoir_geometry`** – Sets the geometry of a reservoir
 - **`set_reservoir_max_discharge`** – Sets a reservoir operating curve, maximum release for a given level
 - **`set_reservoir_min_discharge`** – Sets a reservoir operating curve, minimum release for a given level
 - **`set_reservoir_model`** – Sets a new reservoir model on an element
+- **`set_reservoir_return_curve`** – Sets a reservoir return curve
+- **`set_reservoir_spill_curve`** – Sets a reservoir spill curve
 - **`set_simulation_span`** – Sets the simulation span
 - **`set_simulation_time_step`** – Sets the time step of this simulation
 - **`set_state_value`** – Sets the value of a model state
+- **`set_state_value_bool`** –
+- **`set_state_value_int`** –
 - **`set_states`** – Restores model states from a previously captured snapshot.
 - **`snapshot_state`** – Captures a snapshot of all current model states for later restoration.
 - **`sort_by_execution_order`** – Sort the specified element ids according to the execution order of the simulation
@@ -3748,7 +3937,7 @@ Returns:
 ### cookie_cut_dendritic_catchment
 
 ```
-cookie_cut_dendritic_catchment(bottom_element_id: str, top_element_ids: Optional[VecStr])
+cookie_cut_dendritic_catchment(bottom_element_id: str, top_element_ids: Optional[VecStr]) -> Simulation
 ```
 
 cookie cut a dendritic catchment (without confluences)
@@ -3760,13 +3949,22 @@ Parameters:
 
 Returns:
 
-- **`Simulation`** – a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
+- **`Simulation`** ( `Simulation` ) – a subcatchment simulation, cookie cut from the base simulation. Deep clone of objects.
 
-Example
+Examples:
 
-> > > #### sdh swift2.doc_helper
-> > >
-> > > \_, simulation = sdh.create_test_catchment_structure() e_ids = ['node.n2', 'node.n4'] above_n2 = simulation.cookie_cut_dendritic_catchment(e_ids[0], []) above_n2.describe() {'subareas': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name', 'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}, 'nodes': {'n2': 'n2_name', 'n5': 'n5_name', 'n4': 'n4_name', 'n3': 'n3_name', 'n1': 'n1_name'}, 'links': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name', 'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}} above_n2_below_n4 = simulation.cookie_cut_dendritic_catchment(e_ids[0], \[e_ids[1]\]) above_n2_below_n4.describe() {'subareas': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name'}, 'nodes': {'n2': 'n2_name', 'n5': 'n5_name'}, 'links': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name'}}
+```
+>>> # sdh  swift2.doc_helper
+>>> _, simulation = sdh.create_test_catchment_structure()
+>>> e_ids = ['node.n2', 'node.n4']
+>>> above_n2 = simulation.cookie_cut_dendritic_catchment(e_ids[0], [])
+>>> above_n2.describe()
+{'subareas': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name', 'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}, 'nodes': {'n2': 'n2_name', 'n5': 'n5_name', 'n4': 'n4_name', 'n3': 'n3_name', 'n1': 'n1_name'}, 'links': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name', 'lnk4': 'lnk4_name', 'lnk5': 'lnk5_name'}}
+>>> above_n2_below_n4 = simulation.cookie_cut_dendritic_catchment(e_ids[0], [e_ids[1]])
+>>> above_n2_below_n4.describe()
+{'subareas': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name'}, 'nodes': {'n2': 'n2_name', 'n5': 'n5_name'}, 'links': {'lnk2': 'lnk2_name', 'lnk3': 'lnk3_name'}}
+>>>
+```
 
 ### create_ensemble_forecast_simulation
 
@@ -3779,8 +3977,8 @@ Create an ensemble forecast simulation
 Parameters:
 
 - **`data_library`** (`Any`) – external pointer type ENSEMBLE_DATA_SET_PTR, or a Python class wrapper around it
-- **`start`** (`ConvertibleToTimestamp`) – the start date of the simulation. The time zone will be forced to UTC.
-- **`end`** (`ConvertibleToTimestamp`) – the end date of the simulation. The time zone will be forced to UTC.
+- **`start`** (`ConvertibleToTimestamp`) – the start date of the simulation. Time zone aware timestamps are not supported..
+- **`end`** (`ConvertibleToTimestamp`) – the end date of the simulation. Time zone aware timestamps are not supported..
 - **`input_map`** (`dict`) – a named list were names are the data library data identifiers, and values are character vectors with model state identifiers.
 - **`lead_time`** (`int`) – integer, the length in time steps of the forecasts.
 - **`ensemble_size`** (`int`) – ensemble size
@@ -4031,10 +4229,6 @@ get_catchment_structure() -> Dict[str, Any]
 
 Gets the essential connective structure of a catchment
 
-Parameters:
-
-- **`simulation`** (`Simulation`) – base catchment simulation
-
 Returns:
 
 - `Dict[str, Any]` – Dict\[str, Any\]: A nested dictionary describing the catchment connectivity of subareas, links, and nodes
@@ -4212,6 +4406,18 @@ Parameters:
 Returns:
 
 - `Union[Dict[str, float], float]` – value(s) of the requested model states
+
+### get_state_value_bool
+
+```
+get_state_value_bool(var_id: str) -> bool
+```
+
+### get_state_value_int
+
+```
+get_state_value_int(var_id: str) -> int
+```
 
 ### get_subarea_ids
 
@@ -4431,6 +4637,18 @@ Examples:
 >>> runoff = simulation.get_recorded('subarea.Subarea.runoff')
 ```
 
+### remove_played_input
+
+```
+remove_played_input(var_ids: VecStr) -> None
+```
+
+### remove_recorded
+
+```
+remove_recorded(var_ids: VecStr) -> None
+```
+
 ### remove_state_initialisers
 
 ```
@@ -4457,10 +4675,24 @@ Add an error correction model to an element in a catchment
 
 Parameters:
 
-- **`model_id`** (`str`) – the identifier of the new model to use, e.g. 'ERRIS'
+- **`model_id`** (`str`) – the identifier of the new model to use, at least: * autoregressive * ERRIS * MAERRIS * DualPass * OverrideOutflow
 - **`element_id`** (`str`) – the identifier of the catchment element (node, link, subcatchment) whose outflow rate is corrected.
 - **`length`** (`int`, default: `1` ) – other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported.
 - **`seed`** (`int`, default: `0` ) – other parameters to pass to the creation of the error correction model. Currently length of the AR model only supported.
+
+### set_reservoir_fill_curve
+
+```
+set_reservoir_fill_curve(element_id: str, inflow_rate: ndarray, fill_rate: ndarray) -> None
+```
+
+Sets a reservoir fill curve
+
+Parameters:
+
+- **`element_id`** (`str`) – Element with a suitable reservoir supporting a geometry description
+- **`inflow_rate`** (`ndarray`) – array of inflow rates (m3/s)
+- **`fill_rate`** (`ndarray`) – array of fill rates (m3/s)
 
 ### set_reservoir_geometry
 
@@ -4518,6 +4750,34 @@ Parameters:
 - **`new_model_id`** (`str`) – Currently one of: "ControlledReleaseReservoir", "LevelVolumeAreaReservoir", "FarmDamReservoir";
 - **`element_id`** (`str`) – description
 
+### set_reservoir_return_curve
+
+```
+set_reservoir_return_curve(element_id: str, level: ndarray, return_rate: ndarray) -> None
+```
+
+Sets a reservoir return curve
+
+Parameters:
+
+- **`element_id`** (`str`) – Element with a suitable reservoir supporting a geometry description
+- **`level`** (`ndarray`) – array of levels (m)
+- **`return_rate`** (`ndarray`) – array of return rates (m3/s)
+
+### set_reservoir_spill_curve
+
+```
+set_reservoir_spill_curve(element_id: str, level: ndarray, spill: ndarray) -> None
+```
+
+Sets a reservoir spill curve
+
+Parameters:
+
+- **`element_id`** (`str`) – Element with a suitable reservoir supporting a geometry description
+- **`level`** (`ndarray`) – array of levels (m)
+- **`spill`** (`ndarray`) – array of spillway discharges (m3/s)
+
 ### set_simulation_span
 
 ```
@@ -4528,8 +4788,8 @@ Sets the simulation span
 
 Parameters:
 
-- **`start`** (`ConvertibleToTimestamp`) – the start date of the simulation. The time zone will be forced to UTC.
-- **`end`** (`ConvertibleToTimestamp`) – the end date of the simulation. The time zone will be forced to UTC.
+- **`start`** (`ConvertibleToTimestamp`) – the start date of the simulation. Time zone aware timestamps are not supported..
+- **`end`** (`ConvertibleToTimestamp`) – the end date of the simulation. Time zone aware timestamps are not supported..
 
 ### set_simulation_time_step
 
@@ -4546,7 +4806,7 @@ Parameters:
 ### set_state_value
 
 ```
-set_state_value(var_id: Union[str, Sequence[str]], value: Union[float, int, bool, Sequence] = None) -> None
+set_state_value(var_id: Union[str, Sequence[str]], value: Union[float, int, bool, Sequence]) -> None
 ```
 
 Sets the value of a model state
@@ -4554,7 +4814,19 @@ Sets the value of a model state
 Parameters:
 
 - **`var_id`** (`Any`) – character, model variable state identifier(s)
-- **`value`** (`Any`, default: `None` ) – numeric value(s)
+- **`value`** (`Any`) – numeric value(s)
+
+### set_state_value_bool
+
+```
+set_state_value_bool(var_id: str, value: bool)
+```
+
+### set_state_value_int
+
+```
+set_state_value_int(var_id: str, value: int)
+```
 
 ### set_states
 
@@ -4578,7 +4850,7 @@ Note
 
 Relationship to State Initialisers
 
-State initialisers (set via use_state_initialises()) define how to initialise states at the start of a simulation when reset_initial_states=True. They are applied during exec_simulation(), not by set_states(). If you restore states with set_states() and then call exec_simulation(reset_initial_states=True), the initialisers will overwrite your restored states.
+State initialisers (set via use_state_initialiser()) define how to initialise states at the start of a simulation when reset_initial_states=True. They are applied during exec_simulation(), not by set_states(). If you restore states with set_states() and then call exec_simulation(reset_initial_states=True), the initialisers will overwrite your restored states.
 
 Examples:
 
@@ -4761,7 +5033,6 @@ Examples:
 {'subareas': {}, 'nodes': {}, 'links': {}}
 >>> # below will not work at the time of writing, but maybe should:
 >>> simulation.subset_catchment("subarea.lnk5", 'keep above').describe()
-Traceback (most recent call last):
 ```
 
 ### swap_model
@@ -4943,6 +5214,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
@@ -4953,6 +5225,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -5132,6 +5405,22 @@ Examples:
 >>> p_empty = HypercubeParameteriser.from_dataframe('generic')
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
+
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
 
 ### make_state_init_parameteriser
 
@@ -5317,7 +5606,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -5328,7 +5617,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -5348,6 +5637,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -5412,6 +5713,7 @@ Methods:
 - **`create_parameter_sampler`** – Creates a sampler for this parameteriser
 - **`filtered_parameters`** – Wrap this parameteriser in a filter that can hide some parameters from an optimiser.
 - **`from_dataframe`** – Creates a parameteriser from a parameter specification.
+- **`from_json_file`** – Load a parameteriser from a file with a JSON serialisation.
 - **`make_state_init_parameteriser`** – Converts this parameteriser into a StateInitParameteriser.
 - **`num_free_parameters`** – Number of free parameters in this hypercube parameteriser
 - **`score_for_objective`** – Computes the value of an objective for this given set of parameters
@@ -5422,6 +5724,7 @@ Methods:
 - **`set_parameter_value`** – Sets the value(s) of one or more parameter(s)
 - **`subcatchment_parameteriser`** – Create a parameteriser that gets applied to a subset of a whole catchment
 - **`supports_thread_safe_cloning`** – Is this parameteriser clonable as a deep copy, safe for multi-threading?
+- **`to_json_file`** – Save this parameteriser to a file with a JSON serialisation.
 - **`wrap_transform`** – Create a parameteriser for which parameter transformations can be defined.
 
 ### add_parameter_to_hypercube
@@ -5664,6 +5967,22 @@ Examples:
 >>> p_empty.add_parameter_to_hypercube('x1', value=350, min=1, max=3000)
 ```
 
+### from_json_file
+
+```
+from_json_file(file_path: str) -> HypercubeParameteriser
+```
+
+Load a parameteriser from a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to load from
+
+Returns:
+
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – loaded parameteriser
+
 ### make_state_init_parameteriser
 
 ```
@@ -5848,7 +6167,7 @@ Parameters:
 ### subcatchment_parameteriser
 
 ```
-subcatchment_parameteriser(subcatchment)
+subcatchment_parameteriser(subcatchment: Simulation) -> HypercubeParameteriser
 ```
 
 Create a parameteriser that gets applied to a subset of a whole catchment
@@ -5859,7 +6178,7 @@ Parameters:
 
 Returns:
 
-- **`HypercubeParameteriser`** – New parameteriser whose application is limited to the subcatchment.
+- **`HypercubeParameteriser`** ( `HypercubeParameteriser` ) – New parameteriser whose application is limited to the subcatchment.
 
 Examples:
 
@@ -5879,6 +6198,18 @@ supports_thread_safe_cloning() -> bool
 ```
 
 Is this parameteriser clonable as a deep copy, safe for multi-threading?
+
+### to_json_file
+
+```
+to_json_file(file_path: str) -> None
+```
+
+Save this parameteriser to a file with a JSON serialisation.
+
+Parameters:
+
+- **`file_path`** (`str`) – file path to save to
 
 ### wrap_transform
 
@@ -5904,7 +6235,7 @@ Bases: `DeletableCffiNativeHandle`
 
 Collection of multiple ObjectiveScores, typically a capture of a from a population-based optimizer's iteration.
 
-IMPORTANT Note: ALWAYS use get_best_score() to retrieve the 'best' score, as the order of scores in this collection is NOT guaranteed.
+Note: **ALWAYS** use `get_best_score` to retrieve the 'best' score, as the order of scores in this collection is NOT guaranteed.
 
 Methods:
 

@@ -75,13 +75,13 @@ Attributes:
 ### calib_end
 
 ```
-calib_end = Timestamp('1995-12-01')
+calib_end = pd.Timestamp('1995-12-01')
 ```
 
 ### calib_start
 
 ```
-calib_start = Timestamp('1952-01-01')
+calib_start = pd.Timestamp('1952-01-01')
 ```
 
 ### data_repo
@@ -117,13 +117,13 @@ optimiser = None
 ### parameter_template
 
 ```
-parameter_template = parameters_for(model_id)
+parameter_template = parameters_for(self.model_id)
 ```
 
 ### run_start
 
 ```
-run_start = Timestamp('1950-01-01')
+run_start = pd.Timestamp('1950-01-01')
 ```
 
 ### runoff_id
@@ -135,19 +135,19 @@ runoff_id = 'subarea.Subarea.runoff'
 ### runoff_ts
 
 ```
-runoff_ts = monthly_data(station_id, 'runoff', cf_time=True)
+runoff_ts = self.data_repo.monthly_data(self.station_id, 'runoff', cf_time=True)
 ```
 
 ### s_calib
 
 ```
-s_calib = slice(calib_start, calib_end)
+s_calib = slice(self.calib_start, self.calib_end)
 ```
 
 ### s_valid
 
 ```
-s_valid = slice(valid_start, valid_end)
+s_valid = slice(self.valid_start, self.valid_end)
 ```
 
 ### station_id
@@ -159,13 +159,13 @@ station_id = station_id
 ### valid_end
 
 ```
-valid_end = Timestamp('2014-12-01')
+valid_end = pd.Timestamp('2014-12-01')
 ```
 
 ### valid_start
 
 ```
-valid_start = Timestamp('1996-01-01')
+valid_start = pd.Timestamp('1996-01-01')
 ```
 
 ### best_modelled_runoff

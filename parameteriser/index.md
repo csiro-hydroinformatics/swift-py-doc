@@ -16,6 +16,7 @@ Functions:
 - **`bound_values`** –
 - **`bound_values_df`** – min/max bound a column in a data frame
 - **`concatenate_parameterisers`** – Concatenate hypercubes to a single parameteriser
+- **`create_likelihood_parameteriser`** – Create a parameterizer to allow likelihood estimation. Typically this will be added to another parameterizer.
 - **`create_multisite_obj_parameteriser`** – Builds a parameteriser usable with a multisite multiobjective calculator.
 - **`create_muskingum_param_constraints`** – Create a parameteriser with Muskingum-type constraints. Given an existing parameteriser, create a wrapper that adds constraints on two of its parameters.
 - **`create_parameter_sampler`** –
@@ -347,6 +348,24 @@ Returns:
 
 - **`CompositeParameteriser`** ( `CompositeParameteriser` ) – A concatenated parameteriser
 
+## create_likelihood_parameteriser
+
+```
+create_likelihood_parameteriser(obs_max=None, censor_threshold=None, censor_option=0)
+```
+
+Create a parameterizer to allow likelihood estimation. Typically this will be added to another parameterizer.
+
+Parameters:
+
+- **`obs_max`** (`float`, default: `None` ) – maximum value for the observed variable, used to scale data. Defaults to None, which means the likelihood parameteriser will not work. Must be set elsewhere.
+- **`censor_threshold`** (`float`, default: `None` ) – the threshold value for censoring observations and/or simulations in the likelihood. Defaults to None, which means the likelihood parameteriser will not work. Must be set elsewhere.
+- **`censor_option`** (`int`, default: `0` ) – takes the following values: 0: censors both obs and simulations, 1: no censoring, 2: censor only obsevations, 3: censor only simulations. Defaults to 0.
+
+Returns:
+
+- – [likelihood_parameteriser]\]: likelihood_parameteriser
+
 ## create_multisite_obj_parameteriser
 
 ```
@@ -372,7 +391,7 @@ Returns:
 ## create_muskingum_param_constraints
 
 ```
-create_muskingum_param_constraints(inner_parameters, delta_t=1, param_name_k='K', param_name_x='X', simulation=None)
+create_muskingum_param_constraints(inner_parameters: HypercubeParameteriser, delta_t_hours: float = 1, param_name_k: str = 'K', param_name_x: str = 'X', simulation: Simulation = None)
 ```
 
 Create a parameteriser with Muskingum-type constraints. Given an existing parameteriser, create a wrapper that adds constraints on two of its parameters.
@@ -380,7 +399,7 @@ Create a parameteriser with Muskingum-type constraints. Given an existing parame
 Parameters:
 
 - **`inner_parameters`** (`[HypercubeParameteriser]`) – A SWIFT parameteriser object.
-- **`delta_t`** (`int`, default: `1` ) – the simulation time step in HOURS. Defaults to 1.
+- **`delta_t`** (`int`) – the simulation time step in HOURS. Defaults to 1.
 - **`param_name_k`** (`str`, default: `'K'` ) – the variable identifier to use for the delay parameter of the Muskingum routing. Defaults to "K".
 - **`param_name_x`** (`str`, default: `'X'` ) – the variable identifier to use for the attenuation parameter of the Muskingum routing. Defaults to "X".
 - **`simulation`** (`[Simulation]`, default: `None` ) – the model simulation from which link properties are inspected to define constraints. The links' parameters must already be set.. Defaults to None.

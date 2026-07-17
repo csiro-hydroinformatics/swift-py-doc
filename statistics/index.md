@@ -10,6 +10,8 @@ Functions:
 - **`create_objective`** – Creates an objective calculator
 - **`get_score`** – Evaluate an objective for a given parameterisation
 - **`multi_statistic_definition`** – Collate information for use in multisite multiobjective definition
+- **`ts_has_data`** – Check if a time series has any non-NaN data in a given date range.
+- **`ts_has_missing_values`** – Check if a time series has any NaN data in a given date range.
 
 ## createCompositeObjective
 
@@ -25,7 +27,7 @@ Parameters:
 
 - **`simulation`** (`Simulation`) – A SWIFT simulation object (i.e. a model runner)
 - **`state_name`** (`Any`) – The name identifying the model state variable to calibrate against the observation
-- **`observation`** (`Any`) – an xts
+- **`observation`** (`Any`) – a univariate time series, e.g. xarray or pandas series
 - **`yamlstring_statistic`** (`Any`) – a yaml string representing objective functions and weights eg...
 - **`start_date`** (`Any`) – start date of the period to calculate statistics on
 - **`end_date`** (`Any`) – end date of the period to calculate statistics on
@@ -70,7 +72,7 @@ Parameters:
 
 - **`simulation`** (`Simulation`) – A SWIFT simulation object (i.e. a model runner)
 - **`state_name`** (`Any`) – The name identifying the model state variable to calibrate against the observation
-- **`observation`** (`TimeSeriesLike`) – an xts
+- **`observation`** (`TimeSeriesLike`) – a univariate time series, e.g. xarray or pandas series
 - **`statistic`** (`str`) – statistic identifier, e.g. "NSE"
 - **`start_date`** (`ConvertibleToTimestamp`) – start date of the period to calculate statistics on
 - **`end_date`** (`ConvertibleToTimestamp`) – end date of the period to calculate statistics on
@@ -110,3 +112,19 @@ Parameters:
 - **`objective_names`** (`Any`) – character vector, display names for the objectives. Can be the same as modelVarIds.
 - **`starts`** (`Any`) – POSIXct vector of start dates for statistics
 - **`ends`** (`Any`) – POSIXct vector of end dates for statistics
+
+## ts_has_data
+
+```
+ts_has_data(observation: TimeSeriesLike, start_date: Optional[ConvertibleToTimestamp], end_date: Optional[ConvertibleToTimestamp])
+```
+
+Check if a time series has any non-NaN data in a given date range. Args: observation (TimeSeriesLike): a univariate time series, e.g. xarray or pandas series start_date (Optional[ConvertibleToTimestamp]): start date of the period to check end_date (Optional[ConvertibleToTimestamp]): end date of the period to check Returns: bool: True if there is any non-NaN data in the specified date range, False otherwise.
+
+## ts_has_missing_values
+
+```
+ts_has_missing_values(observation: TimeSeriesLike, start_date: Optional[ConvertibleToTimestamp], end_date: Optional[ConvertibleToTimestamp])
+```
+
+Check if a time series has any NaN data in a given date range. Args: observation (TimeSeriesLike): a univariate time series, e.g. xarray or pandas series start_date (Optional[ConvertibleToTimestamp]): start date of the period to check end_date (Optional[ConvertibleToTimestamp]): end date of the period to check Returns: bool: True if there is any NaN data in the specified date range, False otherwise.

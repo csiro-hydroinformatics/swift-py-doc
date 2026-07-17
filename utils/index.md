@@ -6,6 +6,7 @@ Functions:
 
 - **`as_xarray_series`** –
 - **`c`** – Emulate the R c (concatenate) function, somewhat.
+- **`handle_file_path`** – Check input filename for suitability to be passed to SWIFT API for disk operations.
 - **`is_common_iterable`** – True if an object is iterable but not a string (str)
 - **`mk_full_data_id`** – Create swift IDs (dot separated hierarchical naming scheme)
 - **`parameter_df`** –
@@ -39,6 +40,23 @@ Emulate the R c (concatenate) function, somewhat.
 Returns:
 
 - `ndarray` – np.ndarray: [description]
+
+## handle_file_path
+
+```
+handle_file_path(file_path: Union[Path, str], must_exist: bool) -> str
+```
+
+Check input filename for suitability to be passed to SWIFT API for disk operations.
+
+Parameters:
+
+- **`filename`** (`Union[Path, str]`) – input filename
+- **`must_exist`** (`bool`) – if True, check that the file exists
+
+Returns:
+
+- **`str`** ( `str` ) – path to the file
 
 ## is_common_iterable
 
